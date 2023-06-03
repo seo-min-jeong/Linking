@@ -28,32 +28,32 @@ function Login(props) {
     const [cookies, setCookie] = useCookies(['session']);
 
     //알림 토큰
-    const [token, setToken] = useState('')
+    // const [token, setToken] = useState('')
 
-    function requestPermission() {
-        Notification.requestPermission().then((permission) => {
-            if (permission === 'granted') {
-                const app = initializeApp(firebaseConfig);
-                const messaging = getMessaging(app);
-                getToken(messaging, { vapidKey: 'BBoIkAcnfMamgq8C1UdiOgcAoXYOjG-MtYndGc0MKJBc0wUnkzmLQ_38_dgza4MKve8j7PlYSF4feNbvEvWVtbQ' })
-                    .then((currentToken) => {
-                        if (currentToken) {
-                            setToken(currentToken);
-                            console.log(currentToken);
-                        } else {
-                            console.log('Cannot get token');
-                        }
-                    });
-                onMessage(messaging, (payload) => {
-                    console.log('Message received:', payload);
-                    //
-                    // window.location.href = 'http://localhost:3007';
-                });
-            } else {
-                console.log('Do not have permission!');
-            }
-        });
-    }
+    // function requestPermission() {
+    //     Notification.requestPermission().then((permission) => {
+    //         if (permission === 'granted') {
+    //             const app = initializeApp(firebaseConfig);
+    //             const messaging = getMessaging(app);
+    //             getToken(messaging, { vapidKey: 'BBoIkAcnfMamgq8C1UdiOgcAoXYOjG-MtYndGc0MKJBc0wUnkzmLQ_38_dgza4MKve8j7PlYSF4feNbvEvWVtbQ' })
+    //                 .then((currentToken) => {
+    //                     if (currentToken) {
+    //                         setToken(currentToken);
+    //                         console.log(currentToken);
+    //                     } else {
+    //                         console.log('Cannot get token');
+    //                     }
+    //                 });
+    //             onMessage(messaging, (payload) => {
+    //                 console.log('Message received:', payload);
+    //                 //
+    //                 // window.location.href = 'http://localhost:3007';
+    //             });
+    //         } else {
+    //             console.log('Do not have permission!');
+    //         }
+    //     });
+    // }
 
   const{ setIsLoggedIn, onValueProjectList } = props
 
@@ -68,7 +68,7 @@ function Login(props) {
         password: ''
     })
 
-    requestPermission();
+    // requestPermission();
 
     //로그인 요청
     const [isProject, setIsProject] = useState(false);
@@ -80,7 +80,7 @@ function Login(props) {
             localStorage.setItem('user', JSON.stringify(response.data.data))
             // setIsLoggedIn(true)
             // requestPermission();
-
+console.log(response)
             api.get('/projects/list/part/' + response.data.data.userId, { validateStatus: false })
             .then(respon => {
                 if (respon.status === 404) {
@@ -93,15 +93,15 @@ function Login(props) {
                   }
                 
                 //알림토큰 보내기
-                const userToken = {
-                    userId: response.data.data.userId,
-                    token: token
-                }
+                // const userToken = {
+                //     userId: response.data.data.userId,
+                //     token: token
+                // }
 
-                api.put('/fcm-token/web', userToken)
-                .then(response => {
-                    console.log('알림 토큰 전송 완료 : ', response.data)
-                })
+                // api.put('/fcm-token/web', userToken)
+                // .then(response => {
+                //     console.log('알림 토큰 전송 완료 : ', response.data)
+                // })
 
             })
             .catch(error => {

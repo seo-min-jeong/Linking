@@ -60,6 +60,7 @@
     display: flex;
     margin : auto;
     justify-content: center;
+    margin-top: 60px;
     /* padding-top: 30px; */
 }
 

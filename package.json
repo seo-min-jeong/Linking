@@ -2,6 +2,10 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "engines":{
+    "node":"18.13.0",
+    "npm":"8.19.3"
+  },
   "dependencies": {
     "@fullcalendar/core": "^6.1.5",
     "@fullcalendar/daygrid": "^6.1.5",
@@ -50,7 +54,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "heroku-prebuild": "npm install"
   },
   "eslintConfig": {
     "extends": [
@@ -70,6 +75,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://43.201.231.51:8080",
-  "homepage": "http://seo-min-jeong.github.io/seo-min-jeong.io"
+  "proxy": "http://43.201.231.51:8080"
 }

@@ -67,7 +67,7 @@ function SignUp() {
     const [isMessage, setIsMessage] = useState(null)
     const handleEmailSubmit = (event) => {
         event.preventDefault();
-      console.log(verify.email)
+      console.log(verify)
         if(verify.email !== -1) {
           api.post('/users/verify/email', verify)
           .then((response) => {
