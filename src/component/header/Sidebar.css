@@ -1,0 +1,382 @@
+.side-menu {
+    height: 100%;
+}
+
+.show-menu{
+    width: 290px;
+    height: 100%;
+    position: fixed;
+    left: 0px;
+    transition: 1s;
+    border: solid 2px rgb(255, 249, 234);
+    background-color: #FDFDFA;
+    z-index: 999;
+    top: 0;
+
+    /* overflow: auto;
+    resize: horizontal; */
+}
+    
+.hide-menu{
+    width: 300px;
+    height: 100%;
+    position: fixed;
+    left: -300px;
+    transition: 1s;
+    border: solid 2px rgb(255, 249, 234);
+    background-color: rgb(255, 254, 251);
+    z-index: 999;
+    top: 0;
+}
+
+.menu-bar {
+    margin-top: 30px;
+    margin-left: 25px;
+    text-align: left;
+}
+
+.side-project {
+    display: flex;
+    margin-bottom: 25px;
+    width: 270px;
+}
+
+.side-project-txt {
+    font-size: 15px;
+    font-weight: 500;
+    color: rgb(43, 43, 43);
+}
+
+.sideHome-img {
+    position: absolute;
+    right: 20px;
+}
+
+.sideHome {
+    width: 18px;
+    height: 18px;
+}
+
+.sideHome:hover {
+    /* filter: invert(40%); */
+    cursor: pointer;
+}
+
+.ham {
+    width: 20px;
+    height: 20px;
+    margin-right: 120px;
+    left: 235px;
+    position: relative;
+    top: 5px;
+    transition: 1s;
+  }
+  
+  .ham:hover {
+    cursor: pointer;
+  }
+
+.open-ham {
+    width: 13px;
+    height: 13px;
+    left: 125px;
+    position: relative;
+    margin-top: 18px;
+}
+
+.open-ham:hover, .side-work-smallTxt:hover {
+    cursor: pointer;
+}
+
+.side-work {
+    font-size: 13px;
+    color: rgb(113, 113, 113);
+    margin-bottom: 30px;
+    font-weight: 500;
+}
+
+.side-work-smallTxt {
+    color: rgb(43, 43, 43);
+    font-size: 13.5px;
+}
+
+.side-work-smallBox {
+    margin-bottom: 14px;
+}
+
+.side-smallTxt-box {
+    margin-left: 10px;
+    margin-top: 25px;
+}
+
+.side-doc {
+    font-size: 13px;
+    display: block;
+}
+
+.side-sec-doc {
+    display: flex;
+    font-size: 13px;
+    color: rgb(113, 113, 113);
+    width: 260px;
+}
+
+.arrowBelow-img, .arrowUp-img {
+    width: 11px;
+    margin-right: 10px;
+}
+
+.side-dotImg {
+    width: 13px;
+}
+
+.side-plusImg {
+    width: 12px;
+    height: 12px;
+    opacity: 0.6;
+}
+
+.arrowBelow-img:hover, .arrowUp-img:hover, .side-dotImg:hover, .side-addSec-box1:hover, .side-addSec-box2:hover, .side-plusImg:hover {
+    cursor: pointer;
+}
+  
+.side-arrowBtn {
+    background-color: #FDFDFA;
+    border: white;
+    margin-right: 3px;
+}
+
+.side-dotImg-box {
+    padding-top: 5px;
+    left: 205px;
+    position: absolute;
+}
+
+.side-arrowDot-box {
+    position: relative;
+    /* left: 180px; */
+    display: flex;
+}
+
+.sideDot-hideMenu {
+    display: none;
+}
+
+.sideGroup-hideMenu {
+    display: none;
+}
+
+.sideDot-openMenu {
+    width: 95px;
+    height: auto;
+    position: absolute;
+    background-color: white;
+    border: solid 2px white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    padding: 8px 0px 9px 0px;
+    border-radius: 10px;
+}
+
+.sideGroup-openMenu {
+    width: 115px;
+    height: auto;
+    position: absolute;
+    background-color: white;
+    border: solid 2px white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    padding: 8px 0px 0px 0px;
+    border-radius: 10px;
+    margin-top: 105px;
+    margin-right: -85px;
+}
+
+.file-img, .sideDoc-img {
+    width: 17px;
+    height: 12px;
+    margin-left: 10px;
+    margin-right: 10px;
+    opacity: 0.6;
+}
+
+.file-img2 {
+    width: 14px;
+    height: 16px;
+    margin-left: 10px;
+    margin-right: 10px;
+    opacity: 0.7;
+}
+
+.file-add-img {
+    width: 14px;
+    height: 17px;
+    margin-left: 10px;
+    margin-right: 10px;
+    opacity: 0.7;
+}
+
+.side-add-txt {
+    font-size: 12px;
+    color: #444545;
+    font-weight: 400;
+    line-height: 16px;
+}
+
+.side-delete-txt {
+    font-size: 12px;
+    color: rgba(253, 71, 71, 0.895);
+    font-weight: 600;
+    line-height: 16px;
+}
+
+.side-addSec-box1 {
+    display: flex;
+}
+.side-addSec-box2 {
+    padding-top: 7px;
+    display: flex;
+}
+.side-addSec-box3 {
+    display: flex;
+    margin-bottom: 7px;
+}
+
+.side-setting-box {
+    position: absolute;
+    bottom: 10px;
+    left: 250px;
+}
+
+.side-arrowUpDown-box {
+    position: absolute;
+    bottom: 12px;
+    left: 210px;
+}
+
+.side-bottomBox {
+    display: flex;
+}
+
+.side-group-box {
+    margin-left: 10px;
+    margin-top: 25px;
+    overflow-y: scroll;
+    height: 58vh;
+}
+
+.side-group-smallBox {
+    margin-top: 25px;
+}
+
+.side-groupDot-box {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 24px;
+    margin-top: -15px;
+    margin-bottom: 20px;
+}
+
+.side-docTxt:hover, .side-addSec-box3:hover, .side-doc-secBox:hover {
+    cursor: pointer;
+}
+
+.side-doc-box {
+    margin-left: 25px;
+    margin-top: 20px;
+}
+
+.side-docDot-box {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 24px;
+    margin-top: -15px;
+}
+
+.side-doc-hideBox {
+    display: none;
+}
+
+.side-doc-openBox {
+    width: auto;
+    height: auto;
+    left: 0px;
+    background-color: rgb(255, 254, 251);
+    z-index: 999;
+}
+
+.side-doc-secBox {
+    display: block;
+    margin-bottom: 30px;
+    width: 180px;
+    word-break: break-all;
+}
+
+.side-groupAccordionClosed {
+    display: none;
+}
+
+/* .group-drag-box, .group-ndrag-box {
+    height: 20px;
+    padding: 10px 0px 10px 10px;
+} */
+
+.arrowUpDown-txt {
+    font-size: 13px;
+    margin-left: -13px;
+}
+
+.arrowUpDown-img:hover, .arrowUpDown-txt:hover {
+    cursor: pointer;
+}
+
+.side-anno-box {
+    display: flex;
+}
+
+.side-annotation-box {
+    border: 1px solid rgba(255, 68, 68, 0.882);
+    height: 14px;
+    width: 14px;
+    text-align: center;
+    border-radius: 10px;
+    line-height: 12px;
+    background-color: rgba(255, 68, 68, 0.882);
+    position: absolute;
+    right: 7px;
+}
+
+.side-anno-txt {
+    font-size: 11px;
+    color: #FDFDFA;
+    font-weight: 500;
+}
+
+.side-arrowUpDown-txt {
+    width: 16px;
+    height: 13px;
+    opacity: 0.7;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.setting-img {
+    width: 19px;
+    height: 19px;
+}
+
+.setting-img:hover, .side-arrowUpDown-txt:hover, .side-pageImg:hover {
+    cursor: pointer;
+}
+
+.side-pageImg {
+    width: 9px;
+    height: 9px;
+    z-index: 999;
+}
+
+.side-pageImg-box {
+    margin-left: 10px;
+}

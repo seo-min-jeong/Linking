@@ -1,0 +1,221 @@
+.group-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 225px;
+    height: auto;
+    background-color: white;
+    padding: 10px 30px 20px 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+.doc-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 360px;
+    height: auto;
+    background-color: white;
+    padding: 10px 35px 20px 35px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+.group-modalBox {
+    display: block;
+    margin-top: 10px;
+}
+
+.groupBtn {
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: rgb(248, 248, 237);
+    border: rgb(255, 255, 214) 1px solid;
+    color: rgb(97, 97, 97);
+}
+
+.groupBtn-box {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.group-txt {
+    color: rgb(124, 124, 124);
+    font-weight: 500;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+.group-Input {
+    border: none;
+    border-bottom: 1px solid rgb(228, 228, 228);
+    width: 190px;
+    height: 25px;
+    font-size: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.doc-Input {
+    border: none;
+    border-bottom: 1px solid rgb(228, 228, 228);
+    width: 270px;
+    height: 25px;
+    font-size: 15px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.group-Input:focus, .doc-Input:focus {
+    outline: none;
+}
+
+.group-Input-box {
+    justify-content: center;
+    margin-top: 25px;
+    text-align: center;
+}
+
+.input-count-txt {
+    display: flex;
+    justify-content: center;
+    font-size: 12px;
+    color: rgb(124, 124, 124);
+}
+
+.group-closeBox {
+    text-align: right;
+    margin-bottom: 10px;
+    margin-right: -10px;
+}
+
+.groupBtn:hover, .group-closeTxt {
+    cursor: pointer;
+}
+
+.group-delete-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: auto;
+    background-color: white;
+    padding: 0px 30px 20px 35px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+.group-deleteBtn1 {
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: rgb(248, 248, 237);
+    border: rgb(255, 255, 214) 1px solid;
+    color: rgb(97, 97, 97);
+    margin-right: 30px;
+    font-weight: 600;
+}
+
+.group-deleteBtn2 {
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: rgb(248, 248, 237);
+    border: rgb(255, 255, 214) 1px solid;
+    color: rgb(97, 97, 97);
+    font-weight: 600;
+}
+
+.group-deleteTxt {
+    padding-top: 10px;
+    text-align: center;
+}
+
+.group-deleteBtn-box {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+
+.group-deleteBtn1:hover, .group-deleteBtn2:hover {
+    cursor: pointer;
+}
+
+.page-template-box {
+    display: flex;
+    width: auto;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.template-blank-box {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    border: solid rgba(225, 225, 225, 0.753) 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.template-title-box {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    border: solid rgba(225, 225, 225, 0.753) 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-blank-box {
+    margin-right: 40px;
+}
+
+.page-title-box {
+    margin-left: 40px;
+}
+
+.group-txt-box {
+    display: flex;
+    justify-content: center;
+}
+
+.template-txt {
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-template-txt {
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.page-blank-box:hover .template-blank-box {
+    border-color: red;
+}
+
+.page-blank-box:hover .page-template-txt {
+    color: red;
+}
+
+.page-title-box:hover .template-title-box {
+    border-color: red;
+}
+
+.page-title-box:hover .page-template-txt {
+    color: red;
+}

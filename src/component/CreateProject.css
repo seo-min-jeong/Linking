@@ -1,0 +1,90 @@
+.create-project-box {
+    width: 700px;
+    height: 670px;
+    border: none;
+    margin: auto;
+}
+
+.project-Input {
+    border: none;
+    border-bottom: 1px solid rgb(213, 213, 213);
+    width: 450px;
+    height: 35px;
+    font-size: 20px;
+    font-weight: 400;
+    color: #444545;
+}
+
+.project-Input:focus {
+    outline: none;
+}
+
+.createProjectBtn {
+    width: 70px;
+    height: 45px;
+    border-radius: 8px;
+    background-color: #444545;
+    border: #444545;
+    box-shadow: 2px 2px 2px rgb(150, 150, 150);
+    color: white;
+    font-weight: 400;
+    font-size: 14px;
+    margin-top: 10px;
+    margin: auto;
+}
+
+.team-oneBtn {
+    width: 85px;
+    height: 40px;
+    font-weight: 400;
+    font-size: 12.5px;
+    border-radius: 6px;
+    background-color: #444545;
+    color: white;
+}
+
+.team-oneBtn:hover {
+    cursor: pointer;
+}
+
+.team-create-box {
+    text-align: left;
+    margin-left: 50px;
+    margin-top: -24.5px;
+    height: 260px;
+}
+
+.createProjectBtn:hover {
+    cursor: pointer;
+}
+
+.team-plus-img {
+    width: 25px;
+    height: 25px;
+    opacity: 0.5;
+    margin-bottom: 10px;
+}
+
+.team-plus-box {
+    text-align: center;
+    margin-left: -15px;
+    display: block;
+    margin-top: 50px;
+}
+
+.team-create-name {
+    color: gray;
+    font-size: 17px;
+    font-weight: 450;
+}
+
+.createProjectBtn-box {
+    display: flex;
+    justify-content: center;
+}
+
+.createDate-box {
+    display: flex;
+    margin-top: 60px;
+    margin-left: 50px;
+}

@@ -1,0 +1,125 @@
+.logo {
+    width: 185px;
+    height: 110px;
+    /* margin-top: 70px; */
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.signUp {
+    text-align: center;
+    color: #282c34;
+    font-size: 30px;
+    font-weight: 470;
+}
+
+.signBtn {
+    width: 180px;
+    height: 48px;
+    margin-top: 20px;
+    border-radius: 7px;
+    background-color: #444545;
+    border: #444545;
+    box-shadow: 2px 2px 2px gray;
+    color: white;
+    font-size: 17px;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.duplicate-txt {
+    background-color: #444545;
+    border: #444545;
+    box-shadow: 2px 2px 2px gray;
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 10px 15px 10px 15px;
+    border-radius: 7px;
+}
+
+.signUp-totalBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.signUpBox1 {
+    margin-right: 15px;
+    text-align: right;
+}
+
+.signInputBox {
+    display: block;
+    margin-top: -2px;
+    width: 300px;
+}
+
+.signUpBox {
+    display: flex;
+    margin : auto;
+    justify-content: center;
+    /* padding-top: 30px; */
+}
+
+.signUpTxt {
+    font-size: 20px;
+}
+
+.signUp-smallBox {
+    margin-bottom: 30px;
+}
+
+.signInput {
+    width:250px;
+    height:30px;
+    font-size: 15px;
+    border: none;
+    border-bottom: 0.5px solid rgb(210, 210, 210);
+    border-radius: 3px;
+    margin-bottom: 20px;
+} 
+
+.signInput:focus {
+    outline: none;
+}
+
+::placeholder {
+    color: rgb(170, 170, 170);
+}
+
+.existBox {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+}
+
+.existTxt {
+    font-size: 13px;
+    font-weight: 500;
+    color: #444545;
+}
+
+.sign-loginBtn {
+    background-color: white;
+    border: none;
+    color: rgb(255, 119, 119);
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.sign-up-message {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(222, 1, 1, 0.787);
+}
+
+.sign-message-box {
+    margin-bottom: 10px;
+    text-align: left;
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    margin-right: 100px;
+}

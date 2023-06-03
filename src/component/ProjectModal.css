@@ -1,0 +1,152 @@
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 670px;
+  background-color: rgba(255, 255, 255, 0.9); /* 흰색 배경, 투명도 0.9 */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.team-modal {
+  position: fixed;
+  width: 350px;
+  height: 350px;
+  top: 50%;
+  left: 50%;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transform: translate(-50%, -50%);
+}
+
+.delete-modal {
+  position: fixed;
+  width: 300px;
+  height: 200px;
+  top: 50%;
+  left: 50%;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transform: translate(-50%, -50%);
+}
+
+.del-checkBox {
+  padding-top: 15px;
+}
+
+.del-checkTxt-box {
+  display: flex;
+  justify-content: center;
+}
+
+.delete-CheckBtn {
+  display: flex;
+  justify-content: center;
+}
+
+.delBtn:hover {
+  cursor: pointer;
+}
+
+.team-oneBtn {
+  position: fixed;
+  bottom: 20px;
+}
+
+.team-oneBtn-box {
+  display: flex;
+  justify-content: center;
+}
+
+.project-team-label {
+  display: block;
+  font-size: 12px;
+  height: 37px;
+  line-height: 37px;
+  display: flex;
+  margin-left: 10px;
+  /* background-color: #fffcf5; */
+}
+
+.project-team-label:hover {
+  cursor: pointer;
+}
+
+.project-label-temp {
+  width: 80px;
+}
+
+.circle1{
+  display: inline-block; 
+  width: 20px; 
+  height: 20px;
+  border: #ffffff;
+  position: relative; 
+  top: 4px;
+  cursor: pointer; /* 마우스 올렸을때 손모양 처리 */
+}
+
+.circle1:after{
+  content: '\2713';
+  font-size: 20px; 
+  color: #202020;
+  position: absolute; 
+  top: -10px; 
+  left: -10px;
+  opacity: 0; 
+  transition: 0.1s; 
+  font-weight: 700;
+}
+
+/* .team-chk:checked + .circle1:after{ opacity: 1; } */
+
+.team-chk { 
+  /* position: absolute;  */
+  left: -999em; 
+  margin-right: 15px;
+}
+
+.project-label-name {
+  width: 80px;
+}
+
+.team-total-box {
+  display: flex;
+}
+
+.team-txt {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.team-delete-box {
+  /* margin-left: 25px; */
+  text-align: center;
+}
+
+.team-small-box {
+  margin-top: 5px;
+}
+
+.team-small-txt {
+  font-size: 11px;
+}
+
+.team-no-box {
+  width: 300px;
+  height: 170px;
+  line-height: 30px;
+  text-align: left;
+  margin-top: 10px;
+  background-color: #fffcf5;
+  margin-left: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.team-no-txt {
+  font-size: 13px;
+}

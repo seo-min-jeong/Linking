@@ -1,0 +1,447 @@
+.calen {
+    width: 550px;
+    height: 530px;
+    border-color: rgb(241, 241, 241);
+    margin-top: 18px;
+    margin: auto;
+    margin-top: 15px;
+}
+
+.calendarBox {
+    display: block;
+    margin-top: 30px;
+    margin: auto;
+    /* width: 1315px; */
+    height: 85vh;
+}
+
+.totalCalBox {
+    display: flex;
+    margin-top: 50px;
+    margin: auto;
+    height: auto;
+    flex-wrap: wrap;
+}
+
+.cal-total-box {
+    display: flex;
+    width: 100vh;
+    margin: auto;
+}
+
+.custom-calendar {
+    width: auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    height: auto;
+    padding: 20px;
+}
+
+.todayBigText {
+    font-size: 20px;
+    color: #444444;
+    font-weight: 450;
+    margin-right: 10px;
+}
+
+.todayBigBox {
+    display: flex;
+    width: 100px;
+    margin: auto;
+    margin-top: 90px;
+    margin-bottom: 40px;
+}
+
+.todayPlus {
+    width: 22px;
+    line-height: 22px;
+    padding-top: 1px;
+    opacity: 0.5;
+}
+
+.todayPlus-box {
+    height: 25px;
+}
+
+.todaySmallBox {
+    border: solid 1.2px rgb(234, 231, 231);
+    width: 65vh;
+    border-radius: 20px;
+    text-align: left;
+    height: 550px;
+    margin-top: 35px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    min-width: 620px;
+    min-height: 560px;
+    justify-content: center;
+    
+}
+
+.today-small-box {
+    height: 480px;
+    overflow-y: auto;
+}
+
+.todaySmallBox::-webkit-scrollbar {
+    width: 0;
+}
+
+.todaySmallText1 {
+    margin-top: 50px;
+    color: #848585;
+    margin-right: 100px;
+    font-weight: 500;
+}
+
+.todaySmallText2 {
+    margin-top: 50px;
+    color: #858484;
+    margin-right: 60px;
+    font-weight: 500;
+    margin-left: 5px;
+}
+
+.smallTextBox {
+    width: auto;
+    height: 40px;
+    margin-top: 25px;
+    font-size: 14.5px;
+    display: flex;
+    padding-left: 60px;
+    border-bottom: solid 1.2px rgb(234, 231, 231);
+}
+
+.todaySmallText1-box {
+    margin-right: 92px;
+}
+
+.cal-total-txt {
+    color: #858484;
+    font-weight: 500;
+    font-size: 17px;
+}
+
+.calenBox {
+    text-align: right;
+    margin-bottom: 15px;
+}
+
+.todayPlus:hover {
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+/*  */
+.work-top-content-box {
+    padding-top: 20px;
+    border-bottom: solid 1.2px rgb(234, 231, 231);
+    padding-bottom: 20px;
+    display: flex;
+}
+
+.work-lower-content-box {
+    margin-top: 20px;
+}
+
+.todaySmall-txt1 {
+    margin-top: 50px;
+    color: #5a5a5a;
+    margin-left: 15px;
+    /* margin-right: 100px; */
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.todaySmall-lower-txt {
+    margin-top: 50px;
+    color: #5a5a5a;
+    margin-left: 22px;
+    margin-right: 100px;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.todaySmall-txt2 {
+    margin-top: 50px;
+    color: #5a5a5a;
+    margin-left: 15px;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+.todaySmall-txt3 {
+    font-size: 10px;
+    color: rgb(113, 194, 113);
+    font-weight: 500;
+}
+
+.todaySmall-red-txt {
+    font-size: 10px;
+    color: rgba(253, 71, 71, 0.895);
+    font-weight: 500;
+}
+
+.todaySmal-red-txt2 {
+    margin-top: 50px;
+    color: rgba(253, 71, 71, 0.895);
+    margin-left: 15px;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+.todaySmall-txt4 {
+    font-size: 12px;
+    border: 1.5px solid rgb(234, 234, 234);
+    padding: 5px;
+    border-radius: 7px;
+}
+
+.work-team-dot {
+    width: 12px;
+    height: 13px;
+    padding-top: 3px;
+}
+
+.work-circle{
+    display: inline-block; /* 영역적용가능해짐 */
+    width: 15px; 
+    height: 15px;
+    position: relative; 
+    cursor: pointer; /* 마우스 올렸을때 손모양 처리 */
+    border: #616161 0.5px solid;
+    border-radius: 100%;
+    margin-left: 30px;
+    top: 2px;
+}
+
+.work-lower-circle{
+    display: inline-block; /* 영역적용가능해짐 */
+    width: 15px; 
+    height: 15px;
+    position: relative; 
+    top: 2px;
+    cursor: pointer; /* 마우스 올렸을때 손모양 처리 */
+    border: #616161 0.5px solid;
+    border-radius: 100%;
+    margin-left: 80px;
+}
+
+.work-circle:after{
+    content: '\2713'; /* 체크박스 특수문자 */
+    font-size: 20px; 
+    color: #202020;
+    position: absolute; 
+    opacity: 0; /* 처음엔 안보이게 처리 */
+    transition: 0.1s; 
+    font-weight: 700;
+    top: -10px; 
+    border-radius: 100%;
+    width: 15px; 
+    height: 15px;
+}
+
+#work-chk:checked + .work-circle:after{ 
+    opacity: 1; 
+}
+
+#work-chk { 
+    position: absolute; 
+    left: -999em; 
+}
+
+.work-lower-circle:after{
+    content: '\2713'; /* 체크박스 특수문자 */
+    font-size: 20px; 
+    color: #202020;
+    position: absolute; 
+    opacity: 0; /* 처음엔 안보이게 처리 */
+    transition: 0.1s; 
+    font-weight: 700;
+    top: -10px; 
+    border-radius: 100%;
+    width: 15px; 
+    height: 15px;
+}
+
+#work-chk:checked + .work-lower-circle:after{ 
+    opacity: 1; 
+}
+
+.work-toggle-box {
+    width: 100px;
+    height: auto;
+    /* position: absolute; */
+    border: solid 2px white;
+    background-color: white;
+    z-index: 555;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    color: rgb(63, 63, 63);
+    padding: 0 7px 0 10px;
+    margin-left: -105px;
+    margin-top: 10px;
+
+    background-color: white;
+}
+
+.work-menu-box {
+    display: block;
+    padding-top: 8px;
+}
+
+.work-menu-sec {
+    margin-bottom: 8px;
+    display: flex;
+    height: 20px;
+}
+
+.calenBox:hover, .work-team-dot:hover {
+    cursor: pointer;
+}
+
+.todaySmall-txt1-box {
+    width: 223px;
+    padding-left: 15px;
+}
+
+.todaySmallText2-box {
+    margin-right: 45px;
+    margin-left: 10px;
+}
+
+.todaySmallText3-box {
+    margin-right: 20px;
+    margin-left: 10px;
+}
+
+.work-green-clock {
+    width: 10px;
+    margin-left: 10px;
+    margin-right: 3px;
+}
+
+.todaySmall-txt2-box {
+    width: auto;
+}
+
+.todaySmall-txt3-box {
+    width: auto;
+    margin-right: 30px;
+}
+
+.todaySmall-txt4-box {
+    width: 100px;
+    /* margin: auto; */
+}
+
+.todaySmall-img-box {
+    /* margin-right: 10px; */
+    margin-left: 0px;
+    /* height: 70px; */
+}
+
+.work-plusIcon {
+    width: 13px;
+    height: 13px;
+    opacity: 0.8;
+}
+
+.work-menu-txt {
+    font-size: 12px;
+}
+
+.work-menu-imgBox {
+    padding-top: 2px;
+    margin-right: 8px;
+}
+
+.work-arrow {
+    width: 5px;
+}
+
+.work-arrow-imgBox {
+    margin-top: -2px;
+    margin-right: 11px;
+}
+
+.work-menu-txtBox:hover, .work-arrow:hover, .workNoti-txt:hover, .circle-img:hover {
+    cursor: pointer;
+}
+
+.workNoti-toggle-box {
+    width: 90px;
+    height: auto;
+    /* position: absolute; */
+    border: solid 2px white;
+    background-color: white;
+    z-index: 555;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    color: rgb(63, 63, 63);
+    padding: 0 7px 5px 10px;
+    margin-left: -120px;
+    margin-top: -30px;
+}
+
+.workNoti-hide-box {
+    display: none;
+}
+
+.work-noti {
+    width: 10px;
+    height: 10px;
+    margin-right: 10px;
+}
+
+.workNoti-txt {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.workNoti-box {
+    padding-top: 5px;
+}
+
+.circle-btn {
+    background-color: white;
+    border: none;
+    margin-left: 20px;
+}
+
+.circle-img {
+    width: 15px;
+    height: 15px;
+}
+
+/* 하위 할 일 */
+.work-content-box {
+    display: block;
+}
+
+.work-sub-content-box {
+    padding-top: 20px;
+    border-bottom: solid 1.2px rgb(234, 231, 231);
+    padding-bottom: 20px;
+    display: flex;
+    padding-left: 40px;
+}
+
+.todaySub-txt1-box {
+    width: 200px;
+}
+
+[id^="fc-dom-"].fc-toolbar-title {
+    margin-top: 9px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.todaySmall-txt1:hover{
+    cursor: pointer;
+}
+
+.calendarBox2 {
+    margin-right: 30px;
+}

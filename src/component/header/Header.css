@@ -1,0 +1,517 @@
+/* arrow.js */
+
+.arrowShow-menu{
+    width: 280px;
+    height: 200px;
+    position: absolute;
+    left: 570px;
+    /* background-color: white; */
+    z-index: 999;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+    
+.arrowHide-menu{
+    display: none;
+}
+
+.arrowMenu-bar {
+    /* margin-top: 15px; */
+    /* margin-left: 34px; */
+    text-align: left;
+    display: block;
+}
+
+.arrowBelow {
+    width: 20px;
+    height: 20px;
+    margin-left: 15px;
+    margin-bottom: 4px;
+}
+  
+.arrowUp {
+    width: 20px;
+    height: 20px;
+    margin-left: 15px;
+    margin-bottom: 4px;
+}
+  
+.arrowBtn {
+    /* width: 25px;
+    height: 25px; */
+    background-color: white;
+    border: white;
+}
+
+.arrowBox {
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+}
+
+.arrowBox:hover {
+    cursor: pointer;
+}
+
+.arrow-plus {
+    width: 18px;
+    height: 18px;
+    opacity: 0.5;
+}
+
+.arrow-plus:hover {
+    /* filter: invert(40%); */
+    cursor: pointer;
+}
+
+.arrow-project {
+    display: flex;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+/* myTodo.js */
+
+.todoShow-menu{
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    right: 100px;
+    z-index: 999;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+    overflow-y: auto;
+}
+
+.todoShow-menu::-webkit-scrollbar {
+    width: 0;
+  }
+    
+.todoHide-menu{
+    display: none;
+}
+
+.todoMenu-bar {
+    margin-top: 15px;
+}
+
+.todo-list {
+    font-size: 13px;
+    color: rgb(61, 61, 61);
+}
+
+.todo-list-box {
+    margin-bottom: 20px;
+}
+
+.todo-content {
+    list-style: none;
+    font-size: 14px;
+    font-weight: 500;
+    /* margin-left: 35px; */
+}
+
+.todo-box {
+    display: flex;
+    padding: 15px 20px 15px 20px;
+}
+
+.todo-charge {
+    font-size: 10px;
+    position: absolute;
+    right: 20px;
+    margin-top: 20px;
+}
+
+.todo-content {
+    font-size: 13px;
+}
+
+.todo-line {
+    /* background-color: rgb(255, 87, 87); */
+    width: 15px;
+    height: auto;
+    border: 1.5px solid gray;
+    border-radius: 100px;
+}
+
+.todo-txt {
+    font-size: 12px;
+    font-weight: 400;
+    /* line-height: 20px; */
+    font-weight: 500;
+}
+
+.todo-txt-box {
+    width: 100px;
+    height: auto;
+    margin-top: -5px;
+    margin-right: 3px;
+}
+
+.todo-txt:hover {
+    /* filter: invert(30%); */
+    /* transition: 0.3s; */
+    cursor: pointer;
+}
+
+.mytodo-circle-btn {
+    background-color: rgba(255, 255, 255);
+    border: none;
+    /* margin-right: 30px; */
+}
+
+.mytodo-circle-img {
+    width: 16px;
+    height: 15px;
+}
+
+.mytodo-no-box {
+    margin-top: 100px;
+}
+
+.mytodo-no-txt {
+  font-size: 13px;
+}
+
+.todo-no-box {
+    height: 50vh;
+    margin-top: 120px;
+}
+
+.todo-no-txt {
+  font-size: 13px;
+}
+
+/* noti.js */
+
+.notiShow-menu{
+    width: 330px;
+    height: 360px;
+    position: absolute;
+    right: 60px;
+    z-index: 999;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+    /* overflow-y: auto; */
+}
+    
+.notiHide-menu{
+    display: none;
+}
+
+.notiMenu-bar {
+    margin-top: 15px;
+}
+
+.noti-list {
+    font-size: 13px;
+    color: rgb(61, 61, 61);
+}
+
+.noti-list-box {
+    margin-bottom: 40px;
+}
+
+.notiMenu-bar li {
+    list-style: none;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+    margin-left: 30px;
+}
+
+.noti-span-box {
+    text-align: right;
+    margin-right: 20px;
+}
+
+.noti-box {
+    margin-bottom: 25px;
+}
+
+.noti-box span {
+    font-size: 11px;
+}
+
+.noti-tag-box {
+    display: flex;
+    left: 0;
+    margin-left: 30px;
+    margin-top: 5px;
+}
+
+/***/
+.tag-line {
+    background-color: rgb(255, 87, 87);
+    width: 5px;
+    height: 20px;
+}
+
+.tag-check {
+    background-color: rgb(171, 171, 171);
+    width: 5px;
+    height: 20px;
+}
+
+.noti-check {
+    color: rgb(171, 171, 171);
+}
+
+/* chat.js */
+
+.chatShow-menu{
+    width: 360px;
+    height: 100%;
+    position: fixed;
+    right: 0px;
+    border: solid 2px rgb(255, 249, 234);
+    background-color: rgb(255, 254, 251);
+    z-index: 999;
+    transition: 1s;
+    top: 0;
+    
+    /* box-shadow: 2px 2px 2px 2px rgb(183, 181, 181); */
+}
+    
+.chatHide-menu{
+    width: 360px;
+    height: 100%;
+    position: fixed;
+    right: -360px;
+    transition:1s;
+    border: solid 2px rgb(255, 254, 242);
+    background-color: rgb(255, 254, 242);
+    z-index: 999;
+    top: 0;
+}
+
+.chatMenu-bar {
+    margin-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: solid 1.5px rgba(229, 229, 229, 0.617);
+    height: 5vh;
+}
+
+.chatMenu-bar span {
+    /* font-size: 15px; */
+    color: rgb(61, 61, 61);
+}
+
+.chat-menu-txt {
+    font-size: 15px;
+}
+
+.open-header-bar {
+    width: 16px;
+    height: 16px;
+    position: relative;
+    margin-right: 310px;
+    transition: 1s;
+}
+
+.open-header-bar:hover {
+    /* filter: invert(60%); */
+    cursor: pointer;
+}
+
+.chat-input {
+    border: 1px solid rgb(123, 123, 123);
+    width: 230px;
+    height: 32px;
+    border-radius: 18px;
+    padding-left: 10px;
+}
+
+.chat-input-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 10px;
+    text-align: center;
+    /* margin-left: 50px; */
+    border-top: solid 1.5px rgba(229, 229, 229, 0.617);
+    padding-top: 25px;
+    padding-bottom: 10px;
+    width: 360px;
+    height: 5vh;
+    background-color: rgb(255, 254, 251);
+}
+
+.chat-input-img {
+    width: 25px;
+    margin-left: 20px;
+}
+
+.chat-input:focus {
+    outline: none;
+}
+
+.chat-body {
+    /* position: absolute; */
+    height: 80vb;
+    overflow-y: scroll;
+}
+
+.chat-input-img:hover {
+    cursor: pointer;
+}
+
+.chat-sec-box {
+    display: flex;
+    padding: 20px;
+    border-bottom: solid 1.5px rgba(229, 229, 229, 0.617);
+    position: relative;
+}
+
+.chat-profile-box {
+    border: 1px solid black;
+    border-radius: 100px;
+    width: 50px;
+    height: 50px;
+    justify-content: center;
+    display: flex;
+    background-color: rgb(255, 243, 172);
+    border: 1px solid rgb(228, 228, 228);
+}
+
+.chat-profile-txt {
+    font-size: 14px;
+    writing-mode: vertical-lr;
+    font-weight: 400;
+}
+
+.chat-name-txt {
+    font-size: 11px;
+}
+
+.chat-content-txt {
+    font-size: 13px;
+}
+
+.chat-date-txt {
+    font-size: 10px;
+}
+
+.chat-date-box {
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+}
+
+.chat-name-box {
+    position: absolute;
+    top: 11px;
+    left: 85px;
+}
+
+.chat-content-box {   
+    position: absolute;
+    top: 37px;
+    left: 85px;
+    border: 1px solid black;
+    width: auto;
+    padding: 0px 5px 4px 5px;
+    border-radius: 10px; 
+}
+
+.chat-user-img {
+    width: 13px;
+    position: absolute;
+    left: 20px;
+    margin-top: 5px;
+}
+
+.chat-length-txt {
+    font-size: 12px;
+    left: 50px;
+    position: absolute;
+    margin-top: 5px;
+}
+
+.chat-user-img:hover {
+    cursor: pointer;
+}
+
+/* dot */
+.info-menu-box {
+    width: auto;
+    height: auto;
+    position: absolute;
+    right: 25px;
+    z-index: 999;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    padding: 10px 12px 0px 12px; 
+    /* background-color: rgb(245, 245, 245); */
+    border: solid 2px white;
+    
+}
+
+.info-hide-box {
+    display: none;
+}
+
+.info-sec-box {
+    font-size: 12px;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.info-sec-box:hover {
+    cursor: pointer;
+}
+
+.info-sec-img {
+    width: 13px;
+    margin-right: 10px;
+}
+
+.crown-img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.mytodo-txt {
+    font-size: 6px;
+    color: rgb(113, 194, 113);
+    font-weight: 500;
+    /* margin-top: -3px; */
+}
+
+.mytodo-red-txt {
+    font-size: 6px;
+    color: rgba(253, 71, 71, 0.895);
+    font-weight: 500;
+    /* margin-top: -3px; */
+}
+
+.mytodo-box {
+    height: 25px;
+}
+
+.noti-img {
+    width: 15px;
+    opacity: 0.8;
+}
+
+.noti-check-img {
+    width: 15px;
+    opacity: 0.5;
+}
+
+.noti-body-box {
+    width: 320px;
+    height: 280px;
+    right: 60px;
+    z-index: 999;
+    overflow-y: auto;
+}

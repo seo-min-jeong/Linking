@@ -1,0 +1,33 @@
+.project-date {
+    color: black;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.project-select-box {
+    text-align: left;
+    margin-top: 90px;
+    height: 260px;
+}
+
+.date-sec1-box {
+    text-align: left;
+    color: gray;
+    font-weight: 450;
+    font-size: 15px;
+    margin-right: 225px;
+}
+
+.pencil {
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
+}
+
+.pencil-box {
+    margin-top: 5px;
+}
+
+.pencil:hover {
+    cursor: pointer;
+}

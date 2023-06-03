@@ -1,0 +1,284 @@
+.create-work-box {
+    width: 600px;
+    height: 570px;
+    border: none;
+    margin: auto;
+}
+
+.work-name-sec {
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: -25px;
+    display: flex;
+    justify-content: center;
+    color: #444545;
+}
+
+.work-name-sec2 {
+    text-align: left;
+    margin-left: 50px;
+    margin-top: 30px;
+    display: block;
+}
+
+.work-name-small {
+    color: gray;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.work-Input {
+    border: none;
+    border-bottom: 1px solid rgb(214, 214, 214);
+    width: 330px;
+    height: 35px;
+    font-size: 18px;
+    font-weight: 500;
+    padding-left: 3px;
+    padding-top: 3px;
+}
+
+.work-Input:focus {
+    outline: none;
+}
+
+.time-box {
+    margin-left: 50px;
+    margin-top: 60px;
+}
+
+.time-sec-box {
+    text-align: left;
+    margin-right: 130px;
+    display: block;
+}
+
+.time-sec-txt {
+    color: gray;
+    font-weight: 450;
+    font-size: 15px;
+    padding-left: 3px;
+    margin-bottom: 10px;
+}
+
+.time-sec {
+    font-size: 15px;
+    font-weight: 400;
+    margin-top: 17px;
+}
+
+.charge-box {
+    margin-left: 50px;
+    margin-top: 60px;
+}
+
+.charge-sec-box {
+    text-align: left;
+    margin-right: 130px;
+    display: block;
+}
+
+.charge-sec-txt {
+    color: gray;
+    font-weight: 450;
+    font-size: 15px;
+}
+
+.charge-arrow {
+    width: 14px;
+    height: 14px;
+    margin-left: 5px;
+    opacity: 0.45;
+}
+
+.charge-arrowBtn {
+    background-color: white;
+    border: white;
+}
+
+.workDate-box {
+    display: flex;
+    margin-left: 50px;
+    margin-top: 40px;
+}
+
+.workDate-sec-box {
+    text-align: left;
+    color: gray;
+    font-weight: 450;
+    font-size: 15px;
+    margin-right: 90px;
+}
+
+.workDatepicker {
+    width: 150px;
+    font-size: 15px;
+    border: none;
+    font-weight: 500;
+}
+
+.workDatepicker:focus {
+    outline: none;
+}
+
+.charge-person-box {
+    background-color: rgb(226, 226, 226);
+    font-size: 14px;
+    width: 150px;
+    height: 40px;
+    box-shadow: 2px 2px 2px 2px rgb(183, 181, 181);
+    text-align: center;
+    line-height: 40px;
+    margin-top: 10px;
+}
+
+.createWorkBtn {
+    width: 70px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: #444545;
+    border: #444545;
+    box-shadow: 2px 2px 2px rgb(150, 150, 150);
+    color: white;
+    font-weight: 400;
+    font-size: 15px;
+    position: fixed;
+    bottom: 30px;
+}
+
+.createWorkBtn:hover {
+    /* filter: invert(10%); */
+    cursor: pointer;
+}
+
+.work-hide-box {
+    display: none;
+}
+
+.work-box {
+    width: 130px;
+    height: 105px;
+    margin-bottom: 15px;
+    margin-top: -1px;
+}
+
+.work-teamOne-txt {
+    font-size: 16px;
+    height: 40px;
+    line-height: 40px;
+}
+
+.workBtn {
+    width: 58px;
+    height: 30px;
+    border-radius: 6px;
+    background-color: #444545;
+    border: #444545;
+    box-shadow: 2px 2px 2px rgb(150, 150, 150);
+    color: white;
+    font-weight: 400;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.workBtn:hover {
+    /* filter: invert(10%); */
+    cursor: pointer;
+}
+
+.teamOne-chkBox {
+    display: block;
+    width: 130px;
+    height: 180px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    background-color: rgb(255, 255, 255);
+    left: 230px;
+    bottom: 110px;
+    border-radius: 10px;
+}
+
+.charge-person-box:hover {
+    filter: invert(5%);
+    cursor: pointer;
+}
+
+.work-team-close {
+    margin-left: 117px;
+}
+
+.work-team-close:hover {
+    /* filter: invert(40%); */
+    cursor: pointer;
+}
+
+.work-team-chkBox {
+    border: none;
+}
+
+.circle {
+    display: inline-block; /* 영역적용가능해짐 */
+    width: 20px; 
+    height: 20px;
+    border: #ffffff;
+    position: relative; 
+    top: 4px;
+    cursor: pointer; /* 마우스 올렸을때 손모양 처리 */
+}
+
+/* .circle:after{
+    content: '\2713'; 
+    font-size: 20px; 
+    color: #202020;
+    position: absolute; 
+    top: -10px; 
+    opacity: 0; 
+    transition: 0.1s; 
+    font-weight: 700;
+}
+
+#chk:checked + .circle:after{ opacity: 1; } */
+
+/* 체크박스는 display:none;을 주면 데이터 처리가 안됨 */
+#chk { 
+    position: absolute; 
+    left: -999em; 
+}
+
+.work-label {
+    display: block;
+    font-size: 15px;
+    height: 37px;
+    line-height: 37px;
+    display: flex;
+    justify-content: center;
+    position: relative
+}
+
+.work-label:hover {
+    cursor: pointer;
+}
+
+.workBtn-box {
+    display: flex;
+    justify-content: center;
+}
+
+.createWorkBtn-box {
+    display: flex;
+    justify-content: center;
+}
+
+.work-name-box {
+    margin-top: 10px;
+}
+
+.workClose-box {
+    text-align: right;
+    margin-right: 35px;
+    padding-top: 25px;
+}
+
+.work-top-content-box:hover {
+    cursor: pointer;
+}

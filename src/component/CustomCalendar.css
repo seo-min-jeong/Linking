@@ -1,0 +1,178 @@
+.custom-calendar {
+  width: 600px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  height: auto;
+  padding: 20px;
+  /* left: 100px; */
+  /* position: fixed; */
+}
+
+/* .custom-cal {
+  position: fixed;
+} */
+
+.custom-calendar-body {
+  background-color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  box-shadow: none;
+  width: 500px;
+}
+
+.react-calendar__tile--now {
+  background-color: #fffee8;
+  color: #000000;
+}
+
+.react-calendar__tile--active {
+  background-color: #fffee8;
+  color: #000000;
+}
+
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
+  background-color: #fffee8;
+  color: #000000;
+}
+
+.fc-direction-ltr {
+  width: 55vh;
+  height: 70vh;
+  direction: ltr;
+  height: auto;
+  text-align: left;
+
+  min-height: 300px;
+  min-width: 620px;
+  /* margin-top: 35px; */
+  /* margin-left: 25px; */
+}
+
+.fc .fc-daygrid-day-number {
+  font-size: 13px;
+}
+
+.fc .fc-col-header-cell-cushion {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.fc-direction-ltr .fc-toolbar>*>:not(:first-child) {
+  margin-left: -0.1em;
+}
+
+.fc-direction-ltr .fc-button-group>.fc-button:not(:first-child) {
+  display: none;
+}
+
+.fc-event-time {
+  font-size: 10px;
+  font-weight: 300;  
+}
+
+.fc-event-title {
+  font-size: 11px;
+  color: #000000;
+} 
+
+.fc-daygrid-block-event .fc-event-time, .fc-daygrid-block-event .fc-event-title {
+  font-size: 11px;
+  color: #000000;
+  font-weight: 700;
+}
+
+.fc-event-main {
+  background-color: white;
+  padding-left: 2px;
+  /* border: black solid 1px; */
+}
+
+.fc-direction-ltr .fc-daygrid-block-event:not(.fc-event-end) {
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.fc-event-time {
+  display: none;
+}
+
+.fc-direction-ltr .fc-daygrid-event.fc-event-end {
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.fc-daygrid-event-dot {
+  border: calc(var(--fc-daygrid-event-dot-width)/2) solid black;
+  border-radius: calc(var(--fc-daygrid-event-dot-width)/2);
+  box-sizing: content-box;
+  height: 0;
+  margin: 0 4px;
+  width: 0;
+}
+
+.fc-toolbar-title {
+  font-weight: 500;
+}
+
+.fc-direction-ltr .fc-daygrid-event.fc-event-start, .fc-direction-rtl .fc-daygrid-event.fc-event-end {
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/*아래코드가 달력 뒤로 보내는 코드에용 ㅠㅠ 이게뭐라고 ㅠㅠ*/
+.fc .fc-scroller-liquid-absolute {
+  z-index: 0;
+}
+
+.fc-toolbar-chunk {
+  display: flex;
+}
+
+.fc-icon-chevrons-right:before {
+  /* content: "\032D"; */
+  content: "\e901";
+}
+
+.fc-icon-chevrons-left:before {
+  content: "\e900";
+}
+
+.fc .fc-button-primary {
+  background-color: white;
+  border: none;
+  color: #000000;
+}
+
+.fc .fc-button-primary:active {
+  background-color: white;
+  border: none;
+  color: #000000;
+}
+
+.fc .fc-button-primary:disabled {
+  background-color: white;
+  border-color: white;
+  color: black;
+}
+
+.fc-today-button:hover {
+  cursor: pointer;
+}
+
+.fc-button {
+  background-color: white !important;
+  border-color: white !important;
+  color: black !important;
+}
+
+button:focus {
+  outline: none;
+}
+
+.fc-button-primary:active,
+.fc-button-primary:focus {
+    border-color: transparent !important;
+    box-shadow: none !important;
+    outline: none !important;
+}

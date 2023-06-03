@@ -1,0 +1,62 @@
+.arrowShow-menu{
+    width: 150px;
+    height: auto;
+    position: absolute;
+    left: auto;
+    margin-left: -125px;
+    margin-top: 7px;
+    border: solid 2px white;
+    background-color: white;
+    z-index: 999;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    padding: 10px 20px 10px 20px;
+}
+    
+.arrowHide-menu{
+    display: none;
+}
+
+.arrowMenu-bar {
+    /* margin-top: 15px; */
+    /* margin-left: 34px; */
+    text-align: left;
+    /* padding: 20px; */
+}
+
+.arrow-plus-txt {
+    font-size: 15px;
+    color: rgb(131, 131, 131);
+}
+
+.arrow-txt {
+    font-size: 15px;
+    color: rgb(61, 61, 61);
+}
+
+.arrow-txt:hover {
+    cursor: pointer;
+}
+
+.arrowBelow {
+    width: 10px;
+    height: 7px;
+    margin-left: 12px;
+}
+  
+.arrowUp {
+    width: 10px;
+    height: 7px;
+    margin-left: 12px;
+}
+  
+.arrowBtn {
+    background-color: white;
+    border: white;
+}
+
+.arrowBox:hover {
+    cursor: pointer;
+}
+
+/**/

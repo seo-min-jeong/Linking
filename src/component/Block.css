@@ -1,0 +1,65 @@
+.block-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: auto;
+    background-color: white;
+    padding: 10px 35px 20px 35px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+.title-clone-chkbox {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.title-clone-txt {
+    color: rgb(124, 124, 124);
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.title-clone1-txt {
+    color: rgb(124, 124, 124);
+    font-weight: 500;
+    font-size: 14px;
+    margin-left: 37px;
+}
+
+.title-clone-chk {
+    margin-right: 20px;
+}
+
+.clone-txt-box {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.clone-now-box {
+    margin-bottom: 30px;
+}
+
+.title-clone1-box {
+    margin-bottom: 20px;
+}
+
+.page-clone-box {
+    margin-left: 45px;
+    margin-bottom: 20px;
+}
+
+.page-clone-txt {
+    color: rgb(124, 124, 124);
+    font-weight: 500;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.pages-clone-box {
+    height: 200px;
+    overflow-y: scroll;
+}

@@ -1,0 +1,112 @@
+.loginBox {
+    display: flex;
+    margin : auto;
+    justify-content: center;
+}
+
+.login-total-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.logoBox {
+    height: auto;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.input_id {
+    padding-right: 52px;
+    font-size: 20px;
+}
+
+.input_pw {
+    padding-right: 15px;
+    font-size: 20px;
+}
+
+.login_id {
+    margin-bottom: 25px;
+}
+
+.login_pw {
+    margin-top: 20px;
+}
+
+.loginInput {
+    width:350px;
+    height:33px;
+    font-size:15px;
+    border: 0.5px solid rgb(230, 230, 230);
+    border-radius: 3px;
+}
+
+.loginInput:focus {
+    outline: none;
+}
+
+.loginBtn {
+    width: 140px;
+    height: 98px;
+    border-radius: 14px;
+    background-color: #444545;
+    border: #444545;
+    box-shadow: 2px 2px 2px gray;
+    color: white;
+    font-weight: bolder;
+    font-size: 19px;
+    cursor: pointer;
+}
+
+.user-signBtn {
+    width: 355px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: #444545;
+    border: #444545;
+    color: white;
+    font-size: 15px;
+    font-weight: 400;
+    margin-right: 60px;
+}
+
+.loginBtn-box {
+    margin-left: 20px;
+}
+
+.loginBtn-box2 {
+    display: flex;
+    margin : auto;
+    justify-content: center;
+    padding-top: 30px;
+}
+
+.kakaoBox {
+    margin-right: 30px;
+}
+
+.kakaoImg {
+    cursor: pointer;
+}
+
+.user-signBtn {
+    cursor: pointer;
+}
+
+.loginOrTxt {
+    color: rgb(95, 95, 95);
+    font-weight: 600;
+}
+
+.loginOrBox {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 60px;
+}
+
+.apple-login-box {
+    margin-left: 100px;
+    margin-top: 30px;
+}

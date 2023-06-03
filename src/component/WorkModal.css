@@ -1,0 +1,97 @@
+.work-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background-color: rgba(255, 255, 255, 0.9); /* 흰색 배경, 투명도 0.9 */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+}
+
+.time-custom {
+    border: none;
+    font-size: 15px;
+}
+
+.time-custom:focus {
+    outline: none;
+}
+
+.react-datepicker__day--selected {
+    background-color: rgb(0, 0, 0);
+}
+
+.react-datepicker__day:hover {
+    background-color: rgb(0, 0, 0);
+    color: white;
+}
+
+.react-datepicker__current-month {
+    font-size: 12.5px;
+}
+
+.workDatepicker, .time-custom {
+    cursor: pointer;
+}
+
+.fc .fc-daygrid-day-number:hover {
+    cursor: pointer;
+}
+
+.todo-delete-img {
+    width: 20px;
+}
+
+.todo-delete-box {
+    text-align: right;
+    margin-right: 35px;
+    margin-top: 60px;
+}
+
+.todo-delete-img {
+    cursor: pointer;
+}
+
+.todo-circle-btn {
+    background-color: white;
+    border: none;
+    margin-left: 10px;
+}
+
+.todo-circle-btn2 {
+    background-color: white;
+    border: none;
+    margin-left: 25px;
+}
+
+.todaySmall-txt22 {
+    margin-top: 50px;
+    color: #5a5a5a;
+    margin-left: 15px;
+    margin-right: 100px;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+/* .todaySmall-txt1:hover::before {
+    content: "open";
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-size: 10px;
+    font-weight: bold;
+} */
+
+.assign-chk {
+    left: 0;
+    position: absolute;
+    margin-top: 11px;
+    margin-left: 10px;
+}

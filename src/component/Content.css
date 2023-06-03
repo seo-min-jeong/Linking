@@ -1,0 +1,103 @@
+.contentOpen-box{
+    width: 300px;
+    height: 100%;
+    /* position: absolute; */
+    right: 0px;
+    border: solid 2px rgb(255, 249, 234);
+    background-color: rgb(255, 254, 251);
+    z-index: 900;
+    transition: 1s;
+    top: 37.8px;
+
+    position: fixed;
+}
+
+/* .content-open-box {
+    margin-top: 30px;
+} */
+
+.content-modalBox {
+    display: block;
+    margin-top: 10px;
+}
+
+.content-closeBox {
+    text-align: right;
+    margin-bottom: 10px;
+    margin-right: -10px;
+}
+
+.content-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: auto;
+    background-color: white;
+    padding: 0px 30px 20px 35px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+.content-txt {
+    color: rgb(124, 124, 124);
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.content-Input-box {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.content-Input {
+    border: none;
+    border-bottom: 1px solid rgb(228, 228, 228);
+    width: 200px;
+    height: 25px;
+    font-size: 15px;
+}
+
+.contentBtn-box {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.contentBtn {
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: rgb(248, 248, 237);
+    border: rgb(255, 255, 214) 1px solid;
+    color: rgb(97, 97, 97);
+}
+
+.content-closeTxt:hover, .contentBtn:hover {
+    cursor: pointer;
+}
+
+.content-Input:focus {
+    outline: none;
+}
+
+.side-content-sideBox {
+    text-align: left;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.side-content-secBox {
+    display: flex;
+}
+
+.side-div-box{
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+
+.side-index-box {
+    margin-right: 20px;
+}

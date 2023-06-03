@@ -1,0 +1,382 @@
+.project-box {
+    width: 700px;
+    height: 670px;
+    border: none;
+    margin: auto;
+}
+
+.project-name-box {
+    display: block;
+    text-align: left;
+    margin-left: 50px;
+}
+
+.project-name {
+    color: gray;
+    font-weight: 450;
+    font-size: 15px;
+}
+
+.project-name-txt {
+    font-size: 23px;
+    font-weight: 500;
+}
+
+.project-name-sec {
+    margin-bottom: 13px;
+    display: flex;
+}
+
+.close {
+    width: 25px;
+    height: 25px;
+}
+
+.close:hover {
+    cursor: pointer;
+}
+
+.closeTxt:hover {
+    cursor: pointer;
+}
+
+.close-box {
+    text-align: right;
+    margin-right: 35px;
+    margin-top: 25px;
+}
+
+.date-box {
+    display: flex;
+    margin-top: 60px;
+} 
+
+.updateDate-box {
+    display: flex;
+    margin-top: 60px;
+    margin-left: 50px;
+} 
+
+.date-sec-box {
+    text-align: left;
+    color: gray;
+    font-weight: 450;
+    font-size: 15px;
+    margin-right: 190px;
+}
+
+.datepicker {
+    width: 150px;
+    font-size: 17px;
+    border: none;
+    font-weight: 400;
+    color: #444545;
+}
+
+.datepicker:focus {
+    outline: none;
+}
+
+.datePicker-label {
+    display: flex;
+    margin-top: 20px;
+}
+
+.team-box {
+    margin-top: -24px;
+    text-align: left;
+    margin-left: 50px;
+}
+
+.team-people-sec {
+    width: 490px;
+    height: 200px;
+}
+
+#teamOne-scroll {
+    overflow-y: auto;
+}
+
+.team-sec {
+    color: gray;
+    font-weight: 4500;
+    font-size: 15px;
+    margin-bottom: 30px;
+}
+
+.team-txt-sec {
+    margin-bottom: 30px;
+    display: flex;
+    width: 400px;
+}
+
+.team-txt-sec2 {
+    display: flex;
+    height: 45px;
+}
+
+.team-name-txt {
+    font-size: 16px;
+    margin-right: 15px;
+}
+
+.team-email-txt {
+    font-size: 16px;
+    margin-left: 70px;
+}
+
+.dot-box {
+    margin-top: 90px;
+    text-align: right;
+    margin-right: 90px;
+}
+
+.dot {
+    width: 20px;
+    height: 20px;
+    opacity: 0.5;
+}
+
+.team-deleteImg {
+    width: 20px;
+    height: 20px;
+    opacity: 0.5;
+}
+
+.dot:hover, .team-deleteImg {
+    cursor: pointer;
+}
+
+.del {
+    width: 25px;
+    height: 25px;
+}
+
+.del:hover {
+    cursor: pointer;
+}
+
+.del-box {
+    text-align: right;
+    margin-right: 25px;
+    margin-top: 40px;
+    display: fixed;
+}
+
+.teamShow-menu{
+    width: auto;
+    height: auto;
+    position: absolute;
+    /* margin: auto; */
+    right: 35px;
+    /* margin-left: 510px; */
+    border: solid 2px white;
+    background-color: white;
+    z-index: 2;
+    box-shadow: 2px 2px 2px 2px rgb(183, 181, 181);
+    /* text-align: center; */
+    color: rgb(63, 63, 63);
+    padding: 0px 10px 9px 10px;
+    border-radius: 7px
+}
+    
+.teamHide-menu{
+    display: none;
+}
+
+.team-menu-insert {
+    margin-top: 8px;
+    font-size: 13px;
+}
+
+.team-menu-insert:hover {
+    cursor: pointer;
+}
+
+.team-menu-remove {
+    margin-top: 13px;
+    font-size: 13px;
+}
+
+.team-menu-remove:hover {
+    cursor: pointer;
+}
+
+.team-Input-close {
+    text-align: right;
+    margin-right: 20px;
+    color: gray;
+    font-size: 20px;
+    font-weight: 200;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.team-Input {
+    width: 250px;
+    height: 40px;
+    border: none;
+    font-size: 16px;
+    padding-left: 10px;
+    margin-left: 20px;
+    border-bottom: 1px solid rgb(233, 233, 233);
+    margin-top: 10px;
+}
+
+.team-Input:focus {
+    outline: none;
+}
+
+.mag-img {
+    width: 32px;
+    height: 32px;
+    margin-top: 18px;
+}
+
+.team-hide-box {
+    display: none;
+}
+
+.team-Input-box {
+    display: flex;
+    margin-top: 5px;
+}
+
+.team-one-box {
+    width: 300px;
+    height: 160px;
+    line-height: 30px;
+    text-align: left;
+    margin-top: 20px;
+    background-color: #fffcf5;
+    margin-left: 20px;
+    overflow-y: scroll;
+    /* opacity: 0.3; */
+}
+
+.team-one:hover {
+    background-color: rgb(255, 251, 238);
+    cursor: pointer;
+}
+
+.team-one-hideBox {
+    display: none;
+}
+
+.team-close {
+    text-align: right;
+    margin-right: 8px
+}
+
+.updateProjectBtn-box {
+    margin-top: -40px;
+}
+
+.updateProjectBtn {
+    width: 70px;
+    height: 45px;
+    margin-left: 20px;
+    border-radius: 8px;
+    background-color: #282c34;
+    border: #282c34;
+    box-shadow: 2px 2px 2px rgb(150, 150, 150);
+    color: white;
+    font-weight: 400;
+    font-size: 17px;
+
+}
+
+.updateProjectBtn:hover {
+    filter: invert(10%);
+}
+
+/* .del-checkBox {
+    margin: auto;
+    display: flex;
+    border-radius: 0px;
+    width: 270px;
+    height: 170px;
+    display: block;
+    box-shadow: 2px 2px 2px 2px rgb(183, 181, 181);
+    background-color: rgb(255, 255, 255);
+    position: relative;
+    margin-bottom: 265px;
+} */
+
+.del-hideBox {
+    display: none;
+}
+
+.del-checkTxt {
+    font-size: 15px;
+    line-height: 100px;
+    color: #282c34;
+    font-weight: 400;
+}
+
+.delBtn {
+    width: 70px;
+    height: 35px;
+    border-radius: 8px;
+    background-color: #444545;
+    border: #444545;
+    box-shadow: 2px 2px 2px rgb(150, 150, 150);
+    color: white;
+    font-weight: 400;
+    font-size: 13px;
+    margin-right: 25px;
+    margin-left: 25px;
+    font-weight: 500;
+}
+
+.projectName-Input {
+    border: none;
+    border-bottom: 1px solid rgb(232, 232, 232);
+    width: 300px;
+    height: 35px;
+    font-size: 23px;
+    font-weight: 500;
+}
+
+.projectName-Input:focus {
+    outline: none;
+}
+
+.dot:hover, .updateProjectBtn:hover, .mag-img:hover, .team-Input-close:hover, .datepicker:hover, .del:hover {
+    cursor: pointer;
+}
+
+.closeTxt {
+    font-size: 23px;
+}
+
+.team-circle {
+    display: inline-block; /* 영역적용가능해짐 */
+    border: #ffffff;
+    position: relative; 
+    top: 2px;
+    cursor: pointer; /* 마우스 올렸을때 손모양 처리 */
+    margin-right: 10px;
+    background-color:#ffffff;
+    border: #616161 0.5px solid;
+    border-radius: 100%;
+    width: 15px; 
+    height: 15px;
+}
+
+.team-circle:after{
+    content: '\2713'; /* 체크박스 특수문자 */
+    font-size: 20px; 
+    color: #202020;
+    position: absolute; 
+    top: -10px; 
+    opacity: 0; /* 처음엔 안보이게 처리 */
+    transition: 0.1s; 
+    font-weight: 700;
+
+    border-radius: 100%;
+    width: 15px; 
+    height: 15px;
+}
+
+#chk:checked + .team-circle:after{ opacity: 1; }
