@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from "react";
-import Modal from 'react-modal';
+import React, { useState, useEffect } from "react"
+import Modal from 'react-modal'
 import api from '../../utils/api'
-import { useCookies } from 'react-cookie'
 
-import './SettingModal.css';
+import './SettingModal.css'
 
 function SettingModal(props) {
-  const { onClose, settingData } = props;
+  const { onClose, settingData } = props
   const user = JSON.parse(localStorage.getItem('user'))
-  const [cookies] = useCookies(['session'])
 
-  const [isWebNotiChecked, setWebNotiChecked] = useState(false);
-  const [isMailNotiChecked, setMailNotiChecked] = useState(false);
+  const [isWebNotiChecked, setWebNotiChecked] = useState(false)
+  const [isMailNotiChecked, setMailNotiChecked] = useState(false)
 
   useEffect(() => {
     if(settingData) {
@@ -21,11 +19,11 @@ function SettingModal(props) {
 }, [settingData]);
 
   const handleWebNotiToggle = () => {
-    setWebNotiChecked(!isWebNotiChecked);
+    setWebNotiChecked(!isWebNotiChecked)
   }
 
   const handleMailNotiToggle = () => {
-    setMailNotiChecked(!isMailNotiChecked);
+    setMailNotiChecked(!isMailNotiChecked)
   }
 
   const onClickClose = () => {
@@ -79,7 +77,7 @@ function SettingModal(props) {
           </div>
       </Modal>
   
-    );
+    )
   }
 
-  export default SettingModal;
+  export default SettingModal

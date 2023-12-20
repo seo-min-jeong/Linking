@@ -1,22 +1,18 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import './Content.css';
 import api from '../utils/api'
-import { useCookies } from 'react-cookie'
 
 import AddContent from "./AddContent"
 
 import plus from "../icon/plus.png"
-import trash from "../icon/trash.png"
 import arrowUpDown from "../icon/arrowUpDown.png"
 
 function Content(props) {
     const{onAddTitle, dataArray, setDataArray, pageId } = props
-    console.log(dataArray)
-    const user = JSON.parse(localStorage.getItem('user'));
-    // const [cookies] = useCookies(['session'])
+    const user = JSON.parse(localStorage.getItem('user'))
     
     //plus 버튼
-    const [isAddContent, setIsAddContent] = useState(false);
+    const [isAddContent, setIsAddContent] = useState(false)
     const onClickContentPlus = () => {
         setIsAddContent(isAddContent => !isAddContent);
     }
@@ -27,7 +23,6 @@ function Content(props) {
             setTitle(newValue)
           } 
           onAddTitle('title', newValue)
-          console.log(newValue)
     }
 
     //블록이동
@@ -35,29 +30,29 @@ function Content(props) {
     const [ grab, setGrab ] = React.useState(null)
     
     const _onDragOver = e => {
-        e.preventDefault();
+        e.preventDefault()
     }
     const _onDragStart = e => {
-        setGrab(e.target);
-        e.target.classList.add("grabbing");
-        e.dataTransfer.effectAllowed = "move";
-        e.dataTransfer.setData("text/html", e.target);
+        setGrab(e.target)
+        e.target.classList.add("grabbing")
+        e.dataTransfer.effectAllowed = "move"
+        e.dataTransfer.setData("text/html", e.target)
     }
     const _onDragEnd = e => {
-        e.target.classList.remove("grabbing");
-        e.dataTransfer.dropEffect = "move";
+        e.target.classList.remove("grabbing")
+        e.dataTransfer.dropEffect = "move"
     }
     const _onDrop = e => {
-        let grabPosition = Number(grab.dataset.position);
-        let targetPosition = Number(e.target.dataset.position);
+        let grabPosition = Number(grab.dataset.position)
+        let targetPosition = Number(e.target.dataset.position)
       
-        let _list = [ ...dataArray ];
-        _list[grabPosition] = _list.splice(targetPosition, 1, _list[grabPosition])[0];
+        let _list = [ ...dataArray ]
+        _list[grabPosition] = _list.splice(targetPosition, 1, _list[grabPosition])[0]
 
-        setDataArray(_list);
+        setDataArray(_list)
         }
 
-        const newGroupArr = dataArray?.map(block => block.blockId);
+        const newGroupArr = dataArray?.map(block => block.blockId)
 
         const sendBlock = {
             pageId: pageId,
@@ -77,23 +72,20 @@ function Content(props) {
             .then(response => {
                 console.log('블록 순서변경 성공', response.data.data)
             })
-                .catch(error => {
-                    console.error(error)
-                })
-                setIsDragGroup(false)
+            .catch(error => {
+                console.error(error)
+            })
+            setIsDragGroup(false)
         }
 
-    ////
-    const renderDivs = (activeIndex) => {
+    //
+    const renderDivs = () => {
         console.log(dataArray)
-        const divs = [];
+        const divs = []
 
             for (let i = 0; i < dataArray.length; i++) {
                 if(dataArray[i].blockId != -1) {
-                    const blockId = dataArray[i].blockId;
-                    const blockTitle = dataArray[i].title || "untitled";
-                    const content = dataArray[i].content;
-                    const isCurrentIndex = i === activeIndex;
+                    const blockTitle = dataArray[i].title || "untitled"
 
                 divs.push(
                     <div className="side-content-sideBox" key={i} >
@@ -116,11 +108,11 @@ function Content(props) {
                             <span>{blockTitle === null || blockTitle === '' ? "untitled" : blockTitle}</span>
                         </div>
                     </div>
-                );
+                )
             }
         }
-        return divs;
-    };
+        return divs
+    }
 
     return(
         <div className="content-open-box">
@@ -139,8 +131,6 @@ function Content(props) {
                     <span className="content-plus-txt">목차 추가</span>
                 </div>
             </div>
-
-            {/* <div className="trash-box"><img className="trashImg" src={ trash } /></div> */}
             {isDragGroup ? 
             <div className="arrowUpDown-box">
                 <span className="arrowUpDown-txt" onClick={onClickGroupDrag}>Done</span>
@@ -154,7 +144,7 @@ function Content(props) {
             {isAddContent ? <AddContent onClose={setIsAddContent} onButtonClick={handleInputProject} /> : <></>}
         </div>
 
-    );
+    )
 }
 
-export default Content;
+export default Content

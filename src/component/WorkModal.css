@@ -76,22 +76,40 @@
     font-size: 15px;
 }
 
-/* .todaySmall-txt1:hover::before {
-    content: "open";
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    margin-right: 5px;
-    background-color: black;
-    color: white;
-    text-align: center;
-    font-size: 10px;
-    font-weight: bold;
-} */
-
 .assign-chk {
     left: 0;
     position: absolute;
     margin-top: 11px;
     margin-left: 10px;
 }
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .tooltip::after {
+    content: 'open';
+    position: absolute;
+    top: 20px;
+    left: 100%;
+    transform: translateX(-50%);
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    color: #444545;
+    padding: 5px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  
+  .tooltip:hover::after {
+    opacity: 1;
+  }
+  
+  .smallCal-total-box {
+    display: block;
+  }

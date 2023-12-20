@@ -1,110 +1,99 @@
-import React, { useState, useRef, useEffect } from "react";
-import Modal from 'react-modal';
-import './WorkModal.css';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { ko } from "date-fns/esm/locale";
-import { useNavigate } from "react-router-dom";
-import 'react-time-picker/dist/TimePicker.css';
+import React, { useState } from "react"
+import Modal from 'react-modal'
+import './WorkModal.css'
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
+import { ko } from "date-fns/esm/locale"
+import { useNavigate } from "react-router-dom"
+import 'react-time-picker/dist/TimePicker.css'
 
 function WorkModal(props) {
-    const { isWorkOpen, onWorkClose, event, onValueChange, onClose, isOpen } = props;
-    const [isAddTeam, setAddTeam] = useState(false);
+    const { event, onValueChange, onClose, isOpen } = props
+    const [isAddTeam, setAddTeam] = useState(false)
 
     const [valueWork, setValueWork] = useState('')
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
-    const [hour, setHour] = useState("00");
-    const [minute, setMinute] = useState("00");
-    const [ampm, setAmPm] = useState("AM");
+    const [startDate, setStartDate] = useState(new Date())
+    const [endDate, setEndDate] = useState(new Date())
+    const [hour, setHour] = useState("00")
+    const [minute, setMinute] = useState("00")
+    const [ampm, setAmPm] = useState("AM")
 
-    const hours = [];
-    const minutes = [];
-    const ampms = ["AM", "PM"];
+    const hours = []
+    const minutes = []
+    const ampms = ["AM", "PM"]
 
     for (let i = 1; i <= 12; i++) {
-        hours.push(i < 10 ? "0" + i : i.toString());
+        hours.push(i < 10 ? "0" + i : i.toString())
     }
 
     for (let i = 0; i <= 59; i++) {
-        minutes.push(i < 10 ? "0" + i : i.toString());
+        minutes.push(i < 10 ? "0" + i : i.toString())
     }
 
     const handleHourChange = (e) => {
-        setHour(e.target.value);
-    };
+        setHour(e.target.value)
+    }
     const handleMinuteChange = (e) => {
-        setMinute(e.target.value);
-    };
+        setMinute(e.target.value)
+    }
     const handleAmPmChange = (e) => {
-        setAmPm(e.target.value);
-    };
-
-    const navigate = useNavigate();
+        setAmPm(e.target.value)
+    }
 
     const teamToggleMenu = () => {
-        setAddTeam(isAddTeam => !isAddTeam);
+        setAddTeam(isAddTeam => !isAddTeam)
     }
 
     const onClickChkButton = () => {
-        setAddTeam(false);
+        setAddTeam(false)
     }
 
     const handleInputWork = (e) => {
-        setValueWork(e.target.value);
+        setValueWork(e.target.value)
     }
 
     const handleInputStartDate = (e) => {
-        setStartDate(e);
-        // onValueChange('valueStart', value);
+        setStartDate(e)
     }
 
     const handleInputEndDate = (e) => {
-        setEndDate(e);
-        // onValueChange('valueEnd', value);
-    }
-
-    const handleInputTime = () => {
-        const value = '${hour}:${minute}'
-        onValueChange('valueTime', value);
+        setEndDate(e)
     }
 
     const handleBtnClick = () => {
-        let startYear = startDate.getFullYear();
-        let startMonth = (startDate.getMonth() + 1).toString().padStart(2, '0');
-        let startDay = startDate.getDate().toString().padStart(2, '0');
-        let valueStartDate = startYear;
-        valueStartDate += '-';
-        valueStartDate += startMonth;
-        valueStartDate += '-';
-        valueStartDate += startDay;
+        let startYear = startDate.getFullYear()
+        let startMonth = (startDate.getMonth() + 1).toString().padStart(2, '0')
+        let startDay = startDate.getDate().toString().padStart(2, '0')
+        let valueStartDate = startYear
+        valueStartDate += '-'
+        valueStartDate += startMonth
+        valueStartDate += '-'
+        valueStartDate += startDay
 
-        let endYear = endDate.getFullYear();
-        let endMonth = (endDate.getMonth() + 1).toString().padStart(2, '0');
-        let endDay = endDate.getDate().toString().padStart(2, '0');
-        let valueEndDate = endYear;
-        valueEndDate += '-';
-        valueEndDate += endMonth;
-        valueEndDate += '-';
-        valueEndDate += endDay;
-        valueEndDate += 'T';
-        valueEndDate += hour;
-        valueEndDate += ':';
-        valueEndDate += minute;
+        let endYear = endDate.getFullYear()
+        let endMonth = (endDate.getMonth() + 1).toString().padStart(2, '0')
+        let endDay = endDate.getDate().toString().padStart(2, '0')
+        let valueEndDate = endYear
+        valueEndDate += '-'
+        valueEndDate += endMonth
+        valueEndDate += '-'
+        valueEndDate += endDay
+        valueEndDate += 'T'
+        valueEndDate += hour
+        valueEndDate += ':'
+        valueEndDate += minute
 
-        onValueChange('valueStart', valueStartDate);
-        onValueChange('valueEnd', valueEndDate);
-        onValueChange('valueWork', valueWork);
+        onValueChange('valueStart', valueStartDate)
+        onValueChange('valueEnd', valueEndDate)
+        onValueChange('valueWork', valueWork)
 
-        onClose(isOpen => !isOpen);
-      };
+        onClose(isOpen => !isOpen)
+      }
 
       const onClickClose = () => {
-        onClose(isOpen => !isOpen);
+        onClose(isOpen => !isOpen)
       }
     
-
-  
       return(
         <Modal isOpen={isOpen} onRequestClose={onClose} className="work-modal">
             <div className="create-work-box" >
@@ -221,7 +210,7 @@ function WorkModal(props) {
                 </div>
             </div>
         </Modal>
-      );
+      )
     }
   
-    export default WorkModal;
+    export default WorkModal

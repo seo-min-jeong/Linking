@@ -1,16 +1,16 @@
-import React from 'react';
-import { BarChart, Bar, XAxis, YAxis, Cell } from 'recharts';
+import React from 'react'
+import { BarChart, Bar, XAxis, YAxis, Cell } from 'recharts'
 
 const Chart = (props) => {
     const { graph } = props
-    const chartData = graph || [];
+    const chartData = graph || []
 
     const data = chartData.map((item) => ({
         name: item.userName,
         num: item.completionRatio,
         color: item.completionRatio,
         count: item.completeAssign
-    }));
+    }))
 
     return (
         <BarChart width={550} height={230} data={data}>
@@ -24,7 +24,7 @@ const Chart = (props) => {
             <XAxis dataKey="name" fontSize={'14px'} />
             <YAxis unit="%" domain={[0, 100]} fontSize={'10px'} />
         </BarChart>
-    );
-};
+    )
+}
 
-export default Chart;
+export default Chart

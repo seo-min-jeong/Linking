@@ -63,14 +63,8 @@
     display: flex;
     justify-content: center;
 }
-/* 
-.widget-box {
-    margin-top: 0;
-} */
 
-/*  */
 .widgetText {
-    /* margin-left: 30px; */
     margin-top: 10px;
     margin-bottom: 20px;
 }
@@ -82,7 +76,6 @@
     background-color:rgb(243, 248, 244);
     width: 65.5vh;
     height: 34.5vh;
-    /* margin-left: 30px; */
 }
 
 .todayBox {
@@ -93,9 +86,7 @@
     background-color: rgb(255, 244, 220);
     width: 55vh;
     height: 34.5vh;
-    /* margin-left: 30px; */
     opacity: 0.6;
-
     position: relative;
     padding: 0px 50px 0px 50px;
     overflow-y: auto;
@@ -108,14 +99,12 @@
 
 .home-today-box {
     display: block;
-    /* margin-top: 40px;
-    margin-bottom: 40px; */
 }
 
 .home-today1-box {
     display: flex;
-    margin-top: 35px;
-    /* margin-bottom: 25px; */
+    margin-top: 30px;
+    padding-bottom: 12px;
 }
 
 .home-today-sec {
@@ -126,18 +115,19 @@
 
 .home-today-sec2 {
     position: absolute;
-    right: 40px;
+    right: 80px;
     border: 1px solid rgb(151, 151, 151);
     font-size: 12px;
     padding: 6px;
     border-radius: 7px;
+    margin-top: -4px;
 }
 
 .home-today-time {
     position: absolute;
-    right: 100px;
-    font-size: 12px;
+    right: 250px;
     padding: 6px;
+    margin-top: -6px;
 }
 
 .calBox {
@@ -148,7 +138,6 @@
     width: 55vh;
     height: 70vh;
     margin-left: 20px;
-
     padding-top: 40px;
     padding-left: 40px;
     opacity: 1;
@@ -159,9 +148,6 @@
 }
 
 .totalBox {
-    /* display: block; */
-    /* margin-top: 30px; */
-    /* height: 100vh;  */
     justify-content: center;
     align-items: center;
     padding-top: 40px;
@@ -222,44 +208,14 @@
     margin-right: 45px;
 }
 
-/* .calBox:hover{
-    cursor: pointer;
-}
-
-.docBox:hover {
-    cursor: pointer;
-}
-
-.todayBox:hover {
-    cursor: pointer;
-} */
-
-/* .endDateBox {
-    background-color: rgb(255, 224, 223);
-    margin: auto;
-    margin-top: 10px;
-    width: 1320px;
-    height: 30px;
-    border-radius: 7px;
-}
-
-.endText {
-    font-size: 14px;
-    color: rgb(114, 113, 113);
-    line-height: 30px;
-    font-weight: 500;
-} */
-
 .percent-box {
     display: flex;
     margin: auto;
-    /* width: 100vh; */
     border:2px solid rgba(234, 234, 234, 0.678);
     border-radius: 20px;
 }
 
 .percentBar {
-    /* width: 100vh; */
     height: 30px;
     background-color: rgba(255, 224, 223, 0.629);
     margin: auto;
@@ -267,7 +223,6 @@
 }
 
 .remain-percentBar {
-    /* width: 100vh; */
     height: 30px;
     background-color: rgb(255, 255, 255);
     margin: auto;
@@ -312,4 +267,76 @@
     height: 34.5vh;
     min-width: 600px;
     min-height: 285px;
+}
+
+.home-team-dot {
+    width: 14px;
+    height: 14px;
+    padding-top: 3px;
+    right: 35px;
+    position: absolute;
+}
+
+.home-team-dot:hover {
+    cursor: pointer;
+}
+
+.home-team-box {
+    width: 90px;
+    height: auto;
+    position: relative;
+    border: solid 2px white;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    color: rgb(63, 63, 63);
+    padding: 0 7px 5px 10px;
+    right: -380px;
+    text-align: left;
+    margin-top: 30px;
+}
+
+.home-hide-box {
+    display: none;
+}
+
+.small-blockBox {
+    margin: auto;
+    justify-content: center;
+    height: 100vh;
+}
+
+.small-calBox {
+    border: solid 1px;
+    border-color: rgb(255, 245, 233);
+    border-radius: 70px;
+    background-color: rgb(255, 251, 246);
+    width: 55vh;
+    height: 70vh;
+    padding-top: 40px;
+    padding-left: 10px;
+    opacity: 1;
+}
+
+.small-todayBox {
+    margin-top: 20px;
+    border: solid 1px;
+    border-color: bisque;
+    border-radius: 50px;
+    background-color: rgb(255, 244, 220);
+    width: 60vh;
+    height: 34.5vh;
+    opacity: 0.6;
+    position: relative;
+    padding: 0px 50px 0px 50px;
+    overflow-y: auto;
+}
+
+.small-percent-box {
+    display: flex;
+    margin: auto;
+    border: 2px solid rgba(234, 234, 234, 0.678);
+    border-radius: 20px;
+    position: absolute;
+    bottom: 0;
 }

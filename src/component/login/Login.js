@@ -1,32 +1,23 @@
 import React from 'react';
 import logo from "../../icon/mainLogo.png"
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import api from '../../utils/api';
-import { useLocation } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
+import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+import api from '../../utils/api'
 import CreateProjectModal from '../CreateProjectModal'
-import LinkingHome from '../../LinkingHome';
 
-import './Login.css';
+import './Login.css'
 
-import { initializeApp } from "firebase/app";
-import { getMessaging, getToken, onMessage } from "firebase/messaging";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBMMTjliC7P4S0SDDr-o-ybMA1y2KxUK4c",
-  authDomain: "linking-32bc1.firebaseapp.com",
-  projectId: "linking-32bc1",
-  storageBucket: "linking-32bc1.appspot.com",
-  messagingSenderId: "907357123753",
-  appId: "1:907357123753:web:01dfbc1400440f4d5965b8",
-  measurementId: "G-NG0MSLMCNW"
-}
+// const firebaseConfig = {
+//   apiKey: "AIzaSyBMMTjliC7P4S0SDDr-o-ybMA1y2KxUK4c",
+//   authDomain: "linking-32bc1.firebaseapp.com",
+//   projectId: "linking-32bc1",
+//   storageBucket: "linking-32bc1.appspot.com",
+//   messagingSenderId: "907357123753",
+//   appId: "1:907357123753:web:a844de16276ef2a15965b8",
+//   measurementId: "G-BJV39NP01T"
+// }
 
 function Login(props) {
-    //쿠키
-    const [cookies, setCookie] = useCookies(['session']);
-
     //알림 토큰
     // const [token, setToken] = useState('')
 
@@ -35,7 +26,7 @@ function Login(props) {
     //         if (permission === 'granted') {
     //             const app = initializeApp(firebaseConfig);
     //             const messaging = getMessaging(app);
-    //             getToken(messaging, { vapidKey: 'BBoIkAcnfMamgq8C1UdiOgcAoXYOjG-MtYndGc0MKJBc0wUnkzmLQ_38_dgza4MKve8j7PlYSF4feNbvEvWVtbQ' })
+    //             getToken(messaging, { vapidKey: 'BPeyW-3BerAbyuW7AD8OkSDmDuV2zjin233LBToAnDuKxoQl1LKEk7v-RBTskTwX7Bc6IpRm-VgBxKrOZiu-WrQ' })
     //                 .then((currentToken) => {
     //                     if (currentToken) {
     //                         setToken(currentToken);
@@ -44,16 +35,17 @@ function Login(props) {
     //                         console.log('Cannot get token');
     //                     }
     //                 });
-    //             onMessage(messaging, (payload) => {
-    //                 console.log('Message received:', payload);
-    //                 //
-    //                 // window.location.href = 'http://localhost:3007';
-    //             });
+    //             // onMessage(messaging, (payload) => {
+    //             //     console.log('Message received:', payload);
+    //             //     //
+    //             //     // window.location.href = 'http://localhost:3007';
+    //             // });
     //         } else {
     //             console.log('Do not have permission!');
     //         }
     //     });
     // }
+    // requestPermission()
 
   const{ setIsLoggedIn, onValueProjectList } = props
 
@@ -68,7 +60,7 @@ function Login(props) {
         password: ''
     })
 
-    // requestPermission();
+    // requestPermission()
 
     //로그인 요청
     const [isProject, setIsProject] = useState(false);
@@ -79,8 +71,8 @@ function Login(props) {
           .then(response => {
             localStorage.setItem('user', JSON.stringify(response.data.data))
             // setIsLoggedIn(true)
-            // requestPermission();
-console.log(response)
+            // requestPermission()
+
             api.get('/projects/list/part/' + response.data.data.userId, { validateStatus: false })
             .then(respon => {
                 if (respon.status === 404) {
@@ -97,7 +89,7 @@ console.log(response)
                 //     userId: response.data.data.userId,
                 //     token: token
                 // }
-
+                // console.log(userToken)
                 // api.put('/fcm-token/web', userToken)
                 // .then(response => {
                 //     console.log('알림 토큰 전송 완료 : ', response.data)
@@ -124,41 +116,19 @@ console.log(response)
         setMember({
             ...member,
             [event.target.name]: event.target.value
-        });
+        })
 
         if (event.target.name === 'email') {
             setEmail(event.target.value)
           } else if (event.target.name === 'password') {
             setPassword(event.target.value)
           } 
-    };
+    }
 
     const navigate = useNavigate();
     const onClickSignUp = () => {
         navigate(process.env.PUBLIC_URL + '/signUp')
     }
-
-    //애플 로그인
-    // useEffect(() => {
-    //     AppleSignIn.init({
-    //       clientId: 'your-client-id',
-    //       scope: 'email',
-    //       redirectURI: 'your-redirect-uri',
-    //       usePopup: true, // set to false if you want to use redirection instead of popup
-    //       state: 'some-state-string', // optional, used for CSRF protection
-    //     });
-    //   }, []);
-    useEffect(() => {
-        const script = document.createElement("script");
-        script.type = "text/javascript";
-        script.src =
-          "https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js";
-        document.body.appendChild(script);
-    
-        return () => {
-          document.body.removeChild(script);
-        };
-      }, [])
 
       const onClickButton = () => {
         setIsProject(isProject => !isProject);
@@ -229,7 +199,7 @@ console.log(response)
             </div>
             {isProject ? <CreateProjectModal isOpen={isProject} setIsOpen={setIsProject} onClose={onClickButton} /> : <></> }
         </div>
-    );
+    )
 }
 
-export default Login;
+export default Login

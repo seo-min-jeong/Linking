@@ -1,16 +1,12 @@
 .blank-content-box {
     width: 740px;
-    /* min-height: 400px; */
     height: auto;
-    /* border: solid 1px rgb(222, 222, 222); */
     display: flex;
-    /* align-items: center; */
     border-radius: 10px;
     padding: 20px;
     text-align: left;
     margin: auto;
     position: relative;
-    /* resize: none; */
 }
 
 .blank-content-txt:focus {
@@ -18,8 +14,8 @@
 }
 
 .blank-trash-box {
-    position: absolute;
-    /* bottom: 20px; */
+    position: fixed;
+    bottom: 20px;
     right: 50px;
 }
   
@@ -29,6 +25,7 @@
 
 .blank-textarea {
     resize: none; 
+    min-height: 60vh;
     overflow: hidden; 
     height: auto;
     border: solid 1px rgb(222, 222, 222);
@@ -36,3 +33,24 @@
     padding: 10px;
   }
 
+.blank-pdf-box {
+    position: absolute;
+    right: 30px;
+    top: 50px;
+}
+
+.doc-pdfImg {
+    width: 18px;
+    height: 23px;
+    opacity: 0.5;
+}
+
+.doc-pdfTxt {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(44, 177, 44, 0.512);
+}
+
+.doc-pdfImg:hover {
+    cursor: pointer;
+}

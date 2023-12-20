@@ -1,29 +1,24 @@
-import React, { useState, useRef, useEffect, createContext } from "react";
-import './Document.css';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useRef, useEffect, createContext } from "react"
+import './Document.css'
+import { useLocation } from 'react-router-dom'
 import api from '../utils/api';
-import { useNavigate } from "react-router-dom"
 import { EventSourcePolyfill } from 'event-source-polyfill'
-import { createClient, createDocument } from 'yorkie-js-sdk';
-import { useCookies } from 'react-cookie'
 
 import Content from "./Content"
 import PageNoti from "./PageNoti"
-import AddAnnotation from "./AddAnnotation";
-import UpdateAnnotation from "./UpdateAnnotation";
-import PageDeleteModal from "./PageDeleteModal";
-import AnnotationUpdatePopup from "./AnnotationUpdatePopup";
+import AddAnnotation from "./AddAnnotation"
+import UpdateAnnotation from "./UpdateAnnotation"
+import PageDeleteModal from "./PageDeleteModal"
 import PageNoPopup from "./PageNoPopup"
-import BlockCloneModal from "./BlockCloneModal";
+import BlockCloneModal from "./BlockCloneModal"
 
-import look from "../icon/person.png"
 import plus from "../icon/plus.png"
 import arrowUp from "../icon/arrowUp.png"
 import arrowBelow from "../icon/arrowBelow.png"
 import dot from "../icon/dot.png"
 import annotation from "../icon/updateIcon.png"
 import deleteIcon from "../icon/deleteIcon.png"
-import trash from "../icon/trash.png"
+import trash from "../icon/trashBlack.png"
 import reproduction from "../icon/reproduction.png"
 import updateAnno from "../icon/updateAnno.png"
 
@@ -34,19 +29,14 @@ function Document() {
     const [data, setData] = useState(location.state);
     const user = JSON.parse(localStorage.getItem('user'))
     const[isNoPage, setIsNoPage] = useState()
-    const [notiArray, setNotiArray] = useState(data.doc.pageCheckResList);
+    const [notiArray, setNotiArray] = useState(data.doc.pageCheckResList)
     const [pageTitle, setPageTitle] = useState(data.doc.title)
-    const [dataArray, setDataArray] = useState(data.doc.blockResList);
-    const [array, setArray] = useState(data.doc);
+    const [dataArray, setDataArray] = useState(data.doc.blockResList)
+    const [array, setArray] = useState(data.doc)
     const [id, setPageId] = useState(data.doc.pageId)
     const [projectId, setProjectId] = useState(data.projectId)
     const[title, setTitle] = useState('untitled')
-    // const [test, setTest] = useState(data.doc.content)
-    console.log(array)
-    useEffect(() => {
-        console.log(dataArray)
-        renderBlockAndAnnotation()
-    }, [dataArray])
+
     //통신
     const [blockArr, setBlockArr] = useState({
         pageId: data.doc.pageId,
@@ -56,6 +46,7 @@ function Document() {
 
     const titleRef = useRef(null)
     const contentRef = useRef(null)
+
     //new Data
     useEffect(() => {
         console.log('변경됨')
@@ -66,13 +57,10 @@ function Document() {
         setArray(location.state.doc)
         setPageId(data.doc.pageId)
         setProjectId(data.projectId)
-        // setTest(location.state.doc.content)
     }, [location.state])
 
     //실시간 동시편집
     const socketRef = useRef(null)
-    const textRef = useRef(null)
-    const cursorPosRef = useRef(null)
 
     useEffect(() => {
         renderBlockAndAnnotation()
@@ -80,7 +68,7 @@ function Document() {
 
     //WebSocket 연결
     useEffect(() => {
-        socketRef.current = new WebSocket('ws://43.201.231.51:8080/ws/pages?projectId='+ projectId + '&pageId=' + id + '&userId=' + user.userId)
+        socketRef.current = new WebSocket('ws://url/ws/pages?projectId='+ projectId + '&pageId=' + id + '&userId=' + user.userId)
     
         socketRef.current.onopen = () => {
             console.log('빈페이지 웹소켓 연결성공')
@@ -125,7 +113,7 @@ function Document() {
                     setDataArray(prevDataArray => {
                         const newArr = prevDataArray.map((data, dataIndex) => {
                             if(data.blockId === receivedMessage.blockId) {
-                                const updatedTest = data.title.slice(0, receivedMessage.diffStr.diffStartIndex) + receivedMessage.diffStr.subStr + data.title.slice(receivedMessage.diffStr.diffEndIndex + 1);
+                                const updatedTest = data.title.slice(0, receivedMessage.diffStr.diffStartIndex) + receivedMessage.diffStr.subStr + data.title.slice(receivedMessage.diffStr.diffEndIndex + 1)
                                 console.log('받은 메세지: ', updatedTest)
                                 return { ...data, title: updatedTest }
                             }
@@ -159,7 +147,7 @@ function Document() {
                     setDataArray(prevDataArray => {
                         const newArr = prevDataArray.map((data, dataIndex) => {
                             if(data.blockId === receivedMessage.blockId) {
-                                const updatedTest = data.content.slice(0, receivedMessage.diffStr.diffStartIndex) + receivedMessage.diffStr.subStr + data.content.slice(receivedMessage.diffStr.diffEndIndex + 1);
+                                const updatedTest = data.content.slice(0, receivedMessage.diffStr.diffStartIndex) + receivedMessage.diffStr.subStr + data.content.slice(receivedMessage.diffStr.diffEndIndex + 1)
                                 console.log('받은 메세지: ', updatedTest)
                                 return { ...data, content: updatedTest }
                             }
@@ -174,10 +162,10 @@ function Document() {
 
     //소켓에 블록 제목 전송
     const handleTitleChange = (event, blockId) => {
-        const newTitle = event.target.value;
+        const newTitle = event.target.value
 
         setDataArray(prevDataArray => {
-            const newArr = prevDataArray.map((data, dataIndex) => {
+            const newArr = prevDataArray.map((data) => {
                 if(data.blockId === blockId) {
                     return { ...data, title: newTitle }
                 }
@@ -185,25 +173,25 @@ function Document() {
             })
             return newArr
         })
-console.log(newTitle)
+
         const updateContent = {
             editorType: 1,
             blockId: blockId,
             docs: newTitle
         }
-        const sendData = JSON.stringify(updateContent);
-        console.log('변경된거 소켓에 보냄: ', sendData);
+        const sendData = JSON.stringify(updateContent)
+        console.log('변경데이터 소켓에 보냄: ', sendData)
 
         if (socketRef.current !== null && socketRef.current.readyState === WebSocket.OPEN) {
-            socketRef.current.send(sendData);
+            socketRef.current.send(sendData)
         }
     }
     //소켓에 블럭내용 전송
     const handleContentChange = (event, blockId) => {
-        const newTitle = event.target.value;
+        const newTitle = event.target.value
 
         setDataArray(prevDataArray => {
-            const newArr = prevDataArray.map((data, dataIndex) => {
+            const newArr = prevDataArray.map((data) => {
                 if(data.blockId === blockId) {
                     return { ...data, content: newTitle }
                 }
@@ -217,11 +205,11 @@ console.log(newTitle)
             blockId: blockId,
             docs: newTitle
         }
-        const sendData = JSON.stringify(updateContent);
-        console.log('변경된거 소켓에 보냄: ', sendData);
+        const sendData = JSON.stringify(updateContent)
+        console.log('변경된거 소켓에 보냄: ', sendData)
 
         if (socketRef.current !== null && socketRef.current.readyState === WebSocket.OPEN) {
-            socketRef.current.send(sendData);
+            socketRef.current.send(sendData)
         }
     }
 
@@ -230,7 +218,7 @@ console.log(newTitle)
     const [pageEventSource, setPageEventSource] = useState(null)
     
     useEffect(() => {
-        const newEventSource = new EventSource('http://43.201.231.51:8080/pages/subscribe/' + data.doc.pageId,
+        const newEventSource = new EventSource('https://mylinking.shop/pages/subscribe/' + data.doc.pageId,
             { 
               headers: { 
                 'userId': user.userId,
@@ -251,11 +239,7 @@ console.log(newTitle)
         newEventSource.addEventListener('connect', (event) => {
             const { data: receivedConnectData } = event
             console.log('page connect event data: ', receivedConnectData)
-        });
-      
-        // newEventSource.onerror = (event) => {
-        //     console.error('Error connecting to server:', event)
-        // }
+        })
 
         //블록 추가/////////////////
         newEventSource.addEventListener('postBlock', (event) => {
@@ -263,44 +247,42 @@ console.log(newTitle)
             const { blockId, title, pageId, content } = newData
             const annotationId = -1
             const annotationResList = [{ annotationId }]
-            const data = { blockId, title, pageId, annotationResList, content };
-            setDataArray(prevDataArray => [...prevDataArray, data]);
+            const data = { blockId, title, pageId, annotationResList, content }
+            setDataArray(prevDataArray => [...prevDataArray, data])
         })
+
         //블록 삭제
         newEventSource.addEventListener('deleteBlock', (event) => {
             const newData = JSON.parse(event.data)
             
             setDataArray(prevState => {
-                const filteredArr = prevState.filter(block => block.blockId !== newData.blockId);
-                return filteredArr;
-            });
+                const filteredArr = prevState.filter(block => block.blockId !== newData.blockId)
+                return filteredArr
+            })
 
             setActiveGroupIndex(prevIndex => {
                 if (prevIndex >= dataArray.length) {
                 return dataArray.length - 1
                 } else {
-                return prevIndex;
+                return prevIndex
                 }
             })
-        });
+        })
+
         //페이지 삭제
         newEventSource.addEventListener('deletePage', (event) => {
             const newData = JSON.parse(event.data)
             setIsNoPage(newData)
         })
-            
-        // //블럭 순서변경
-        // newEventSource.addEventListener('putBlockOrder', (event) => {
-        //     const newData = JSON.parse(event.data)
-        // })
+
         //주석추가
         newEventSource.addEventListener('postAnnotation', (event) => {
             const newData = JSON.parse(event.data)
 
-            const { annotationId, blockId, content, lastModified, userName, userId } = newData;
-            const data = { annotationId, blockId, content, lastModified, userName, userId };
+            const { annotationId, blockId, content, lastModified, userName, userId } = newData
+            const data = { annotationId, blockId, content, lastModified, userName, userId }
             const updatedDataArray = [...dataArray]
-            let i = -1
+
             for (let index = 0; index < updatedDataArray.length; index++) {
                 if (updatedDataArray[index].blockId === blockId) {
                     updatedDataArray[index].annotationResList.push(data)
@@ -309,10 +291,11 @@ console.log(newTitle)
                 }
             }
         })
+
         //주석수정
         newEventSource.addEventListener('updateAnnotation', (event) => {
             const newData = JSON.parse(event.data)
-            const { annotationId, blockId, content, lastModified } = newData
+            const { annotationId, content } = newData
 
             const updatedDataArray = dataArray.map(group => {
                 const updatedAnnotations = group.annotationResList.map(anno => {
@@ -327,26 +310,28 @@ console.log(newTitle)
                 return {
                 ...group,
                 annotationResList: updatedAnnotations
-                };
+                }
             })
             setDataArray([...updatedDataArray])
         })
+
         //주석삭제
         newEventSource.addEventListener('deleteAnnotation', (event) => {
             const newData = JSON.parse(event.data)
-            const { annotationId, blockId } = newData
+            const { annotationId } = newData
 
             setDataArray(prevData => {
                 const newDataArray = prevData.map(block => {
-                  const updatedAnnotations = block.annotationResList.filter(anno => anno.annotationId !== annotationId);
+                  const updatedAnnotations = block.annotationResList.filter(anno => anno.annotationId !== annotationId)
                   return {
                     ...block,
                     annotationResList: updatedAnnotations
-                  };
-                });
-                return newDataArray;
-              });
+                  }
+                })
+                return newDataArray
+              })
         })
+
         //noti-enter
         newEventSource.addEventListener('enter', (event) => {
             const newData = JSON.parse(event.data)
@@ -366,6 +351,7 @@ console.log(newTitle)
                 })
             })
         })
+
         //noti-leave
         newEventSource.addEventListener('leave', (event) => {
             const newData = JSON.parse(event.data)
@@ -385,6 +371,7 @@ console.log(newTitle)
                 })
             })
         })
+
         //페이지 이름 수정
         newEventSource.addEventListener('putPageTitle', (event) => {
             const newData = JSON.parse(event.data)
@@ -392,136 +379,110 @@ console.log(newTitle)
 
             setArray(prevState => {
                 if(prevState.pageId === pageId) {
-                    return { ...prevState, title: title };
+                    return { ...prevState, title: title }
                 }
                 return prevState;
             })
             if(pageId === pageId) {
                 setPageTitle(title)
             }
-            // setArray(prevState => {
-            //     const index = prevState.findIndex(item => item.pageId === pageId);
-            //     if (index !== -1) {
-            //       const newArray = [...prevState];
-            //       newArray[index] = { ...newArray[index], title: title };
-            //       return newArray;
-            //     }
-            //     return prevState;
-            //   })
-            
         })
 
         setPageEventSource(newEventSource)
         
         return() => {
-            newEventSource.close();
-            console.log('page close!!!!!!!!!!!!!!!!!!!!')
+            newEventSource.close()
         }
-    }, [data.doc.pageId, dataArray, array])
-
-    useEffect(() => {
-        
-    }, [array]);
-
+    }, [data.doc.pageId])
+    
     const lookMenuRef = useRef(null)
     const [isLook, setIsLook] = useState(false)
     const [isContent, setIsContent] = useState(false)
-    const [isNoti, setIsNoti] = useState(false)
-    const [isSendNoti, setIsSendNoti] = useState(false)
-    // const [content, setContent] = useState('문서내용문서내용문서내용문서내용문서내용문서내용문서내용문서내용문서내용문서내용문서내용문서내용문서내용문서내용문서내용문서내용문서내용문서내용문서내용문서내용문서내용문서내용문서내용문서내용문서내용문서내용문서내용문서내용문서내용문서내용문서내용문서내용')
     const [activeGroupIndex, setActiveGroupIndex] = useState(null)
 
-    const [now, setNow] = useState(false)
-    const onClickLook = () => {
-        setIsSendNoti(false);
-        setIsNoti(false);
-        setIsLook(isLook => !isLook)
-    }
     const onClickContent = () => {
-        setIsContent(isContent => !isContent);
+        setIsContent(isContent => !isContent)
     }
 
     useEffect(() => {
         const handleOutsideClose = (e) => {
-          if(isLook && (!lookMenuRef.current || !lookMenuRef.current.contains(e.target))) setIsLook(isLook => !isLook);
-        };
-        document.addEventListener('click', handleOutsideClose);
+          if(isLook && (!lookMenuRef.current || !lookMenuRef.current.contains(e.target))) setIsLook(isLook => !isLook)
+        }
+        document.addEventListener('click', handleOutsideClose)
         
-        return () => document.removeEventListener('click', handleOutsideClose);
-    }, [isLook]);
-
-    //블록 추가
-    const [isAddContent, setIsAddContent] = useState(false);
-    const onClickContentPlus = () => {
-        setIsAddContent(isAddContent => !isAddContent);
-    }
+        return () => document.removeEventListener('click', handleOutsideClose)
+    }, [isLook])
 
     //
-    const dotMenuRef = useRef(null);
-    // const [isDot, setIsDot] = useState(new Array(dataArray.length).fill(false));
-    const [isDot, setIsDot] = useState([]);
+    const dotMenuRef = useRef(null)
+    const [isDot, setIsDot] = useState([])
+
     useEffect(() => {
-        setIsDot(new Array(data.length).fill(false));
-    }, [dataArray]);
-    // const [isGroupDot, setIsGroupDot] = useState(new Array(dataArray.length).fill(false));
-    const [isGroupDot, setIsGroupDot] = useState([]);
+        setIsDot(new Array(data.length).fill(false))
+    }, [dataArray])
+
+    const [isGroupDot, setIsGroupDot] = useState([])
+
     useEffect(() => {
-        setIsGroupDot(new Array(data.length).fill(false));
-    }, [dataArray]);
+        setIsGroupDot(new Array(data.length).fill(false))
+    }, [dataArray])
+
     const onClickGroupDot = (index) => {
         setIsGroupDot(prevState => {
-            const newState = [...prevState]; 
-            newState[index] = !newState[index]; 
-            return newState;
-        });
-        setActiveGroupIndex(index);
+            const newState = [...prevState]
+            newState[index] = !newState[index]
+            return newState
+        })
+        setActiveGroupIndex(index)
     }
+
     useEffect(() => {
         const handleOutsideClose = (e) => {
-          if(isGroupDot && (!dotMenuRef.current || !dotMenuRef.current.contains(e.target))) setIsDot(isGroupDot => !isGroupDot);
-        };
-        document.addEventListener('click', handleOutsideClose);
+          if(isGroupDot && (!dotMenuRef.current || !dotMenuRef.current.contains(e.target))) setIsDot(isGroupDot => !isGroupDot)
+        }
+        document.addEventListener('click', handleOutsideClose)
         
-        return () => document.removeEventListener('click', handleOutsideClose);
-    }, [isGroupDot]);
+        return () => document.removeEventListener('click', handleOutsideClose)
+    }, [isGroupDot])
 
     //페이지 삭제
     const [isDeletePage, setIsDeletePage] = useState(false)
     const handleDeletePage = () => { 
         setIsDeletePage(isDeletePage => !isDeletePage)
-    };
+    }
 
     //주석 추가
     const[isAnnoPop, setIsAnnoPop] = useState(false)
     const handleButtonAnnotation = () => {
         setIsAnnoPop(isAnnoPop => !isAnnoPop)
         setIsGroupDot(prevState => {
-            const newState = [...prevState];
-            newState[activeGroupIndex] = false;
-            return newState;
-        });
-    };
+            const newState = [...prevState]
+            newState[activeGroupIndex] = false
+            return newState
+        })
+    }
 
     const[isAnnoUpdatePop, setIsAnnoUpdatePop] = useState(false)
     const[annoId, setAnnoId] = useState(0)
+
     //주석수정
     const onUpdateAnnotation = (annotationId) => {
         setIsAnnoUpdatePop(isAnnoUpdatePop => !isAnnoUpdatePop)
         setAnnoId(annotationId)
         setIsAnnoDot(prevState => {
-            const newState = [...prevState];
-            newState[activeGroupIndex] = false;
-            return newState;
-        });
-    };
+            const newState = [...prevState]
+            newState[activeGroupIndex] = false
+            return newState
+        })
+    }
 
     //주석 삭제
     const onDeleteAnnotation = (annotationId, i, j) => {
         setIsAnnoDot(prevState => {
-            const newState = [...prevState];
-            newState[i] = {...newState[i], [j]: !newState[i]?.[j]};
-            return newState;
-        });
+            const newState = [...prevState]
+            newState[i] = {...newState[i], [j]: !newState[i]?.[j]}
+            return newState
+        })
         
         api.delete('/annotations/' + annotationId, {
             headers:{
@@ -535,7 +496,7 @@ console.log(newTitle)
                     ...group,
                     annotationResList: updatedAnnotations
                 }
-              });
+              })
               setDataArray(updatedDataArray)
             })
             .catch(error => {
@@ -560,7 +521,7 @@ console.log(newTitle)
                 }
             })
             .then(response => {
-              const { annotationId, blockId, content, lastModified, userName, userId } = response.data.data;
+              const { annotationId } = response.data.data
 
               const updatedDataArray = dataArray.map(group => {
                 const updatedAnnotations = group.annotationResList.map(anno => {
@@ -568,15 +529,15 @@ console.log(newTitle)
                     return {
                       ...anno,
                       content: newValue
-                    };
+                    }
                   }
                   return anno;
-                });
+                })
                 return {
                   ...group,
                   annotationResList: updatedAnnotations
-                };
-              });
+                }
+              })
               setDataArray(updatedDataArray)
             })
             .catch(error => {
@@ -585,14 +546,14 @@ console.log(newTitle)
         }
 
     //주석dot
-    const [isAnnoDot, setIsAnnoDot] = useState([]);
+    const [isAnnoDot, setIsAnnoDot] = useState([])
 
     const onClickAnnoDot = (i, j) => {
         setIsAnnoDot(prevState => {
-            const newState = [...prevState];
-            newState[i] = {...newState[i], [j]: !newState[i]?.[j]};
+            const newState = [...prevState]
+            newState[i] = {...newState[i], [j]: !newState[i]?.[j]}
             return newState;
-        });
+        })
     }
       
     //주석추가
@@ -600,17 +561,18 @@ console.log(newTitle)
         content: '',
         blockId: 0,
         projectId: data.projectId
-    });
+    })
+
     const handleInputAnnotation = (inputValue, newValue) => {
         const newAnnoArr = {
             ...annoArr,
             blockId: dataArray[activeGroupIndex].blockId,
             projectId: data.projectId,
             [inputValue]: newValue,
-          };
+          }
 
-          setAnnoArr(newAnnoArr);
-          console.log(newAnnoArr)
+          setAnnoArr(newAnnoArr)
+
           api
             .post('/annotations', newAnnoArr, {
                 headers:{
@@ -618,10 +580,10 @@ console.log(newTitle)
                 }
             })
             .then(response => {
-              const { annotationId, blockId, content, lastModified, userName, userId } = response.data.data;
-              const newData = { annotationId, blockId, content, lastModified, userName, userId };
-              const updatedDataArray = [...dataArray];
-              updatedDataArray[activeGroupIndex].annotationResList.push(newData);
+              const { annotationId, blockId, content, lastModified, userName, userId } = response.data.data
+              const newData = { annotationId, blockId, content, lastModified, userName, userId }
+              const updatedDataArray = [...dataArray]
+              updatedDataArray[activeGroupIndex].annotationResList.push(newData)
               setDataArray(updatedDataArray)
             })
             .catch(error => {
@@ -630,30 +592,16 @@ console.log(newTitle)
         }
     
     //블록 추가
-    const textAreaRef = useRef(null);
+    const textAreaRef = useRef(null)
     useEffect(() => {
         if (textAreaRef.current) {
-          textAreaRef.current.style.height = "auto";
-          textAreaRef.current.style.height = textAreaRef.current.scrollHeight + "px";
+          textAreaRef.current.style.height = "auto"
+          textAreaRef.current.style.height = textAreaRef.current.scrollHeight + "px"
         }
-      }, []);
-    //input
+      }, [])
 
-    //페이지 제목 수정
-    const handleInputProject = (event) => {
-        setBlockArr({
-            ...blockArr,
-            order: dataArray.length,
-            [event.target.name]: event.target.value
-        });
-        if (event.target.name === 'title') {
-            setTitle(event.target.value)
-        } 
-
-    }
-
-    const [divCount, setDivCount] = useState(0);
-    const [isArrow, setIsArrow] = useState(new Array(divCount).fill(false));
+    const [divCount, setDivCount] = useState(dataArray.length)
+    const [isArrow, setIsArrow] = useState(new Array(divCount).fill(true))
     const arrowToggleMenu = (index) => {
         setIsArrow(prevState => {
           const newState = [...prevState];
@@ -669,23 +617,18 @@ console.log(newTitle)
         const pageId = data.doc.pageId
         const annotationId = -1
         const annotationResList = [{ annotationId }]
-        const newData = { blockId, title, pageId, annotationResList };
-        setDataArray(prevDataArray => [...prevDataArray, newData]);
+        const newData = { blockId, title, pageId, annotationResList }
+        setDataArray(prevDataArray => [...prevDataArray, newData])
     }
 
-      //목차 추가(블록 추가)
+    //목차 추가(블록 추가)
     const handleButtonClickTest = () => {
-        // setDivCount(prevCount => prevCount + 1);
-        // setIsArrow(prevState => {
-        //   const newState = [...prevState, false];
-        //   return newState;
-        // });
         const updatedBlockArr = {
             ...blockArr,
             order: dataArray.length
-        };
+        }
         setBlockArr(updatedBlockArr);
-console.log(updatedBlockArr)
+
         api.post('/blocks', updatedBlockArr, {
             headers:{
                 userId: user.userId
@@ -699,7 +642,7 @@ console.log(updatedBlockArr)
                 const annotationResList = [{ annotationId }]
                 const content = ''
                 const newData = { blockId, title, pageId, annotationResList, content }
-                setDataArray(prevDataArray => [...prevDataArray, newData]);
+                setDataArray(prevDataArray => [...prevDataArray, newData])
             })
             .catch(error => {
                 console.error(error)
@@ -709,9 +652,9 @@ console.log(updatedBlockArr)
       const [isAnnotationExpanded, setIsAnnotationExpanded] = useState(Array(dataArray.length).fill(false))
       const annotationToggleMenu = (index) => {
         setIsAnnotationExpanded(prevState => {
-          const newState = [...prevState];
-          newState[index] = !newState[index];
-          return newState;
+          const newState = [...prevState]
+          newState[index] = !newState[index]
+          return newState
         })
       }
 
@@ -721,9 +664,9 @@ console.log(updatedBlockArr)
       }
 
       useEffect(() => {
-        console.log('Updated dataArray:', dataArray);
-      }, [dataArray]);
-console.log(dataArray)
+        console.log('Updated dataArray:', dataArray)
+      }, [dataArray])
+
     //블록 & 주석 통합
     const renderBlockAndAnnotation = () => {
         const divs = []
@@ -733,7 +676,6 @@ console.log(dataArray)
             const annotationDivs = []
 
             if(dataArray[i].blockId != -1) {
-                const blockId = dataArray[i].blockId
                 const blockTitle = dataArray[i].title
                 const content = dataArray[i].content
 
@@ -766,22 +708,20 @@ console.log(dataArray)
                                 </div> 
                                 : 
                                 <div className="anno-total-box">
-                                  <div>
-                                      <div className="doc-content-dot-img"/>
-                                  </div>
+                                    <div>
+                                        <div className="doc-content-dot-img"/>
+                                    </div>
                                 </div>
                                 }
-                              <div className="anno-content-box">
-                                        <span className="anno-content-txt">{a.content}</span>
-                                    </div>
-                                    <div className="anno-info-box">
-                                        <span className="anno-info-txt">{a.userName}</span>
-                                        <span>{a.lastModified}</span>
-                                    </div>
-                             </div>
-          
-                              
+                                <div className="anno-content-box">
+                                    <span className="anno-content-txt">{a.content}</span>
+                                </div>
+                                <div className="anno-info-box">
+                                    <span className="anno-info-txt">{a.userName}</span>
+                                    <span>{a.lastModified}</span>
+                                </div>
                             </div>
+                        </div>
                           );
                         }
 
@@ -809,16 +749,6 @@ console.log(dataArray)
                                             lang="en"
                                             />
                                         </form>
-                                        {/* <textarea 
-                                        className='doc-index-txt'
-                                        ref={titleRef} 
-                                        value={dataArray[i]?.title || ''} 
-                                        onChange={(event) => {
-                                            handleTitleChange(event, dataArray[i]?.blockId);
-                                            adjustTextareaHeight(event.target);
-                                        }}
-                                        lang="en"
-                                        /> */}
                                         <div className="doc-arrow-imgBox">
                                             <button className="doc-arrowBtn" onClick={() => arrowToggleMenu(i)}>
                                             {isArrow[i] ? (
@@ -930,23 +860,23 @@ console.log(dataArray)
         })
         .then(response => {
             const blockDataArray = response.data.data.reduce((result, group) => {
-                const blockData = group.pageResList.filter(item => item.template === 'BLOCK');
+                const blockData = group.pageResList.filter(item => item.template === 'BLOCK')
                 if (blockData.length > 0) {
-                  const updatedGroup = { ...group, pageResList: blockData };
-                  result.push(updatedGroup);
+                  const updatedGroup = { ...group, pageResList: blockData }
+                  result.push(updatedGroup)
                 }
-                return result;
-              }, []);
+                return result
+              }, [])
 
             setGroupArr(blockDataArray)
             setCloneTitle(blockTitle)
             setCloneContent(content)
             setIsClone(isClone => !isClone)
             setIsGroupDot(prevState => {
-                const newState = [...prevState];
-                newState[activeGroupIndex] = false;
-                return newState;
-            });
+                const newState = [...prevState]
+                newState[activeGroupIndex] = false
+                return newState
+            })
         })
         .catch(error => {
           console.error(error)
@@ -960,46 +890,25 @@ console.log(dataArray)
                 userId: user.userId
             }
         }) .then(() => {
-            // for (let i = 0; i < dataArray[activeGroupIndex].annotationResList.length; i++) {
-            //     api.delete('/annotations/' + dataArray[activeGroupIndex].annotationResList[i].annotationId, {
-            //         headers:{
-            //             userId: user.userId,
-            //             projectId: data.projectId
-            //         }
-            //     }) .then(() => {
-            //         setArray(prevData => {
-            //             const newData = {...prevData};
-            //             newData.blockResList = prevData.blockResList.map(block => {
-            //                 block.annotationResList = block.annotationResList.filter(anno => anno.annotationId !== dataArray[activeGroupIndex].annotationResList[i].annotationId);
-            //                 return block;
-            //             });
-            //             return newData;
-            //             })
-            //     })
-            //     .catch(error => {
-            //     console.error(error)
-            //     });
-            // }
-
             if (activeGroupIndex !== null) {
                 setDataArray(prevState => {
-                    const newArr = [...prevState];
-                    newArr.splice(activeGroupIndex, 1);
-                    return newArr;
+                    const newArr = [...prevState]
+                    newArr.splice(activeGroupIndex, 1)
+                    return newArr
                 });
                 console.log(activeGroupIndex)
-                setActiveGroupIndex(prevIndex => prevIndex - 1);
+                setActiveGroupIndex(prevIndex => prevIndex - 1)
                 setIsGroupDot(prevState => {
-                    const newState = [...prevState];
-                    newState[activeGroupIndex] = false;
-                    return newState;
-                });
+                    const newState = [...prevState]
+                    newState[activeGroupIndex] = false
+                    return newState
+                })
             }
 
         })
         .catch(error => {
         console.error(error)
-        });
+        })
     }
 
     //사이드바에서 블록추가
@@ -1007,18 +916,18 @@ console.log(dataArray)
         setBlockArr(prevBlockArr => ({
             ...prevBlockArr,
             order: dataArray.length,
-            title: newValue,
-        }));
+            title: newValue
+        }))
         
         if (inputName === 'title') {
             setTitle(newValue)
         }
         
-        setDivCount(prevCount => prevCount + 1);
+        setDivCount(prevCount => prevCount + 1)
         setIsArrow(prevState => {
-          const newState = [...prevState, false];
-          return newState;
-        });
+          const newState = [...prevState, false]
+          return newState
+        })
 
         api.post('/blocks', {
             ...blockArr,
@@ -1034,8 +943,8 @@ console.log(dataArray)
                 const pageId = blockArr.pageId
                 const annotationId = -1
                 const annotationResList = [{ annotationId }]
-                const newData = { blockId, title, pageId, annotationResList };
-                setDataArray(prevDataArray => [...prevDataArray, newData]);
+                const newData = { blockId, title, pageId, annotationResList }
+                setDataArray(prevDataArray => [...prevDataArray, newData])
             })
             .catch(error => {
                 console.error(error)
@@ -1080,15 +989,12 @@ console.log(dataArray)
             </div>
             {isAnnoPop ? <AddAnnotation onClose={setIsAnnoPop} onButtonClick={handleInputAnnotation} /> : <></>}
             {isAnnoUpdatePop ? <UpdateAnnotation onClose={setIsAnnoUpdatePop} onButtonClick={handleUpdateAnnotation} /> : <></>}
-            {/* <div className="doc-trash-box">
-                <img className="doc-trashImg" src={ trash } onClick={handleDeletePage}/>
-            </div> */}
             {isDeletePage ? <PageDeleteModal isDeletePage={isDeletePage} setIsDeletePage={setIsDeletePage} onClose={handleDeletePage} pageId={id} /> : <></> }
             {isNoPage != null ? <PageNoPopup isNoPage={isNoPage} setIsNoPage={setIsNoPage} /> : <></> }
             {isClone ? <BlockCloneModal isOpen={isClone} onClose={setIsClone} pageId={id} projectId={projectId} groupArr={groupArr} title={cloneTitle} content={cloneContent} onValueBlockChange={handleBlockChange}/> : <></>}
         </div>
 
-    );
+    )
 }
 
-export default Document;
+export default Document

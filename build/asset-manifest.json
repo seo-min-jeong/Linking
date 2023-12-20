@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/static/css/main.05783a98.css",
-    "main.js": "/static/js/main.b7a8cae4.js",
-    "static/js/787.28cb0dcd.chunk.js": "/static/js/787.28cb0dcd.chunk.js",
-    "static/media/chain.png": "/static/media/chain.dc45873f33dca1d223cb.png",
-    "static/media/airplane.png": "/static/media/airplane.15dc666f65c73da74db9.png",
-    "static/media/mainLogo.png": "/static/media/mainLogo.f9e7ed87014772532613.png",
-    "static/media/setting.png": "/static/media/setting.0e1d8aec7a8d7e02ae41.png",
-    "static/media/ring.png": "/static/media/ring.27815cf0f2f26c3e577a.png",
-    "static/media/chatImg.png": "/static/media/chatImg.e992b6e3e7a76eaf4088.png",
-    "static/media/ring2.png": "/static/media/ring2.00e2adfc5b359e135ee9.png",
-    "index.html": "/index.html",
-    "main.05783a98.css.map": "/static/css/main.05783a98.css.map",
-    "main.b7a8cae4.js.map": "/static/js/main.b7a8cae4.js.map",
-    "787.28cb0dcd.chunk.js.map": "/static/js/787.28cb0dcd.chunk.js.map"
+    "main.css": "/seo-min-jeong.io/static/css/main.98ebc99b.css",
+    "main.js": "/seo-min-jeong.io/static/js/main.4dbc2412.js",
+    "static/js/787.28cb0dcd.chunk.js": "/seo-min-jeong.io/static/js/787.28cb0dcd.chunk.js",
+    "static/media/chain.png": "/seo-min-jeong.io/static/media/chain.dc45873f33dca1d223cb.png",
+    "static/media/airplane.png": "/seo-min-jeong.io/static/media/airplane.15dc666f65c73da74db9.png",
+    "static/media/mainLogo.png": "/seo-min-jeong.io/static/media/mainLogo.f9e7ed87014772532613.png",
+    "static/media/setting.png": "/seo-min-jeong.io/static/media/setting.0e1d8aec7a8d7e02ae41.png",
+    "static/media/ring.png": "/seo-min-jeong.io/static/media/ring.27815cf0f2f26c3e577a.png",
+    "static/media/chatImg.png": "/seo-min-jeong.io/static/media/chatImg.e992b6e3e7a76eaf4088.png",
+    "static/media/ring2.png": "/seo-min-jeong.io/static/media/ring2.00e2adfc5b359e135ee9.png",
+    "index.html": "/seo-min-jeong.io/index.html",
+    "main.98ebc99b.css.map": "/seo-min-jeong.io/static/css/main.98ebc99b.css.map",
+    "main.4dbc2412.js.map": "/seo-min-jeong.io/static/js/main.4dbc2412.js.map",
+    "787.28cb0dcd.chunk.js.map": "/seo-min-jeong.io/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.05783a98.css",
-    "static/js/main.b7a8cae4.js"
+    "static/css/main.98ebc99b.css",
+    "static/js/main.4dbc2412.js"
   ]
 }

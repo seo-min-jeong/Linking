@@ -1,7 +1,7 @@
 import React, { useState } from "react"
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
 
-import InitialProjectModal from "./component/InitialProjectModal";
+import InitialProjectModal from "./component/InitialProjectModal"
 
 function LinkingHome(props) {
     const { onValueProjectList, setIsLoggedIn } = props
@@ -14,7 +14,6 @@ function LinkingHome(props) {
     }
 
     const handleProjectList = (newValue) => {
-        console.log(newValue)
         onValueProjectList(newValue)
         navigate(process.env.PUBLIC_URL + '/home')
         setIsLoggedIn(true)

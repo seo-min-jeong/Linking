@@ -6,43 +6,40 @@ import { ko } from "date-fns/esm/locale";
 import { useNavigate } from "react-router-dom";
 
 import close from "../icon/close.png"
-import calen from "./icon/calen.png"
 import dot from "../icon/dot.png"
-import pencil from "../icon/pencil.png"
 import del from "../icon/del.png"
 import mag from "./icon/mag.png"
 
 function UpdateProject() {
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
+    const [startDate, setStartDate] = useState(new Date())
+    const [endDate, setEndDate] = useState(new Date())
 
-    const teamMenuRef = useRef(null);
-    const [isTeam, setTeam] = useState(false);
-    const [isAddTeam, setAddTeam] = useState(false);
-    const [isTeamOne, setTeamOne] = useState(false);
-    const [isDeleteTeam, setDeleteTeam] = useState(false);
-    const [isUpdate, setUpdate] = useState(false);
+    const teamMenuRef = useRef(null)
+    const [isTeam, setTeam] = useState(false)
+    const [isAddTeam, setAddTeam] = useState(false)
+    const [isTeamOne, setTeamOne] = useState(false)
+    const [isDeleteTeam, setDeleteTeam] = useState(false)
 
     const teamToggleMenu = () => {
-        setTeam(isTeam => !isTeam);
+        setTeam(isTeam => !isTeam)
     }
 
     const addTeamMenu = () => {
-        setAddTeam(isAddTeam => !isAddTeam);
-        setTeam(false);
+        setAddTeam(isAddTeam => !isAddTeam)
+        setTeam(false)
     }
 
     const addTeamOneMenu = () => {
-        setTeamOne(isTeamOne => !isTeamOne);
+        setTeamOne(isTeamOne => !isTeamOne)
     }
 
     const closeTeamMenu = () => {
-        setAddTeam(false);
-        setTeamOne(false);
+        setAddTeam(false)
+        setTeamOne(false)
     }
 
     const deleteTeam = () => {
-        setDeleteTeam(isDeleteTeam => !isDeleteTeam);
+        setDeleteTeam(isDeleteTeam => !isDeleteTeam)
     }
 
     const onClickButton = () => {
@@ -51,31 +48,31 @@ function UpdateProject() {
 
     useEffect(() => {
         const handleOutsideClose = (e) => {
-          if(isTeam && (!teamMenuRef.current || !teamMenuRef.current.contains(e.target))) setTeam(isTeam => !isTeam);
-        };
-        document.addEventListener('click', handleOutsideClose);
+          if(isTeam && (!teamMenuRef.current || !teamMenuRef.current.contains(e.target))) setTeam(isTeam => !isTeam)
+        }
+        document.addEventListener('click', handleOutsideClose)
         
-        return () => document.removeEventListener('click', handleOutsideClose);
-    }, [isTeam]);
+        return () => document.removeEventListener('click', handleOutsideClose)
+    }, [isTeam])
 
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     const onClickBack = () => {
-        navigate(-1);
+        navigate(-1)
     }
 
     const onClickDelOk = () => {
-        navigate('/home');
+        navigate('/home')
     }
 
     const onClickDelCancel = () => {
-        setDeleteTeam(isDeleteTeam => !isDeleteTeam);
+        setDeleteTeam(isDeleteTeam => !isDeleteTeam)
     }
 
     const [inputTeam, setInputTeam] = useState('')
 
     const handleInputTeam = (e) => {
-        setInputTeam(e.target.value);
+        setInputTeam(e.target.value)
     }
 
     var projectName = "창의융합종합설계2"
@@ -83,48 +80,8 @@ function UpdateProject() {
     const [inputProject, setInputProject] = useState(projectName)
 
     const handleInputProject = (e) => {
-        setInputProject(e.target.value);
+        setInputProject(e.target.value)
     }
-
-    const onClickProject = () => {
-        setUpdate(isUpdate => !isUpdate);
-    }
-
-    // const [users, setUsers] = useState([
-    //     {
-    //         firstName: "서",
-    //         lastName: "민정",
-    //         email: "smj3963@gmail.com"
-    //     },
-    //     {
-    //         firstName: "이",
-    //         lastName: "은빈",
-    //         email: "dmsqls@gmail.com"
-    //     },
-    //     {
-    //         firstName: "윤",
-    //         lastName: "겸지",
-    //         email: "ruawl@gmail.com"
-    //     },
-    //     {
-    //         firstName: "최",
-    //         lastName: "혜민",
-    //         email: "gPals@gmail.com"
-    //     }
-    // ])
-
-    // const onCreate = () =>{
-    //     const user = {
-    //       firstName,
-    //       lastName,
-    //       email,
-    //     }
-    //     setUsers([...users, user]) 
-    //     setInputs({
-    //         firstName: '',
-    //         lastName: '',
-    //         email: ''
-    // })
 
     return(
         <div className="project-box" >
@@ -133,7 +90,6 @@ function UpdateProject() {
                 <div className="project-name-sec"><span className="project-name">프로젝트명</span></div>
                 <div className="project-name-sec">
                     <input className='projectName-Input' type='text' name='project_team' value={inputProject} onChange={handleInputProject} />
-                    {/* <div className="pencil-box"><img className="pencil" src={ pencil } onClick={ onClickProject }/></div> */}
                 </div>
             </div>
             <div className="date-box">
@@ -147,7 +103,6 @@ function UpdateProject() {
                         dateFormat="yyyy-MM-dd"
                         locale={ko}
                         />
-                        {/* <i><img className="close" src={ calen } /></i> */}
                     </label>
                 </div>
                 <div className="date-sec-box">
@@ -160,7 +115,6 @@ function UpdateProject() {
                         dateFormat="yyyy-MM-dd"
                         locale={ko}
                         />
-                        {/* <i><img className="close" src={ calen } /></i> */}
                     </label>
                 </div>
             </div>
@@ -231,7 +185,7 @@ function UpdateProject() {
 
         </div>
 
-    );
+    )
 }
 
-export default UpdateProject;
+export default UpdateProject

@@ -1,12 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
-import Modal from 'react-modal';
-import './WorkModal.css';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { ko } from "date-fns/esm/locale";
-import 'react-time-picker/dist/TimePicker.css';
-import api from '../utils/api';
-import { useCookies } from 'react-cookie'
+import React, { useState } from "react"
+import Modal from 'react-modal'
+import './WorkModal.css'
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
+import { ko } from "date-fns/esm/locale"
+import 'react-time-picker/dist/TimePicker.css'
+import api from '../utils/api'
 
 import deleteIcon from "../icon/trash.png"
 
@@ -14,11 +13,23 @@ import deleteIcon from "../icon/trash.png"
 function WorkSelectModal(props) {
     const { isOpen, onClose, data, projectId, emitterId, onValueAll, partList } = props
     const [isAddTeam, setAddTeam] = useState(false)
-    // const [cookies] = useCookies(['session'])
 
     const [content, setContent] = useState(data.content)
-    const [startDate, setStartDate] = useState(new Date(data.startDate))
-    const [dueDate, setDueDate] = useState(new Date(data.dueDate))
+
+    const tempStartDate = new Date()
+    tempStartDate.setFullYear(data.startDate.substring(0,4))
+    tempStartDate.setMonth(data.startDate.substring(6,7)-1)
+    tempStartDate.setDate(data.startDate.substring(8,10))
+
+    const tempDueDate = new Date()
+    tempDueDate.setFullYear(data.dueDate.substring(0,4))
+    tempDueDate.setMonth(data.dueDate.substring(6,7)-1)
+    tempDueDate.setDate(data.dueDate.substring(8,10))
+
+
+    const [startDate, setStartDate] = useState(tempStartDate)
+    const [dueDate, setDueDate] = useState(tempDueDate)
+
     const [hour, setHour] = useState(data.dueDate.substring(11,13))
     const [minute, setMinute] = useState(data.dueDate.substring(14,16))
     const [ampm, setAmpm] = useState(data.dueDate.substring(17,19))
@@ -32,21 +43,19 @@ function WorkSelectModal(props) {
     const minutes = []
     const ampms = ["AM", "PM"]
 
-    for (let i = 1; i <= 24; i++) {
-        hours.push(i < 10 ? "0" + i : i.toString());
+    for (let i = 1; i <= 12; i++) {
+        hours.push(i < 10 ? "0" + i : i.toString())
     }
 
     for (let i = 0; i <= 59; i++) {
-        minutes.push(i < 10 ? "0" + i : i.toString());
+        minutes.push(i < 10 ? "0" + i : i.toString())
     }
 
     const handleHourChange = (e) => {
-        setHour(e.target.value);
-        console.log(e.target.value);
+        setHour(e.target.value)
     }
     const handleMinuteChange = (e) => {
-        setMinute(e.target.value);
-        console.log(e.target.value);
+        setMinute(e.target.value)
     }
     const handleAmpmChange = (e) => {
         setAmpm(e.target.value)
@@ -58,7 +67,7 @@ function WorkSelectModal(props) {
     }
 
     const onClickChkButton = () => {
-        setAddTeam(false);
+        setAddTeam(false)
     }
 
     const handleInputWork = (event) => {
@@ -71,27 +80,26 @@ function WorkSelectModal(props) {
         } else if (name === 'dueDate') {
             setDueDate(value)
         } 
-
     }
 
     const handleBtnClick = () => {
-        let startYear = startDate.getFullYear();
-        let startMonth = (startDate.getMonth() + 1).toString().padStart(2, '0');
-        let startDay = startDate.getDate().toString().padStart(2, '0');
-        let valueStartDate = startYear;
-        valueStartDate += '-';
-        valueStartDate += startMonth;
-        valueStartDate += '-';
-        valueStartDate += startDay;
+        let startYear = startDate.getFullYear()
+        let startMonth = (startDate.getMonth() + 1).toString().padStart(2, '0')
+        let startDay = startDate.getDate().toString().padStart(2, '0')
+        let valueStartDate = startYear
+        valueStartDate += '-'
+        valueStartDate += startMonth
+        valueStartDate += '-'
+        valueStartDate += startDay
 
-        let endYear = dueDate.getFullYear();
-        let endMonth = (dueDate.getMonth() + 1).toString().padStart(2, '0');
-        let endDay = dueDate.getDate().toString().padStart(2, '0');
-        let valueEndDate = endYear;
-        valueEndDate += '-';
-        valueEndDate += endMonth;
-        valueEndDate += '-';
-        valueEndDate += endDay;
+        let endYear = dueDate.getFullYear()
+        let endMonth = (dueDate.getMonth() + 1).toString().padStart(2, '0')
+        let endDay = dueDate.getDate().toString().padStart(2, '0')
+        let valueEndDate = endYear
+        valueEndDate += '-'
+        valueEndDate += endMonth
+        valueEndDate += '-'
+        valueEndDate += endDay
 
         const work = {
             emitterId: emitterId,
@@ -114,12 +122,12 @@ function WorkSelectModal(props) {
                 })
         })
         .catch(error => {
-            console.error(error);
+            console.error(error)
         })
     }
 
     const onClickClose = () => {
-        onClose(isOpen => !isOpen);
+        onClose(isOpen => !isOpen)
     }
 
     const [selectedPeoples, setSelectedPeoples] = useState([])
@@ -150,14 +158,13 @@ function WorkSelectModal(props) {
                 setAssignList([parseInt(userId)])
             }
         }
-
-        setAddTeam(false);
+        setAddTeam(false)
     }
 
     const setAssignListForSelectedPeoples = (selectedPeoples) => {
         selectedPeoples.forEach((person) => {
-          const [lastName, firstName, userId] = person.split('_');
-          setAssignList((prevList) => [...prevList, parseInt(userId)]);
+          const [userId] = person.split('_')
+          setAssignList((prevList) => [...prevList, parseInt(userId)])
         })
     }
 
@@ -283,9 +290,7 @@ function WorkSelectModal(props) {
                                     value={`${people.lastName}_${people.firstName}_${people.userId}`}
                                     checked={selectedPeoples.includes(`${people.lastName}_${people.firstName}_${people.userId}`)}
                                     onChange={handleCheckboxChange}
-                                    // id="chk"
                                     />
-                                    {/* <i class="circle"></i> */}
                                     {people.lastName}{people.firstName}
                                 </label>
                                 </div>
@@ -299,7 +304,7 @@ function WorkSelectModal(props) {
                 </div>
             </div>
         </Modal>
-      );
+      )
     }
   
-    export default WorkSelectModal;
+    export default WorkSelectModal

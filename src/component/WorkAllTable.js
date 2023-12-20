@@ -1,20 +1,19 @@
-import React, { useState, useRef, useEffect } from "react";
-import api from '../utils/api';
-import { useCookies } from 'react-cookie'
+import React, { useState, useRef, useEffect } from "react"
+import api from '../utils/api'
 import { useLocation } from 'react-router-dom'
 
 import SubWorkModal from "./SubWorkModal"
 import WorkSelectModal from "./WorkSelectModal"
 import WorkSelectSubModal from "./WorkSelectSubModal"
 import CreateWorkModal from "./CreateWorkModal"
-import Cal from "./Cal";
+import Cal from "./Cal"
 
 import dot from "../icon/dot.png"
 import noti from "../icon/bell.png"
 import arrowtriangle from "../icon/lefttriangle.png"
-import plusIcon from "../icon/plusIcon.png";
-import clockGreen from "../icon/clockGreen.png";
-import clockRed from "../icon/clockRed.png";
+import plusIcon from "../icon/plusIcon.png"
+import clockGreen from "../icon/clockGreen.png"
+import clockRed from "../icon/clockRed.png"
 import bellRed2 from "../icon/bellRed.png"
 import bellGreen2 from "../icon/bellGreen.png"
 import circleDefault from "../icon/circleDefault.png"
@@ -25,33 +24,30 @@ import circleInprogress from "../icon/circleInprogress.png"
 import plus from "./icon/plus.png"
 
 //월 할일
-function WorkAllTable( props ) {
-    // const { projectId, emitterId, partList, onValueWorkAll, setTableList, tableList } = props
-    
+function WorkAllTable() {
     const location = useLocation()
     const [tableList, setTableList] = useState(location.state.data)
     const user = JSON.parse(localStorage.getItem('user'))
     const [partList, setPartList] = useState(location.state.partList)
     const projectId = location.state.projectId
     const [activeTodoIndex, setActiveTodoIndex] = useState(tableList.length)
-    // const [cookies] = useCookies(['session'])
 
     useEffect(() => {
       setTableList(location.state.data)
       setPartList(location.state.partList)
-    }, [location.state]);
+    }, [location.state])
 
     const [parentId, setParentId] = useState(-1)
 
-    const workMenuRef = useRef(null);
-    const [isWork, setWork] = useState(false);
+    const workMenuRef = useRef(null)
+    const [isWork, setWork] = useState(false)
 
-    const [isNoti, setIsNoti] = useState(false);
-    const [isTodoDot, setIsTodoDot] = useState(tableList ? new Array(tableList.length).fill(false) : []);
-    const [isUpAssignDot, setIsUpAssignDot] = useState(tableList.map(todo => todo.assignList ? new Array(todo.assignList.length).fill(false) : [] ));
+    const [isNoti, setIsNoti] = useState(false)
+    const [isTodoDot, setIsTodoDot] = useState(tableList ? new Array(tableList.length).fill(false) : [])
+    const [isUpAssignDot, setIsUpAssignDot] = useState(tableList.map(todo => todo.assignList ? new Array(todo.assignList.length).fill(false) : [] ))
 
     const [isChildTodoDot, setIsChildTodoDot] = useState(tableList.map(todo => todo.childAllList ? new Array(todo.childAllList.length).fill(false) : [] ))
-    const [isChildAssignDot, setIsChildAssignDot] = useState([]);
+    const [isChildAssignDot, setIsChildAssignDot] = useState([])
 
     useEffect(() => {
       setActiveTodoIndex(tableList.length)
@@ -91,7 +87,7 @@ function WorkAllTable( props ) {
     const[emitterId, setEmitterId] = useState()
     let emitter = 0
     useEffect(() => {
-        const newEventSource = new EventSource('http://43.201.231.51:8080/todos/connect/web/project/' + projectId + '/user/' + user.userId,
+        const newEventSource = new EventSource('https://mylinking.shop/todos/connect/web/project/' + projectId + '/user/' + user.userId,
             { 
               headers: { 
                 'Cache-Control': 'no-cache',
@@ -149,7 +145,7 @@ function WorkAllTable( props ) {
               id: newData.todoId
             }
           ])
-          setTableList(prevMonthList => [...prevMonthList, newData]);
+          setTableList(prevMonthList => [...prevMonthList, newData])
         })
     
         //하위할일 추가
@@ -160,12 +156,12 @@ function WorkAllTable( props ) {
               return {
                 ...item,
                 childTodoList: [...item.childTodoList, newData]
-              };
+              }
             }
-            return item;
-          });
+            return item
+          })
           
-          setTableList([...updatedMonthList]);
+          setTableList([...updatedMonthList])
         })
     
         //상위할일 수정
@@ -202,19 +198,19 @@ function WorkAllTable( props ) {
                   id: newData.todoId
                 }
               } else {
-                return prevEvent; 
+                return prevEvent
               }})
           })
     
           setTableList(prevMonthList => {
             const updatedMonthList = prevMonthList.map(item => {
               if (item.todoId === newData.todoId) {
-                return newData;
+                return newData
               }
-              return item;
-            });
+              return item
+            })
           
-            return updatedMonthList;
+            return updatedMonthList
           })
       })
     
@@ -240,7 +236,7 @@ function WorkAllTable( props ) {
                   childTodoList: updatedChildTodoList
                 }
               }
-              return item;
+              return item
             })
           })
         })
@@ -255,20 +251,20 @@ function WorkAllTable( props ) {
                   return {
                     ...assignItem,
                     status: newData.status,
-                  };
+                  }
                 }
-                return assignItem;
-              });
+                return assignItem
+              })
         
               return {
                 ...item,
                 assignList: updatedAssignList,
-              };
+              }
             }
-            return item;
-          });
+            return item
+          })
         
-          setTableList(updatedMonthList);
+          setTableList(updatedMonthList)
         })
     
         //하위할일 상태 업데이트
@@ -283,26 +279,26 @@ function WorkAllTable( props ) {
                       return {
                         ...assignItem,
                         status: newData.status,
-                      };
+                      }
                     }
-                    return assignItem;
-                  });
+                    return assignItem
+                  })
         
                   return {
                     ...childTodo,
                     assignList: updatedAssignList,
-                  };
+                  }
                 }
                 return childTodo;
-              });
+              })
         
               return {
                 ...item,
                 childTodoList: updatedChildTodoList,
-              };
+              }
             }
             return item;
-          });
+          })
         
           setTableList(updatedMonthList);
         })
@@ -343,7 +339,7 @@ function WorkAllTable( props ) {
             .catch(error => {
                 console.error(error)
             })
-            console.log('Calendar close!!!!!!!!!!!!!!!!!!!!')
+            console.log('Calendar close')
         }
       }, [user.userId])
 
@@ -351,24 +347,29 @@ function WorkAllTable( props ) {
     const onToggleMenu = (i, k) => {
         if(k === -1) {
             setIsTodoDot(prevState => {
-                const newState = [...prevState]; 
-                newState[i] = !newState[i]; 
-                return newState;
-            });
+                const newState = [...prevState]
+                newState[i] = !newState[i]
+                return newState
+            })
             setActiveTodoIndex(i)
+            setIsUpAssignDot(tableList.map(todo => todo.assignList ? new Array(todo.assignList.length).fill(false) : [] ))
+            setIsChildAssignDot([])
+            setIsChildTodoDot(tableList.map(todo => todo.childAllList ? new Array(todo.childAllList.length).fill(false) : [] ))
         } else {
+          
             setIsUpAssignDot(prevState => {
-                const newState = [...prevState];
-                newState[i] = prevState[i];
-                newState[i][k] = !newState[i][k]; 
-                return newState;
+                const newState = [...prevState]
+                newState[i] = prevState[i]
+                newState[i][k] = !newState[i][k];
+                return newState
               })
+              setIsChildAssignDot([])
+              setIsTodoDot(tableList ? new Array(tableList.length).fill(false) : [])
+              setIsChildTodoDot(tableList.map(todo => todo.childAllList ? new Array(todo.childAllList.length).fill(false) : [] ))
         }
         setIsNoti(false)
-        setIsChildAssignDot([])
-        setIsChildTodoDot(tableList.map(todo => todo.childAllList ? new Array(todo.childAllList.length).fill(false) : [] ))
-        
     }
+
     //하위할일 ...
     const onToggleChildMenu = (i, j, l) => {
         if(l === -1) {
@@ -376,76 +377,77 @@ function WorkAllTable( props ) {
                 const newState = [...prevState]
                 newState[i] = prevState[i]
                 newState[i][j] = !newState[i][j]
-                return newState;
+                return newState
               })
               setIsSubNoti(false)
+              setIsTodoDot(tableList ? new Array(tableList.length).fill(false) : [])
+              setIsUpAssignDot(tableList.map(todo => todo.assignList ? new Array(todo.assignList.length).fill(false) : [] ))
+              setIsChildAssignDot([])
+
         } else {
-            const myArray = new Array(tableList.length).fill(false)
+          const myArray = new Array(tableList.length).fill(false)
             const test = tableList[i].childTodoList.map(todo => new Array(todo.assignList.length).fill(false))
             for(let k = 0; k < myArray.length; k++) {
                 if(i === k) {
-                    myArray[k] = test;
+                    myArray[k] = test
                 }
             }
 
-            setIsChildAssignDot(prevState => {
-                const newState = myArray;
+            setIsChildAssignDot(() => {
+                const newState = myArray
                 newState[i] = myArray[i]
                 newState[i][j] = myArray[i][j]
-                newState[i][j][l] = !newState[i][j][l];
-                return newState;
+                newState[i][j][l] = !newState[i][j][l]
+                return newState
             })
-            setIsSubNoti(false)
+        setIsSubNoti(false)
+        setIsTodoDot(tableList ? new Array(tableList.length).fill(false) : [])
+        setIsUpAssignDot(tableList.map(todo => todo.assignList ? new Array(todo.assignList.length).fill(false) : [] ))
+        setIsChildTodoDot(tableList.map(todo => todo.childAllList ? new Array(todo.childAllList.length).fill(false) : [] ))
         }
     }
 
-    const workSubMenuRef = useRef(null);
-    const [isSubWork, setIsSubWork] = useState(false);
-    const onSubToggleMenu = () => {
-        setWork(false);
-        setIsSubNoti(false);
-        setIsSubWork(isSubWork => !isSubWork);
-    }
+    const [isSubWork, setIsSubWork] = useState(false)
 
     const onToggleNoti = () => {
-        setIsNoti(isNoti => !isNoti);
+        setIsNoti(isNoti => !isNoti)
     }
 
-    const [isSubNoti, setIsSubNoti] = useState(false);
+    const [isSubNoti, setIsSubNoti] = useState(false)
     const onToggleSubNoti = () => {
-        setIsSubNoti(isSubNoti => !isSubNoti);
+        setIsSubNoti(isSubNoti => !isSubNoti)
     }
 
     useEffect(() => {
         const handleOutsideClose = (e) => {
-          if(isWork && (!workMenuRef.current || !workMenuRef.current.contains(e.target))) setWork(isWork => !isWork);
-        };
-        document.addEventListener('click', handleOutsideClose);
+          if(isWork && (!workMenuRef.current || !workMenuRef.current.contains(e.target))) setWork(isWork => !isWork)
+        }
+        document.addEventListener('click', handleOutsideClose)
         
-        return () => document.removeEventListener('click', handleOutsideClose);
-    }, [isWork]);
+        return () => document.removeEventListener('click', handleOutsideClose)
+    }, [isWork])
 
     useEffect(() => {
         const handleOutsideClose = (e) => {
-          if(isSubWork && (!workMenuRef.current || !workMenuRef.current.contains(e.target))) setIsSubWork(isSubWork => !isSubWork);
-        };
-        document.addEventListener('click', handleOutsideClose);
+          if(isSubWork && (!workMenuRef.current || !workMenuRef.current.contains(e.target))) setIsSubWork(isSubWork => !isSubWork)
+        }
+        document.addEventListener('click', handleOutsideClose)
         
-        return () => document.removeEventListener('click', handleOutsideClose);
-    }, [isSubWork]);
+        return () => document.removeEventListener('click', handleOutsideClose)
+    }, [isSubWork])
 
     //하위할일 추가버튼
     const [isOpen, setIsOpen] = useState(false)
     const [isSubOpen, setIsSubOpen] = useState(false)
     const onClickButton = (i, todoId) => {
-        setWork(false);
-        setIsSubOpen(isSubOpen => !isSubOpen);
+        setWork(false)
+        setIsSubOpen(isSubOpen => !isSubOpen)
         
         setIsTodoDot(prevState => {
-            const newState = [...prevState]; 
-            newState[i] = !newState[i]; 
-            return newState;
-        });
+            const newState = [...prevState]
+            newState[i] = !newState[i]
+            return newState
+        })
         setActiveTodoIndex(i)
         setParentId(todoId)
         setIsTodoDot(new Array(tableList.length).fill(false))
@@ -458,11 +460,11 @@ function WorkAllTable( props ) {
         setIsOpen(isOpen => !isOpen)
     }
 
-    const [valueWork, setValueWork] = useState('');
-    const [valueStart, setValueStart] = useState('');
-    const [valueEnd, setValueEnd] = useState('');
-    const [valueTime, setValueTime] = useState('');
-    const [valuePeople, setValuePeople] = useState([]);
+    const [valueWork, setValueWork] = useState('')
+    const [valueStart, setValueStart] = useState('')
+    const [valueEnd, setValueEnd] = useState('')
+    const [valueTime, setValueTime] = useState('')
+    const [valuePeople, setValuePeople] = useState([])
 
     const handleChange = (inputName, newValue) => {
         if (inputName === 'valueWork') {
@@ -476,14 +478,14 @@ function WorkAllTable( props ) {
           } else if (inputName === 'valuePeople') {
             setValuePeople(newValue);
           }
-    };
+    }
 
-    const [isWorkOpen, setIsWorkOpen] = useState(true);
-    const [clickedEvent, setClickedEvent] = useState(null);
+    const [isWorkOpen, setIsWorkOpen] = useState(true)
+    const [clickedEvent, setClickedEvent] = useState(null)
     const handleEventClick = (info) => {
-        setIsWorkOpen(false);
-        info.event.people = valuePeople;
-        setClickedEvent(info.event); 
+        setIsWorkOpen(false)
+        info.event.people = valuePeople
+        setClickedEvent(info.event)
     }
 
     const[isSelectModal, setIsSelectModal] = useState(false)
@@ -503,21 +505,21 @@ function WorkAllTable( props ) {
     const handleTodoClick = (todoIndex, assignIndex) => {
         let state = tableList[todoIndex].assignList[assignIndex]
         setTableList(prevTodoList => {
-          const updatedTodoList = [...prevTodoList];
+          const updatedTodoList = [...prevTodoList]
           state = updatedTodoList[todoIndex].assignList[assignIndex]
 
           let now = new Date()
           const date = new Date(updatedTodoList[todoIndex].dueDate)
 
           if (state.status === 'BEFORE_START') {
-            state.status = 'IN_PROGRESS';
+            state.status = 'IN_PROGRESS'
           } else if (state.status === 'IN_PROGRESS') {
-            state.status = 'COMPLETE';
+            state.status = 'COMPLETE'
           } else {
             if(date < now) {
                 state.status = 'INCOMPLETE'
             } else {
-                state.status = 'BEFORE_START';
+                state.status = 'BEFORE_START'
             }
           }
 
@@ -532,24 +534,24 @@ function WorkAllTable( props ) {
             console.log(response.data.data)
         })
         .catch(error => {
-            console.error(error);
+            console.error(error)
         })
-
-          return updatedTodoList;
+          return updatedTodoList
         })
     }
+
     //상위 빨강색 상태변경
     const handleLateClick = (todoIndex, assignIndex) => {
         let state = tableList[todoIndex].assignList[assignIndex]
         setTableList(prevTodoList => {
-          const updatedTodoList = [...prevTodoList];
-          state = updatedTodoList[todoIndex].assignList[assignIndex];
+          const updatedTodoList = [...prevTodoList]
+          state = updatedTodoList[todoIndex].assignList[assignIndex]
           if (state.status === 'INCOMPLETE') {
-            state.status = 'INCOMPLETE_PROGRESS';
+            state.status = 'INCOMPLETE_PROGRESS'
           } else if (state.status === 'INCOMPLETE_PROGRESS') {
-            state.status = 'COMPLETE';
+            state.status = 'COMPLETE'
           } else {
-            state.status = 'INCOMPLETE';
+            state.status = 'INCOMPLETE'
           }
 
           const todoStatus = {
@@ -563,10 +565,9 @@ function WorkAllTable( props ) {
             console.log(response.data.data)
         })
         .catch(error => {
-            console.error(error);
+            console.error(error)
         })
-
-          return updatedTodoList;
+          return updatedTodoList
         })
     }
 
@@ -581,14 +582,14 @@ function WorkAllTable( props ) {
           const date = new Date(updatedTodoList[todoIndex].childTodoList[todoChildIndex].dueDate)
 
           if (state.status === 'BEFORE_START') {
-            state.status = 'IN_PROGRESS';
+            state.status = 'IN_PROGRESS'
           } else if (state.status === 'IN_PROGRESS') {
-            state.status = 'COMPLETE';
+            state.status = 'COMPLETE'
           } else {
             if(date < now) {
                 state.status = 'INCOMPLETE'
             } else {
-                state.status = 'BEFORE_START';
+                state.status = 'BEFORE_START'
             }
           }
 
@@ -603,10 +604,9 @@ function WorkAllTable( props ) {
             console.log(response.data.data)
         })
         .catch(error => {
-            console.error(error);
+            console.error(error)
         })
-
-          return updatedTodoList;
+          return updatedTodoList
         })
     }
 
@@ -614,14 +614,14 @@ function WorkAllTable( props ) {
     const handleLateChildTodoClick = (todoIndex, todoChildIndex, assignIndex) => {
         let state = tableList[todoIndex].childTodoList[todoChildIndex].assignList[assignIndex]
         setTableList(prevTodoList => {
-          const updatedTodoList = [...prevTodoList];
-          state = updatedTodoList[todoIndex].childTodoList[todoChildIndex].assignList[assignIndex];
+          const updatedTodoList = [...prevTodoList]
+          state = updatedTodoList[todoIndex].childTodoList[todoChildIndex].assignList[assignIndex]
           if (state.status === 'INCOMPLETE') {
-            state.status = 'INCOMPLETE_PROGRESS';
+            state.status = 'INCOMPLETE_PROGRESS'
           } else if (state.status === 'INCOMPLETE_PROGRESS') {
-            state.status = 'COMPLETE';
+            state.status = 'COMPLETE'
           } else {
-            state.status = 'INCOMPLETE';
+            state.status = 'INCOMPLETE'
           }
 
           const todoStatus = {
@@ -635,10 +635,9 @@ function WorkAllTable( props ) {
             console.log(response.data.data)
         })
         .catch(error => {
-            console.error(error);
+            console.error(error)
         })
-
-          return updatedTodoList;
+          return updatedTodoList
         })
     }
 
@@ -753,6 +752,11 @@ function WorkAllTable( props ) {
         })
     }
 
+    const handleTableList = (newValue) => {
+      setTableList(newValue)
+      setIsChildTodoDot(newValue.map(todo => todo.childAllList ? new Array(todo.childAllList.length).fill(false) : [] ))
+    }
+
     return (
         <div>
             <div className='todayBigBox'>
@@ -762,9 +766,8 @@ function WorkAllTable( props ) {
                 </div>
             </div>
             <div className="cal-total-box" style={{ display: 'flex', justifyContent: 'center', margin: 'auto',  minWidth: '1380px' }}>
-              <Cal events={events} setEvents={setEvents}/>
+              <Cal events={events} setEvents={setEvents} onTableList={handleTableList}/>
             <div className='todaySmallBox' ref={ workMenuRef } style={{ justifyContent: 'center', alignItems: 'center' }}>
-                {/* <Cal events={events} setEvents={setEvents}/> */}
                 <div className='smallTextBox'>
                     <div className="todaySmallText1-box"><span className='todaySmallText1'>할 일</span></div>
                     <div className="todaySmallText2-box"><span className='todaySmallText2'>마감 날짜</span></div>
@@ -782,7 +785,7 @@ function WorkAllTable( props ) {
                                 {assign.userId === user.userId ? 
                                         <div>
                                             {assign.status === 'INCOMPLETE' || assign.status === 'INCOMPLETE_PROGRESS' ?
-                                            <button onClick={() => handleLateClick(i, k)} className="todo-circle-btn">
+                                            <button style={{ cursor: 'pointer' }} onClick={() => handleLateClick(i, k)} className="todo-circle-btn">
                                                 <div>
                                                     {assign.status === 'INCOMPLETE' && <img src={circleIncomplete} className='todo-check-img'/>}
                                                     {assign.status === 'INCOMPLETE_PROGRESS' && <img src={circleInprogress} className='todo-check-img' />}
@@ -790,7 +793,7 @@ function WorkAllTable( props ) {
                                                 </div>
                                             </button>
                                             :
-                                            <button onClick={() => handleTodoClick(i, k)} className="todo-circle-btn">
+                                            <button style={{ cursor: 'pointer' }} onClick={() => handleTodoClick(i, k)} className="todo-circle-btn">
                                                 <div>
                                                     {assign.status === 'BEFORE_START' && <img src={circleDefault} className='todo-check-img'/>}
                                                     {assign.status === 'IN_PROGRESS' && <img src={circleIng} className='todo-check-img' />}
@@ -822,15 +825,18 @@ function WorkAllTable( props ) {
                                         }
                                 <div className='todaySmall-txt1-box'>
                                     {assign.userId === user.userId ? 
-                                        <span className='todaySmall-txt1' onClick={() => onClickWorkSelectModal(todo)} >{todo.content}</span>
+                                        <span className="todaySmall-txt1 tooltip" onClick={() => onClickWorkSelectModal(todo)}>
+                                        {todo.content}
+                                      </span>
+                                      
                                         : 
-                                        <span className='todaySmall-txt2'>{todo.content}</span>
+                                        <span className='todaySmall-txt1'>{todo.content}</span>
                                     }
                                 </div>
                                 {assign.status === 'INCOMPLETE' || assign.status === 'INCOMPLETE_PROGRESS' ?
                                 <>
                                   <div className='todaySmall-txt2-box'>
-                                    <span className='todaySmal-red-txt2'>{todo.dueDate.substring(0,11)}</span>
+                                    <span className='todaySmall-red-txt2'>{todo.dueDate.substring(0,11)}</span>
                                   </div>
                                   <div className='todaySmall-txt3-box'>
                                     <img className='work-green-clock' src={ clockRed }/>
@@ -864,11 +870,11 @@ function WorkAllTable( props ) {
                                                     <img className='work-arrow' src={ arrowtriangle } onClick={ onToggleNoti } />
                                                     <div className={isNoti ? 'workNoti-toggle-box' : 'workNoti-hide-box'} >
                                                         <div className="workNoti-box">
-                                                            <img className='work-noti' src={ bellRed2 } />
+                                                            <img className='work-noti' src={ bellRed2 } onClick={() => onClickWebAndMail({ content: todo.content, targetUserId: assign.userId })}/>
                                                             <span className="workNoti-txt" onClick={() => onClickWebAndMail({ content: todo.content, targetUserId: assign.userId })}>Web & Mail</span>
                                                         </div>
                                                         <div className="workNoti-box">
-                                                            <img className='work-noti' src={ bellGreen2 } />
+                                                            <img className='work-noti' src={ bellGreen2 } onClick={() => onClickWeb({ content: todo.content, targetUserId: assign.userId })}/>
                                                             <span className="workNoti-txt" onClick={() => onClickWeb({ content: todo.content, targetUserId: assign.userId })}>Web</span>
                                                         </div>
                                                     </div>
@@ -877,8 +883,8 @@ function WorkAllTable( props ) {
                                                 <div className="work-menu-txtBox"><span className="work-menu-txt">알림 보내기</span></div>
                                             </div>
                                             <div className='work-menu-sec'>
-                                                <div className="work-menu-imgBox"><img className='work-plusIcon' src={ plusIcon }/></div>
-                                                <div className="work-menu-txtBox"><span className="work-menu-txt" onClick={() => onClickButton(i, todo.todoId) } >하위 할 일 추가</span></div>
+                                                <div className="work-menu-imgBox"><img className='work-plusIcon' src={ plusIcon } onClick={() => onClickButton(i, todo.todoId)}/></div>
+                                                <div className="work-menu-txtBox"><span className="work-menu-txt" onClick={() => onClickButton(i, todo.todoId)} >하위 할 일 추가</span></div>
                                             </div>
                                         </div>
                                     </div>
@@ -892,7 +898,7 @@ function WorkAllTable( props ) {
                             {todo.assignList[0].userId === user.userId ? 
                                             <div>
                                                 {todo.assignList[0].status === 'INCOMPLETE' || todo.assignList[0].status === 'INCOMPLETE_PROGRESS' ?
-                                                <button onClick={() => handleLateClick(i, 0)} className="todo-circle-btn">
+                                                <button style={{ cursor: 'pointer' }} onClick={() => handleLateClick(i, 0)} className="todo-circle-btn">
                                                     <div>
                                                         {todo.assignList[0].status === 'INCOMPLETE' && <img src={circleIncomplete} className='todo-check-img'/>}
                                                         {todo.assignList[0].status === 'INCOMPLETE_PROGRESS' && <img src={circleInprogress} className='todo-check-img' />}
@@ -900,7 +906,7 @@ function WorkAllTable( props ) {
                                                     </div>
                                                 </button>
                                                 :
-                                                <button onClick={() => handleTodoClick(i, 0)} className="todo-circle-btn">
+                                                <button style={{ cursor: 'pointer' }} onClick={() => handleTodoClick(i, 0)} className="todo-circle-btn">
                                                     <div>
                                                         {todo.assignList[0].status === 'BEFORE_START' && <img src={circleDefault} className='todo-check-img'/>}
                                                         {todo.assignList[0].status === 'IN_PROGRESS' && <img src={circleIng} className='todo-check-img' />}
@@ -934,7 +940,7 @@ function WorkAllTable( props ) {
                                         }
                             <div className='todaySmall-txt1-box'>
                                 {todo.assignList[0].userId === user.userId ? 
-                                    <span className='todaySmall-txt1' onClick={() => onClickWorkSelectModal(todo)} >{todo.content}</span>
+                                    <span className='todaySmall-txt1 tooltip' onClick={() => onClickWorkSelectModal(todo)} >{todo.content}</span>
                                     : 
                                     <span className='todaySmall-txt2'>{todo.content}</span>
                                 }
@@ -974,18 +980,18 @@ function WorkAllTable( props ) {
                                     }
                                     onToggleMenu(i, -1)
                                 }}/>
-                                <div className={isTodoDot[i] ? 'work-toggle-box' : 'work-hide-box'} >
+                                <div className={isTodoDot && isTodoDot[i] ? 'work-toggle-box' : 'work-hide-box'} >
                                     <div className='work-menu-box'>
                                         <div className='work-menu-sec'>
                                             <div className="work-arrow-imgBox">
                                                 <img className='work-arrow' src={ arrowtriangle } onClick={ onToggleNoti } />
                                                 <div className={isNoti ? 'workNoti-toggle-box' : 'workNoti-hide-box'} >
                                                     <div className="workNoti-box">
-                                                        <img className='work-noti' src={ bellRed2 } />
+                                                        <img className='work-noti' src={ bellRed2 } onClick={() => onClickWebAndMail({ content: todo.content, targetUserId: todo.assignList[0].userId })}/>
                                                         <span className="workNoti-txt" onClick={() => onClickWebAndMail({ content: todo.content, targetUserId: todo.assignList[0].userId })}>Web & Mail</span>
                                                     </div>
                                                     <div className="workNoti-box">
-                                                        <img className='work-noti' src={ bellGreen2 } />
+                                                        <img className='work-noti' src={ bellGreen2 } onClick={() => onClickWeb({ content: todo.content, targetUserId: todo.assignList[0].userId })}/>
                                                         <span className="workNoti-txt" onClick={() => onClickWeb({ content: todo.content, targetUserId: todo.assignList[0].userId })}>Web</span>
                                                     </div>
                                                 </div>
@@ -994,8 +1000,8 @@ function WorkAllTable( props ) {
                                             <div className="work-menu-txtBox"><span className="work-menu-txt">알림 보내기</span></div>
                                         </div>
                                         <div className='work-menu-sec'>
-                                            <div className="work-menu-imgBox"><img className='work-plusIcon' src={ plusIcon }/></div>
-                                            <div className="work-menu-txtBox"><span className="work-menu-txt" onClick={() => onClickButton(i, todo.todoId) } >하위 할 일 추가</span></div>
+                                            <div className="work-menu-imgBox"><img className='work-plusIcon' src={ plusIcon } onClick={() => onClickButton(i, todo.todoId)}/></div>
+                                            <div className="work-menu-txtBox"><span className="work-menu-txt" onClick={() => onClickButton(i, todo.todoId)} >하위 할 일 추가</span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -1015,7 +1021,7 @@ function WorkAllTable( props ) {
                                             {childAssign.userId === user.userId ? 
                                                 <div>
                                                     {childAssign.status === 'INCOMPLETE' || childAssign.status === 'INCOMPLETE_PROGRESS' ?
-                                                    <button onClick={() => handleLateChildTodoClick(i, j, l)} className="todo-circle-btn">
+                                                    <button style={{ cursor: 'pointer' }} onClick={() => handleLateChildTodoClick(i, j, l)} className="todo-circle-btn">
                                                         <div>
                                                             {childAssign.status === 'INCOMPLETE' && <img src={circleIncomplete} className='todo-check-img'/>}
                                                             {childAssign.status === 'INCOMPLETE_PROGRESS' && <img src={circleInprogress} className='todo-check-img' />}
@@ -1023,7 +1029,7 @@ function WorkAllTable( props ) {
                                                         </div>
                                                     </button>
                                                     :
-                                                    <button onClick={() => handleChildTodoClick(i, j, l)} className="todo-circle-btn">
+                                                    <button style={{ cursor: 'pointer' }} onClick={() => handleChildTodoClick(i, j, l)} className="todo-circle-btn">
                                                         <div>
                                                             {childAssign.status === 'BEFORE_START' && <img src={circleDefault} className='todo-check-img'/>}
                                                             {childAssign.status === 'IN_PROGRESS' && <img src={circleIng} className='todo-check-img' />}
@@ -1055,7 +1061,7 @@ function WorkAllTable( props ) {
                                             }
                                             <div className='todaySub-txt1-box'>
                                                 {childAssign.userId === user.userId ? 
-                                                    <span className='todaySmall-txt1' onClick={() => onClickWorkSubSelectModal(childTodo)} >{childTodo.content}</span>
+                                                    <span className='todaySmall-txt1 tooltip' onClick={() => onClickWorkSubSelectModal(childTodo)} >{childTodo.content}</span>
                                                     : 
                                                     <span className='todaySmall-txt2'>{childTodo.content}</span>
                                                 }
@@ -1063,7 +1069,7 @@ function WorkAllTable( props ) {
                                             {childAssign.status === 'INCOMPLETE' || childAssign.status === 'INCOMPLETE_PROGRESS' ?
                                               <>
                                                 <div className='todaySmall-red-txt2-box'>
-                                                  <span className='todaySmall-txt2'>{childTodo.dueDate.substring(0,11)}</span>
+                                                  <span className='todaySmall-red-txt2'>{childTodo.dueDate.substring(0,11)}</span>
                                                 </div>
                                                 <div className='todaySmall-txt3-box'>
                                                   <img className='work-green-clock' src={ clockRed }/>
@@ -1095,11 +1101,11 @@ function WorkAllTable( props ) {
                                                                 <img className='work-arrow' src={ arrowtriangle } onClick={ onToggleSubNoti } />
                                                                 <div className={isSubNoti ? 'workNoti-toggle-box' : 'workNoti-hide-box'} >
                                                                     <div className="workNoti-box">
-                                                                        <img className='work-noti' src={ bellRed2 } />
+                                                                        <img className='work-noti' src={ bellRed2 } onClick={() => onClickWebAndMail({ content: childTodo.content, targetUserId: childAssign.userId })}/>
                                                                         <span className="workNoti-txt" onClick={() => onClickWebAndMail({ content: childTodo.content, targetUserId: childAssign.userId })}>Web & Mail</span>
                                                                     </div>
                                                                     <div className="workNoti-box">
-                                                                        <img className='work-noti' src={ bellGreen2 } />
+                                                                        <img className='work-noti' src={ bellGreen2 } onClick={() => onClickWeb({ content: childTodo.content, targetUserId: childAssign.userId })}/>
                                                                         <span className="workNoti-txt" onClick={() => onClickWeb({ content: childTodo.content, targetUserId: childAssign.userId })}>Web</span>
                                                                     </div>
                                                                 </div>
@@ -1120,7 +1126,7 @@ function WorkAllTable( props ) {
                                         {childTodo.assignList[0].userId === user.userId ? 
                                             <div>
                                                 {childTodo.assignList[0].status === 'INCOMPLETE' || childTodo.assignList[0].status === 'INCOMPLETE_PROGRESS' ?
-                                                <button onClick={() => handleLateChildTodoClick(i, j, 0)} className="todo-circle-btn">
+                                                <button style={{ cursor: 'pointer' }} onClick={() => handleLateChildTodoClick(i, j, 0)} className="todo-circle-btn">
                                                     <div>
                                                         {childTodo.assignList[0].status === 'INCOMPLETE' && <img src={circleIncomplete} className='todo-check-img'/>}
                                                         {childTodo.assignList[0].status === 'INCOMPLETE_PROGRESS' && <img src={circleInprogress} className='todo-check-img' />}
@@ -1128,7 +1134,7 @@ function WorkAllTable( props ) {
                                                     </div>
                                                 </button>
                                                 :
-                                                <button onClick={() => handleChildTodoClick(i, j, 0)} className="todo-circle-btn">
+                                                <button style={{ cursor: 'pointer' }} onClick={() => handleChildTodoClick(i, j, 0)} className="todo-circle-btn">
                                                     <div>
                                                         {childTodo.assignList[0].status === 'BEFORE_START' && <img src={circleDefault} className='todo-check-img'/>}
                                                         {childTodo.assignList[0].status === 'IN_PROGRESS' && <img src={circleIng} className='todo-check-img' />}
@@ -1160,7 +1166,7 @@ function WorkAllTable( props ) {
                                         }
                                         <div className='todaySub-txt1-box'>
                                             {childTodo.assignList[0].userId === user.userId ? 
-                                                <span className='todaySmall-txt1' onClick={() => onClickWorkSubSelectModal(childTodo)} >{childTodo.content}</span>
+                                                <span className='todaySmall-txt1 tooltip' onClick={() => onClickWorkSubSelectModal(childTodo)} >{childTodo.content}</span>
                                                 : 
                                                 <span className='todaySmall-txt2'>{childTodo.content}</span>
                                             }
@@ -1193,18 +1199,18 @@ function WorkAllTable( props ) {
                                             <img className='work-team-dot' src={ dot } onClick={() => {
                                                 onToggleChildMenu(i, j, -1)
                                             }}/>
-                                            <div className={isChildTodoDot[i][j] ? 'work-toggle-box' : 'work-hide-box'} >
+                                            <div className={isChildTodoDot && isChildTodoDot[i] && isChildTodoDot[i][j] ? 'work-toggle-box' : 'work-hide-box'} >
                                                 <div className='work-menu-box'>
                                                     <div className='work-menu-sec'>
                                                         <div className="work-arrow-imgBox">
                                                             <img className='work-arrow' src={ arrowtriangle } onClick={ onToggleSubNoti } />
                                                             <div className={isSubNoti ? 'workNoti-toggle-box' : 'workNoti-hide-box'} >
                                                                 <div className="workNoti-box">
-                                                                    <img className='work-noti' src={ bellRed2 } />
+                                                                    <img className='work-noti' src={ bellRed2 } onClick={() => onClickWebAndMail({ content: childTodo.content, targetUserId: childTodo.assignList[0].userId })}/>
                                                                     <span className="workNoti-txt" onClick={() => onClickWebAndMail({ content: childTodo.content, targetUserId: childTodo.assignList[0].userId })}>Web & Mail</span>
                                                                 </div>
                                                                 <div className="workNoti-box">
-                                                                    <img className='work-noti' src={ bellGreen2 } />
+                                                                    <img className='work-noti' src={ bellGreen2 } onClick={() => onClickWeb({ content: childTodo.content, targetUserId: childTodo.assignList[0].userId })}/>
                                                                     <span className="workNoti-txt" onClick={() => onClickWeb({ content: childTodo.content, targetUserId: childTodo.assignList[0].userId })}>Web</span>
                                                                 </div>
                                                             </div>
@@ -1234,8 +1240,8 @@ function WorkAllTable( props ) {
           </div>
         </div>
 
-    );
+    )
 
 }
 
-export default WorkAllTable;
+export default WorkAllTable

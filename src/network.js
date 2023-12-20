@@ -1,12 +1,12 @@
 export const network = {
     isOnline: false,
     showOffline: function(elem) {
-      network.isOnline = false;
-      elem.innerHTML = '<span class="red"> </span>';
+      network.isOnline = false
+      elem.innerHTML = '<span class="red"> </span>'
     },
     showOnline: function(elem) {
-      network.isOnline = true;
-      elem.innerHTML = '<span class="green"> </span>';
+      network.isOnline = true
+      elem.innerHTML = '<span class="green"> </span>'
     },
     statusListener: function(elem) {
       return function(event) {
@@ -17,7 +17,7 @@ export const network = {
               event.value === 'disconnected') ||
             (event.type === 'document-synced' && event.value === 'sync-failed'))
         ) {
-          network.showOffline(elem);
+          network.showOffline(elem)
         } else if (
           !network.isOnline &&
           ((event.type === 'status-changed' && event.value === 'activated') ||
@@ -27,8 +27,8 @@ export const network = {
             event.type === 'peers-changed' ||
             event.type === 'documents-changed')
         ) {
-          network.showOnline(elem);
+          network.showOnline(elem)
         }
-      };
+      }
     },
-  };
+  }

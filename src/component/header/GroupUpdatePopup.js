@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import Modal from 'react-modal';
-import './Group.css';
+import React, { useState } from "react"
+import Modal from 'react-modal'
+import './Group.css'
 
 
 function GroupUpdatePopup(props) {
-    const { onClose, onButtonClick, name } = props;
-    const [groupName, setGroupName] = useState('');
+    const { onClose, onButtonClick, name } = props
+    const [groupName, setGroupName] = useState('')
 
     function handleClick() {
         onButtonClick('name', groupName)
-        onClose(false);
+        onClose(false)
     }
 
     const onClickClose = () => {
-        onClose(false);
+        onClose(false)
     }
 
     const [inputCount, setInputCount] = useState(0)
@@ -52,7 +52,7 @@ function GroupUpdatePopup(props) {
                 <div className="groupBtn-box"><button className="groupBtn" onClick={handleClick}>저장</button></div>
             </div>
         </Modal>
-    );
+    )
 }
 
-export default GroupUpdatePopup;
+export default GroupUpdatePopup

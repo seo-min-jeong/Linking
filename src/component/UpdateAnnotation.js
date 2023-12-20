@@ -1,22 +1,22 @@
-import React, { useState, useRef, useEffect } from "react";
-import Modal from 'react-modal';
-import './Content.css';
+import React, { useState } from "react"
+import Modal from 'react-modal'
+import './Content.css'
 
 
 function UpdateAnnotation(props) {
-    const { onClose, onButtonClick } = props;
-    const [annoContent, setAnnoContent] = useState('');
+    const { onClose, onButtonClick } = props
+    const [annoContent, setAnnoContent] = useState('')
 
     const handleChange = (event) => {
-        setAnnoContent(event.target.value);
+        setAnnoContent(event.target.value)
     }
     function handleClick() {
-        onButtonClick('content', annoContent);
-        onClose(false);
+        onButtonClick('content', annoContent)
+        onClose(false)
     }
 
     const onClickClose = () => {
-        onClose(false);
+        onClose(false)
     }
 
     return(
@@ -40,7 +40,7 @@ function UpdateAnnotation(props) {
                 <div className="contentBtn-box"><button className="contentBtn" onClick={handleClick}>저장</button></div>
             </div>
         </Modal>
-    );
+    )
 }
 
-export default UpdateAnnotation;
+export default UpdateAnnotation

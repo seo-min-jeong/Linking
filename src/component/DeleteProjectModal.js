@@ -1,32 +1,30 @@
-import React, { useState, useRef, useEffect } from "react";
-import Modal from 'react-modal';
-import './ProjectModal.css';
-import { useNavigate } from "react-router-dom";
+import React from "react"
+import Modal from 'react-modal'
+import './ProjectModal.css'
+import { useNavigate } from "react-router-dom"
 import api from "../utils/api"
-import { useCookies } from 'react-cookie'
 
 function DeleteProjectModal(props) {
     const { isDeleteTeam, setDeleteTeam, onClose, projectId, onValueProject } = props
-    // const [cookies] = useCookies(['session'])
   
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     const onClickDelOk = event => {
         event.preventDefault()
+        
         api.delete('/projects/' + projectId)
           .then(() => {
-            console.log("프로젝트 삭제 성공")
             onValueProject('delete', true)
           })
           .catch(error => {
-            console.error(error);
-          });
-        setDeleteTeam(false);
-        navigate(process.env.PUBLIC_URL + '/home');
+            console.error(error)
+          })
+        setDeleteTeam(false)
+        navigate(process.env.PUBLIC_URL + '/home')
     }
 
     const onClickDelCancel = () => {
-        setDeleteTeam(false);
+        setDeleteTeam(false)
     }
 
       return(
@@ -40,7 +38,7 @@ function DeleteProjectModal(props) {
             </div> 
         </Modal>
     
-      );
+      )
     }
   
-    export default DeleteProjectModal;
+    export default DeleteProjectModal

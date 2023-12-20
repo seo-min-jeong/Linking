@@ -1,15 +1,13 @@
-import React, { useState, useRef, useEffect } from "react";
-import Modal from 'react-modal';
-import './ProjectModal.css';
+import React, { useState, useRef, useEffect } from "react"
+import Modal from 'react-modal'
+import './ProjectModal.css'
 import AddTeam from "./AddTeam"
 import api from "../utils/api"
-import { useNavigate } from "react-router-dom";
-import { format } from "date-fns";
 import DeletePartModal from "./DeletePartModal"
 
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { ko } from "date-fns/esm/locale";
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
+import { ko } from "date-fns/esm/locale"
 
 import dot from "../icon/dot.png"
 import crown from "../icon/crown.png"
@@ -17,12 +15,12 @@ import crown from "../icon/crown.png"
 
 function CreateProjectModal(props) {
     const user = JSON.parse(localStorage.getItem('user'));
-    const { isOpen, onClose, setIsOpen, onValueProjectList } = props
+    const { isOpen, onClose, setIsOpen } = props
 
-    const [projectId, setProjectId] = useState(0);
-    const [beginDate, setBeginDate] = useState(new Date());
-    const [dueDate, setDueDate] = useState(new Date());
-    const [projectName, setProjectName] = useState('');
+    const [projectId, setProjectId] = useState(0)
+    const [beginDate, setBeginDate] = useState(new Date())
+    const [dueDate, setDueDate] = useState(new Date())
+    const [projectName, setProjectName] = useState('')
     const [partList, setPartList] = useState([{ lastName: user.lastName, firstName: user.firstName, email: user.email, userId: user.userId }])
 
     const [project, setProject] = useState({
@@ -30,7 +28,7 @@ function CreateProjectModal(props) {
         beginDate: '',
         dueDate: '',
         partList: [user.userId]
-      });
+      })
       
       //프로젝트 생성버튼
       const handleSubmit = event => {
@@ -38,33 +36,33 @@ function CreateProjectModal(props) {
         
         api.post('/projects', project)
           .then(response => {
-            setProjectId(response.data.data.projectId);
-            setProjectName(response.data.data.projectName);
-            setBeginDate(response.data.data.beginDate);
-            setDueDate(response.data.data.dueDate);
+            setProjectId(response.data.data.projectId)
+            setProjectName(response.data.data.projectName)
+            setBeginDate(response.data.data.beginDate)
+            setDueDate(response.data.data.dueDate)
             setPartList(response.data.data.partList)
 
-            setIsOpen(false);
+            setIsOpen(false)
           })
           .catch(error => {
-            console.error(error);
-          });
-    };
+            console.error(error)
+          })
+    }
 
-    const teamMenuRef = useRef(null);
-    const [isTeam, setTeam] = useState(false);
-    const [isAddTeam, setAddTeam] = useState(false);
+    const teamMenuRef = useRef(null)
+    const [isTeam, setTeam] = useState(false)
+    const [isAddTeam, setAddTeam] = useState(false)
 
     const teamToggleMenu = () => {
-        setTeam(isTeam => !isTeam);
+        setTeam(isTeam => !isTeam)
     }
 
     const addTeamMenu = () => {
-        setTeam(false);
-        setAddTeam(isAddTeam => !isAddTeam);
+        setTeam(false)
+        setAddTeam(isAddTeam => !isAddTeam)
     }
 
-    const [isDeleteTeam, setDeleteTeam] = useState(false);
+    const [isDeleteTeam, setDeleteTeam] = useState(false)
     const deleteTeam = () => {
       setDeleteTeam(isDeleteTeam => !isDeleteTeam)
       setTeam(false)
@@ -72,18 +70,18 @@ function CreateProjectModal(props) {
 
     useEffect(() => {
         const handleOutsideClose = (e) => {
-          if(isTeam && (!teamMenuRef.current || !teamMenuRef.current.contains(e.target))) setTeam(isTeam => !isTeam);
-        };
-        document.addEventListener('click', handleOutsideClose);
+          if(isTeam && (!teamMenuRef.current || !teamMenuRef.current.contains(e.target))) setTeam(isTeam => !isTeam)
+        }
+        document.addEventListener('click', handleOutsideClose)
         
-        return () => document.removeEventListener('click', handleOutsideClose);
-    }, [isTeam]);
+        return () => document.removeEventListener('click', handleOutsideClose)
+    }, [isTeam])
 
     const handleInputProject = (event) => {
         setProject({
             ...project,
             [event.target.name]: event.target.value
-        });
+        })
         if (event.target.name === 'projectName') {
             setProjectName(event.target.value)
           } else if (event.target.name === 'beginDate') {
@@ -114,20 +112,20 @@ function CreateProjectModal(props) {
 
     const handleDeleteChange = (inputName, newValue) => {
       if (inputName === 'partList') {
-        setPartList(newValue); 
+        setPartList(newValue)
 
         const newPartList = newValue.map(item => parseInt(item.userId)).filter(id => !isNaN(id))
 
         setProject(prevProject => ({
           ...prevProject,
           partList: newPartList
-        }));
+        }))
       }
-  };
+  }
 
     useEffect(() => {
         setPartList(partList)
-    }, [partList]);
+    }, [partList])
 
     return(
       <Modal isOpen={isOpen} onRequestClose={onClose} className="modal">
@@ -209,7 +207,7 @@ function CreateProjectModal(props) {
         </div>
       </Modal>
   
-    );
+    )
   }
 
-  export default CreateProjectModal;
+  export default CreateProjectModal

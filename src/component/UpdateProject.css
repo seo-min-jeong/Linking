@@ -89,7 +89,7 @@
 }
 
 .team-people-sec {
-    width: 490px;
+    width: 550px;
     height: 200px;
 }
 
@@ -167,14 +167,11 @@
     width: auto;
     height: auto;
     position: absolute;
-    /* margin: auto; */
     right: 35px;
-    /* margin-left: 510px; */
     border: solid 2px white;
     background-color: white;
     z-index: 2;
     box-shadow: 2px 2px 2px 2px rgb(183, 181, 181);
-    /* text-align: center; */
     color: rgb(63, 63, 63);
     padding: 0px 10px 9px 10px;
     border-radius: 7px
@@ -289,19 +286,6 @@
 .updateProjectBtn:hover {
     filter: invert(10%);
 }
-
-/* .del-checkBox {
-    margin: auto;
-    display: flex;
-    border-radius: 0px;
-    width: 270px;
-    height: 170px;
-    display: block;
-    box-shadow: 2px 2px 2px 2px rgb(183, 181, 181);
-    background-color: rgb(255, 255, 255);
-    position: relative;
-    margin-bottom: 265px;
-} */
 
 .del-hideBox {
     display: none;

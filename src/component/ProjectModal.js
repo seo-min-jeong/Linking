@@ -1,10 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
-import Modal from 'react-modal';
-import './ProjectModal.css';
+import React from "react"
+import Modal from 'react-modal'
+import './ProjectModal.css'
 import crown from "../icon/crown.png"
 
 function ProjectModal(props) {
-    const { isOpen, onClose, data, ownerId } = props;
+    const { isOpen, onClose, data, ownerId } = props
 
     return(
         <Modal isOpen={isOpen} onRequestClose={onClose} className="modal">
@@ -53,7 +53,7 @@ function ProjectModal(props) {
                 </div>
             </div>
         </Modal>
-    );
+    )
   }
 
-  export default ProjectModal;
+  export default ProjectModal

@@ -1,14 +1,12 @@
-import React, { useState, useRef, useEffect } from "react";
-import Modal from 'react-modal';
-import './Group.css';
+import React, { useState } from "react"
+import Modal from 'react-modal'
+import './Group.css'
 import api from "../../utils/api"
-import { useCookies } from 'react-cookie';
 
 function AddGroup(props) {
-    const { onClose, onButtonClick, projectId, order } = props;
-    const user = JSON.parse(localStorage.getItem('user'));
-    const [cookies] = useCookies(['session'])
-    const [name, setName] = useState('');
+    const { onClose, onButtonClick, projectId, order } = props
+    const user = JSON.parse(localStorage.getItem('user'))
+    const [name, setName] = useState('')
 
     const onClickClose = () => {
         onClose(false);
@@ -21,17 +19,18 @@ function AddGroup(props) {
         setGroup({
             ...group,
             [event.target.name]: event.target.value
-        });
+        })
         if (event.target.name === 'name') {
             setName(event.target.value)
           } 
-    };
+    }
 
     const [group, setGroup] = useState({
         projectId: projectId,
         name: '',
         order: order
-    });
+    })
+
     const [newGroup, setNewGroup] = useState({
         projectId: projectId,
         name: '',
@@ -52,17 +51,17 @@ function AddGroup(props) {
                 name: response.data.data.name,
                 pageResList: [],
                 groupId: response.data.data.groupId
-            };
-            console.log(group);
-            setNewGroup(updatedNewGroup);
-            onButtonClick('newGroup', updatedNewGroup);
-            onClose(false);
+            }
+            console.log(group)
+            setNewGroup(updatedNewGroup)
+            onButtonClick('newGroup', updatedNewGroup)
+            onClose(false)
           })
           .catch(error => {
             console.log(group)
             console.error(error);
-          });
-      };
+          })
+      }
 
     return(
         <Modal
@@ -91,7 +90,7 @@ function AddGroup(props) {
                 <div className="groupBtn-box"><button className="groupBtn" onClick={handleClick}>저장</button></div>
             </div>
         </Modal>
-    );
+    )
 }
 
 export default AddGroup;

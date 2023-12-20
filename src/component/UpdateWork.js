@@ -1,25 +1,22 @@
-import React, { useState, useRef } from "react";
-import './Work.css';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { ko } from "date-fns/esm/locale";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react"
+import './Work.css'
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
+import { ko } from "date-fns/esm/locale"
+import { useNavigate } from "react-router-dom"
 
 import close from "../icon/close.png"
 
 function UpdateWork() {
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
-
-    const teamMenuRef = useRef(null);
-
-    const [isAddTeam, setAddTeam] = useState(false);
+    const [startDate, setStartDate] = useState(new Date())
+    const [endDate, setEndDate] = useState(new Date())
+    const [isAddTeam, setAddTeam] = useState(false)
 
     const teamToggleMenu = () => {
-        setAddTeam(isAddTeam => !isAddTeam);
+        setAddTeam(isAddTeam => !isAddTeam)
     }
 
-    const navigate = useNavigate();
+    const navigate = useNavigate()
     const onClickBack = () => {
         navigate(-1)
     }
@@ -28,7 +25,7 @@ function UpdateWork() {
     }
 
     const onClickChkButton = () => {
-        setAddTeam(false);
+        setAddTeam(false)
     }
     
     var workName = "요구명세서 작성"
@@ -124,7 +121,6 @@ function UpdateWork() {
                             <input type="checkbox" id="chk"/>
                             <i class="circle"></i>
                         </label>
-                        {/* <div className="work-teamOne-txt"><span>최혜민</span></div> */}
                     </div>
                     <div className="workBtn-box">
                         <button className='workBtn' type='button' onClick={ onClickChkButton }>선택</button>
@@ -132,7 +128,7 @@ function UpdateWork() {
                 </div>
             </div>
         </div>
-    );
+    )
 }
 
-export default UpdateWork;
+export default UpdateWork

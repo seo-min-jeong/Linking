@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import api from '../utils/api'
 import { useCookies } from 'react-cookie'
 
-import close from "../icon/close.png"
 import mag from "./icon/mag.png"
 import dot from "../icon/dot.png"
 
@@ -16,49 +15,43 @@ function CreateProject() {
     const [cookies] = useCookies(['session'])
 
     const [projectName, setProjectName] = useState(null)
-    const [beginDate, setBeginDate] = useState(new Date());
-    const [dueDate, setDueDate] = useState(new Date());
-    const [partList, setPartList] = useState([]);
+    const [beginDate, setBeginDate] = useState(new Date())
+    const [dueDate, setDueDate] = useState(new Date())
+    const [partList, setPartList] = useState([])
 
-    const teamMenuRef = useRef(null);
-    const [isTeam, setTeam] = useState(false);
-    const [isAddTeam, setAddTeam] = useState(false);
-    const [isTeamOne, setTeamOne] = useState(false);
+    const teamMenuRef = useRef(null)
+    const [isTeam, setTeam] = useState(false)
+    const [isAddTeam, setAddTeam] = useState(false)
+    const [isTeamOne, setTeamOne] = useState(false)
 
     const teamToggleMenu = () => {
-        setTeam(isTeam => !isTeam);
+        setTeam(isTeam => !isTeam)
     }
 
     const addTeamMenu = () => {
-        setAddTeam(isAddTeam => !isAddTeam);
-        setTeam(false);
+        setAddTeam(isAddTeam => !isAddTeam)
+        setTeam(false)
     }
 
     const addTeamOneMenu = () => {
-        setTeamOne(isTeamOne => !isTeamOne);
+        setTeamOne(isTeamOne => !isTeamOne)
     }
 
     const closeTeamMenu = () => {
-        setAddTeam(false);
-        setTeamOne(false);
+        setAddTeam(false)
+        setTeamOne(false)
     }
 
     useEffect(() => {
         const handleOutsideClose = (e) => {
-          if(isTeam && (!teamMenuRef.current || !teamMenuRef.current.contains(e.target))) setTeam(isTeam => !isTeam);
-        };
-        document.addEventListener('click', handleOutsideClose);
+          if(isTeam && (!teamMenuRef.current || !teamMenuRef.current.contains(e.target))) setTeam(isTeam => !isTeam)
+        }
+        document.addEventListener('click', handleOutsideClose)
         
-        return () => document.removeEventListener('click', handleOutsideClose);
-    }, [isTeam]);
+        return () => document.removeEventListener('click', handleOutsideClose)
+    }, [isTeam])
 
-    const [inputProject, setInputProject] = useState('')
-
-    const handleInputProject = (e) => {
-        setInputProject(e.target.value)
-    }
-
-    const navigate = useNavigate();
+    const navigate = useNavigate()
     const onClickButton = () => {
         navigate(process.env.PUBLIC_URL + '/home')
     }
@@ -66,7 +59,7 @@ function CreateProject() {
     const [inputTeam, setInputTeam] = useState('')
 
     const handleInputTeam = (e) => {
-        setInputTeam(e.target.value);
+        setInputTeam(e.target.value)
     }
 
     const [project, setProject] = useState({
@@ -74,7 +67,7 @@ function CreateProject() {
         beginDate: new Date(),
         dueDate: new Date(),
         partList: []
-      });
+      })
 
       const handleSubmit = event => {
         event.preventDefault()
@@ -84,8 +77,6 @@ function CreateProject() {
             }
         })
           .then(response => {
-            console.log(response.data);
-
             setProjectName(response.data.userId)
             setBeginDate(response.data.email)
             setDueDate(response.data.password)
@@ -93,18 +84,17 @@ function CreateProject() {
 
           })
           .catch(error => {
-            console.log(project);
-            console.error(error);
-          });
+            console.error(error)
+          })
 
-          navigate(process.env.PUBLIC_URL + '/home');
-    };
+          navigate(process.env.PUBLIC_URL + '/home')
+    }
 
     const handleChange = event => {
         setProject({
             ...project,
             [event.target.name]: event.target.value
-        });
+        })
 
         if (event.target.name === 'projectName') {
             setProjectName(event.target.value)
@@ -115,7 +105,7 @@ function CreateProject() {
           } else if (event.target.name === 'partList') {
             setPartList(event.target.value)
           }
-    };
+    }
 
     return(
         <div className="create-project-box">
@@ -189,7 +179,7 @@ function CreateProject() {
             </div>
         </div>
 
-    );
+    )
 }
 
-export default CreateProject;
+export default CreateProject

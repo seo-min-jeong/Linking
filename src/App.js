@@ -1,18 +1,7 @@
-import logo from "./icon/mainLogo.png"
-import chat from "./icon/chat.png"
-import ham from "./icon/ham.png"
-import ring from "./icon/ring.png"
-import dot from "./icon/dot.png"
-
 import Header from "./component/header/Header"
 import Login from "./component/login/Login"
 import SignUp from "./component/login/SignUp"
 import Home from "./home/Home"
-import MainPage from "./MainPage"
-import Cal from "./component/Cal"
-import UpdateProject from "./component/UpdateProject"
-import CreateProject from "./component/CreateProject"
-import Project from "./component/Project"
 import CreateWork from "./component/CreateWork"
 import UpdateWork from "./component/UpdateWork"
 import Document from "./component/Document"
@@ -20,22 +9,19 @@ import BlankPage from "./component/BlankPage"
 import LinkingHome from "./LinkingHome"
 import WorkAllTable from "./component/WorkAllTable"
 
-import './App.css';
-import { useState, useEffect } from "react";
-import { HashRouter as Router, Route, Routes } from "react-router-dom";
-import api from './utils/api';
-import { useResizable } from "react-resizable-element"
+import './App.css'
+import { useState } from "react"
+import { HashRouter as Route, Routes } from "react-router-dom"
+import api from './utils/api'
 
 function App() {
-  const user = JSON.parse(localStorage.getItem('user'));
-
   let now = new Date()
   let year = now.getFullYear()
   let month = now.getMonth() + 1
   let day = now.getDate()
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false); 
-  const [projectList, setProjectList] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [projectList, setProjectList] = useState([])
   const [todoList, setTodoList] = useState([])
   const [todoMonthly, setTodoMonthly] = useState([])
   const [beginDate, setBeginDate] = useState()
@@ -46,14 +32,12 @@ function App() {
   const [monthList, setMonthList] = useState([])
 
   const handleProjectList = (newValue) => {
-    console.log(newValue)
     setProjectList(newValue)
     setFirstProjectId(newValue[0].projectId)
 
     api.get('/todos/list/monthly/project/' + newValue[0].projectId + '/' + year + '/' + month)
     .then(response => {
       setTodoMonthly(response.data.data)
-      console.log(response.data.data)
     })
     .catch(error => {
         console.error(error)
@@ -73,10 +57,9 @@ function App() {
       api.get('/assigns/ratio/project/' + newValue[0].projectId)
       .then(response => {
         setGraph(response.data.data)
-        console.log(response.data.data)
       })
       .catch(error => {
-        console.error(error);
+        console.error(error)
       })
 
       api.get('/projects/' + newValue[0].projectId)
@@ -84,7 +67,7 @@ function App() {
         setOwnerId(response.data.data.ownerId)
       })
       .catch(error => {
-        console.error(error);
+        console.error(error)
       })
 
   }
@@ -134,9 +117,8 @@ function App() {
             setGraph={setGraph} 
             projectId={firstProjectId} 
             setProjectId={setFirstProjectId}
-            // onData={handleHomeData}
             />} 
-            />
+          />
           }
           {isLoggedIn && <Route path={process.env.PUBLIC_URL + "/calendar"} element={<WorkAllTable newMonthList={monthList}/>} />}
           {isLoggedIn && <Route path={process.env.PUBLIC_URL + "/createWork"} element={<CreateWork />} />}
@@ -153,7 +135,7 @@ function App() {
           />
       </Routes>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

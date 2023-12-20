@@ -1,19 +1,18 @@
 import React, { useState, useRef, useEffect } from "react";
 import './BlankPage.css';
 import { useLocation } from 'react-router-dom';
-import api from '../utils/api';
 import { EventSourcePolyfill } from 'event-source-polyfill'
-import { useCookies } from 'react-cookie'
 
 import PageNoti from "./PageNoti"
-import PageDeleteModal from "./PageDeleteModal";
+import PageDeleteModal from "./PageDeleteModal"
 import PageNoPopup from "./PageNoPopup"
-import trash from "../icon/trash.png"
+import trash from "../icon/trashBlack.png"
+import pdfImg from "../icon/pdfImg.png"
 
 function BlankPage() {
-    const location = useLocation();
-    const [data, setData] = useState(location.state);
-    const user = JSON.parse(localStorage.getItem('user'));
+    const location = useLocation()
+    const [data, setData] = useState(location.state)
+    const user = JSON.parse(localStorage.getItem('user'))
     const [notiArray, setNotiArray] = useState(data.doc.pageCheckResList)
 
     const[isNoPage, setIsNoPage] = useState()
@@ -36,7 +35,7 @@ function BlankPage() {
     const EventSource = EventSourcePolyfill
     const [pageEventSource, setPageEventSource] = useState(null);
     useEffect(() => {
-        const newEventSource = new EventSource('http://43.201.231.51:8080/pages/subscribe/' + data.doc.pageId,
+        const newEventSource = new EventSource('https://mylinking.shop/pages/subscribe/' + data.doc.pageId,
             { 
               headers: { 
                 'userId': user.userId,
@@ -55,9 +54,9 @@ function BlankPage() {
         }
       
         newEventSource.addEventListener('connect', (event) => {
-            const { data: receivedConnectData } = event;
-            console.log('page connect event data: ', receivedConnectData);
-        });
+            const { data: receivedConnectData } = event
+            console.log('page connect event data: ', receivedConnectData)
+        })
       
         //페이지 수정
         newEventSource.addEventListener('putPageTitle', (event) => {
@@ -116,7 +115,6 @@ function BlankPage() {
         
         return() => {
             newEventSource.close();
-            console.log('page close!!!!!!!!!!!!!!!!!!!!')
         }
     }, [data.doc.pageId]);
 
@@ -125,18 +123,18 @@ function BlankPage() {
 
     useEffect(() => {
         const handleOutsideClose = (e) => {
-          if(isLook && (!lookMenuRef.current || !lookMenuRef.current.contains(e.target))) setIsLook(isLook => !isLook);
-        };
-        document.addEventListener('click', handleOutsideClose);
+          if(isLook && (!lookMenuRef.current || !lookMenuRef.current.contains(e.target))) setIsLook(isLook => !isLook)
+        }
+        document.addEventListener('click', handleOutsideClose)
         
-        return () => document.removeEventListener('click', handleOutsideClose);
-    }, [isLook]);
+        return () => document.removeEventListener('click', handleOutsideClose)
+    }, [isLook])
 
     const [dataArray, setDataArray] = useState(data.doc.blockResList);
     const [isDot, setIsDot] = useState([])
 
     useEffect(() => {
-    setIsDot(new Array(data.length).fill(false));
+    setIsDot(new Array(data.length).fill(false))
     }, [dataArray])
  
     //페이지 삭제
@@ -153,14 +151,14 @@ function BlankPage() {
 
     //WebSocket 연결
     useEffect(() => {
-        socketRef.current = new WebSocket('ws://43.201.231.51:8080/ws/pages?projectId='+ projectId + '&pageId=' + id + '&userId=' + user.userId)
+        socketRef.current = new WebSocket('ws://url/ws/pages?projectId='+ projectId + '&pageId=' + id + '&userId=' + user.userId)
     
         socketRef.current.onopen = () => {
             console.log('빈페이지 웹소켓 연결성공')
         }
 
         socketRef.current.addEventListener('open', () => {
-            console.log('빈페이지 웹소켓 연결성공!!!')
+            console.log('빈페이지 웹소켓 연결성공')
           })
       
         return () => {
@@ -172,27 +170,28 @@ function BlankPage() {
     }, [])
 
     useEffect(() => {
-        adjustTextareaHeight();
-      }, [test]);
+        adjustTextareaHeight()
+      }, [test])
 
     const handleChange = (event) => {
-        console.log(event.target.value)
+        const text = event.target.value
         
         setTest(event.target.value)
         cursorPosRef.current = event.target.selectionStart
         const updateContent = {
             editorType: 0,
-            docs: event.target.value
+            docs: text
         }
-        const sendData = JSON.stringify(updateContent);
-        console.log('변경된거 소켓에 보냄: ', sendData);
+        const sendData = JSON.stringify(updateContent)
+        console.log('변경된거 소켓에 보냄: ', sendData)
 
         if (socketRef.current !== null && socketRef.current.readyState === WebSocket.OPEN) {
-            socketRef.current.send(sendData);
+            socketRef.current.send(sendData)
         }
 
-        adjustTextareaHeight();
+        adjustTextareaHeight()
     }
+
     useEffect(() => {
         socketRef.current.onmessage = (event) => {
             const receivedMessage = JSON.parse(event.data)
@@ -213,27 +212,19 @@ function BlankPage() {
     }, [test])
 
     const restoreCursorPosition = () => {
-        // if (textRef.current) {
-        //     const { selectionStart } = textRef.current
-        //     textRef.current.selectionStart = selectionStart;
-        //     textRef.current.selectionEnd = selectionStart;
-        //     textRef.current.focus(); 
-        // }
         if (textRef.current) {
-            textRef.current.focus();
-            const { value } = textRef.current;
-            const newPosition = cursorPosRef.current;
-            textRef.current.setSelectionRange(newPosition, newPosition);
+            textRef.current.focus()
+            const newPosition = cursorPosRef.current
+            textRef.current.setSelectionRange(newPosition, newPosition)
         }
       }
 
       const adjustTextareaHeight = () => {
-        const textarea = textRef.current;
-        textarea.style.height = 'auto'; // Reset height to auto
-        textarea.style.height = textarea.scrollHeight + 'px'; // Set height to content height
+        const textarea = textRef.current
+        textarea.style.height = 'auto';
+        textarea.style.height = textarea.scrollHeight + 'px';
       }
-      
-  
+
     return(
         <div style={{ minWidth: '980px', minHeight: '715px' }}>
             <div className="doc-header-box" ref={ lookMenuRef }>
@@ -249,6 +240,14 @@ function BlankPage() {
                 <div className="blank-trash-box">
                     <img className="doc-trashImg" src={ trash } onClick={handleDeletePage}/>
                 </div>
+                <div className="blank-pdf-box">
+                    <div>
+                        <img className="doc-pdfImg" src={ pdfImg }/>
+                    </div>
+                    <div>
+                        <span className="doc-pdfTxt">Save as PDF</span>
+                    </div>
+                </div>
             </div>
             <div className="blank-content-box" id="editor">
                 <textarea 
@@ -259,14 +258,11 @@ function BlankPage() {
                 lang="en"
                 />
             </div>
-            {/* <div className="blank-trash-box">
-                <img className="doc-trashImg" src={ trash } onClick={handleDeletePage}/>
-            </div> */}
             {isDeletePage ? <PageDeleteModal isDeletePage={isDeletePage} setIsDeletePage={setIsDeletePage} onClose={handleDeletePage} pageId={id} /> : <></> }
             {isNoPage != null ? <PageNoPopup isNoPage={isNoPage} setIsNoPage={setIsNoPage} /> : <></> }
         </div>
 
-    );
+    )
 }
 
-export default BlankPage;
+export default BlankPage

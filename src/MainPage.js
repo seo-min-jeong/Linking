@@ -1,25 +1,17 @@
 import logo from "./icon/chain.png"
 
-import './App.css';
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import './App.css'
+import { useNavigate } from "react-router-dom"
 
 function MainPage() {
-
-  let post = 'L I N K I N G';
-  let [제목, b] = useState('L I N K I N G');
-  let leftLogo = '<';
-  let rightLogo = '>';
-
-
   const navigate = useNavigate();
 
   const onClickLogin = () => {
-    navigate('/login');
+    navigate('/login')
   };
 
   const onClickSignUp = () => {
-    navigate('/signUp');
+    navigate('/signUp')
   }
 
 
@@ -38,7 +30,7 @@ function MainPage() {
           </div>
         
       </div>
-  );
+  )
 }
 
-export default MainPage;
+export default MainPage

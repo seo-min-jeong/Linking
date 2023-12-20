@@ -1,12 +1,12 @@
-import React, { useState, useRef, useEffect } from "react";
-import Modal from 'react-modal';
+import React, { useState } from "react"
+import Modal from 'react-modal'
 import api from "../utils/api"
-import './Block.css';
+import './Block.css'
 import arrowBelow from "../icon/arrowBelow.png"
 import arrowUp from "../icon/arrowUp.png"
 
 function BlockCloneModal(props) {
-    const { onClose, isOpen, pageId, projectId, groupArr, title, onValueBlockChange, content } = props
+    const { onClose, pageId, groupArr, title, onValueBlockChange, content } = props
     const user = JSON.parse(localStorage.getItem('user'))
 
     const onClickClose = () => {
@@ -14,15 +14,15 @@ function BlockCloneModal(props) {
     }
 
     //arrow
-    const [expandedGroups, setExpandedGroups] = useState(Array(groupArr.length).fill(false));
+    const [expandedGroups, setExpandedGroups] = useState(Array(groupArr.length).fill(true))
     const onArrowClick = (groupIndex) => {
-        const newExpandedGroups = [...expandedGroups];
-        newExpandedGroups[groupIndex] = !newExpandedGroups[groupIndex];
-        setExpandedGroups(newExpandedGroups);
+        const newExpandedGroups = [...expandedGroups]
+        newExpandedGroups[groupIndex] = !newExpandedGroups[groupIndex]
+        setExpandedGroups(newExpandedGroups)
     }
 
     //체크박스
-    const [isChecked, setIsChecked] = useState(false);
+    const [isChecked, setIsChecked] = useState(false)
 
     const [selectedUser, setSelectedUser] = useState({})
     const [diffPageId, setDiffPageId] = useState()
@@ -70,7 +70,7 @@ function BlockCloneModal(props) {
                     'userId': user.userId
                 }
             })
-            .then(response => {
+            .then(() => {
                 onClose(false)
             })
             .catch(error => {
@@ -89,19 +89,8 @@ function BlockCloneModal(props) {
                 <div className="clone-txt-box">
                     <span className="group-txt">블록을 복제할 문서를 선택해 주세요.</span>
                 </div>
-                {/* <div className="clone-now-box">
-                    <input 
-                    type="checkbox" 
-                    className="title-clone-chk" 
-                    checked={isChecked}
-                    onChange={handleCheckboxClick}
-                    /><span className="title-clone-txt">현재 블록 페이지</span>
-                </div> */}
                 
                 <div>
-                    {/* <div className="title-clone1-box">
-                        <span className="title-clone1-txt">다른 블록 페이지</span>
-                    </div> */}
                     <div className="pages-clone-box">
                     {groupArr.map((group, i) => (
                         <div 

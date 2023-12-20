@@ -1,20 +1,14 @@
 .contentOpen-box{
     width: 300px;
     height: 100%;
-    /* position: absolute; */
     right: 0px;
     border: solid 2px rgb(255, 249, 234);
     background-color: rgb(255, 254, 251);
     z-index: 900;
     transition: 1s;
     top: 37.8px;
-
     position: fixed;
 }
-
-/* .content-open-box {
-    margin-top: 30px;
-} */
 
 .content-modalBox {
     display: block;

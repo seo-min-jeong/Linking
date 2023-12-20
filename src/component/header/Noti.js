@@ -1,17 +1,17 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react"
 import api from '../../utils/api'
-import './Header.css';
-import { useCookies } from 'react-cookie'
+import './Header.css'
 
 import noti from "../../icon/ring2.png"
 import redNoti from "../../icon/redNoti.png"
 import greenNoti from "../../icon/greemNoti.png"
+import greenCheck from "../../icon/green-check.png"
+import redCheck from "../../icon/red-check.png"
 
 function Noti() {
     const user = JSON.parse(localStorage.getItem('user'))
-    const [cookies] = useCookies(['session'])
-    const notiMenuRef = useRef(null);
-    const [isNoti, setNoti] = useState(false);
+    const notiMenuRef = useRef(null)
+    const [isNoti, setNoti] = useState(false)
     const [notiList, setNotiList] = useState([])
     const [badge, setBadge] = useState(0)
     const [isChecking, setIsChecking] = useState(false)
@@ -19,17 +19,16 @@ function Noti() {
     //알림 WebSocket 
     const socket = useRef(null)
     useEffect(() => {
-      socket.current = new WebSocket('ws://43.201.231.51:8080/ws/push-notifications?userId=' + user.userId);
+      socket.current = new WebSocket('wss://mylinking.shop/ws/push-notifications?userId=' + user.userId)
       
       socket.current.onopen = () => {
-        console.log('알림 웹소켓 연결성공');
+        console.log('알림 웹소켓 연결성공')
       };
 
       socket.current.onmessage = ('badge', (event) => {
-          const receivedMessage = JSON.parse(event.data);
-          console.log(event.data)
+          const receivedMessage = JSON.parse(event.data)
           setBadge(receivedMessage.data)
-          console.log('Received message:', receivedMessage);
+          console.log('Received message:', receivedMessage)
       })
     
       return () => {
@@ -44,12 +43,10 @@ function Noti() {
         const openMessage = {
           isChecking: true
         }
-        socket.current.send(JSON.stringify(openMessage));
-        console.log('isChecking===true 보내기 성공')
+        socket.current.send(JSON.stringify(openMessage))
 
         api.get('/push-notifications/' + user.userId)
         .then(response => {
-          console.log('알림함 조회 : ', response.data.data)
           setNotiList(response.data.data)
         })
         .catch(error => {
@@ -63,8 +60,7 @@ function Noti() {
         const openMessage = {
           isChecking: false
         }
-        socket.current.send(JSON.stringify(openMessage));
-        console.log('isChecking===false 보내기 성공')
+        socket.current.send(JSON.stringify(openMessage))
 
         setNoti(isNoti => !isNoti)
         setIsChecking(false)
@@ -93,7 +89,6 @@ function Noti() {
         })
       }
       
-
     return(
         <div className="noti-menu" ref={ notiMenuRef }>
           <div className="chat-img-box">
@@ -117,8 +112,17 @@ function Noti() {
                               {notiList.map((noti, index) => (
                                   <div className="noti-box">
                                       <div className="noti-tag-box">
+                                        {noti.noticeType === 'TODO' ? 
+                                        <>
+                                          {noti.priority === 0 ? <img src={redCheck} className={noti.checked ? "noti-check-img" : "noti-img"}/> : <></>}
+                                          {noti.priority === 1 ? <img src={greenCheck} className={noti.checked ? "noti-check-img" : "noti-img"}/> : <></>}
+                                        </> 
+                                        : 
+                                        <>
                                           {noti.priority === 0 ? <img src={redNoti} className={noti.checked ? "noti-check-img" : "noti-img"}/> : <></>}
                                           {noti.priority === 1 ? <img src={greenNoti} className={noti.checked ? "noti-check-img" : "noti-img"}/> : <></>}
+                                        </>
+                                        }
                                           {/* <div className={noti.checked ? "tag-check" : "tag-line"} /> */}
                                           <li className={noti.checked ? "noti-check" : ""} >{noti.body}</li>
                                       </div>
@@ -132,7 +136,7 @@ function Noti() {
           </div>
 
         </div>
-    );
+    )
 }
 
-export default Noti;
+export default Noti

@@ -1,31 +1,27 @@
-import React, { useState, useRef, useEffect } from "react";
-import Modal from 'react-modal';
-import './ProjectModal.css';
+import React, { useState, useRef, useEffect } from "react"
+import Modal from 'react-modal'
+import './ProjectModal.css'
 import AddTeam from "./AddTeam"
 import api from "../utils/api"
-import { useNavigate } from "react-router-dom";
-import DeleteProjectModal from "./DeleteProjectModal"
-import DeleteTeam from "./DeleteTeam";
-import { useCookies } from 'react-cookie'
+import { useNavigate } from "react-router-dom"
+import DeleteTeam from "./DeleteTeam"
 
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { ko } from "date-fns/esm/locale";
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
+import { ko } from "date-fns/esm/locale"
 
 import dot from "../icon/dot.png"
-import del from "../icon/trash.png"
 import crown from "../icon/crown.png"
 
 function UpdateProjectModal(props) {
-    const { isOpen, setIsUpdate, onClose, data, ownerId, onValueProject } = props
+    const { isOpen, setIsUpdate, onClose, data, onValueProject } = props
     const user = JSON.parse(localStorage.getItem('user'))
-    // const [cookies] = useCookies(['session'])
-  
-    const [projectId, setProjectId] = useState(data.projectId);
-    const [beginDate, setBeginDate] = useState(new Date(data.beginDate));
-    const [dueDate, setDueDate] = useState(new Date(data.dueDate));
-    const [projectName, setProjectName] = useState(data.projectName);
-    const [partLists, setPartLists] = useState(data.partList.map(part => part.userId));
+
+    const [projectId, setProjectId] = useState(data.projectId)
+    const [beginDate, setBeginDate] = useState(new Date(data.beginDate))
+    const [dueDate, setDueDate] = useState(new Date(data.dueDate))
+    const [projectName, setProjectName] = useState(data.projectName)
+    const [partLists, setPartLists] = useState(data.partList.map(part => part.userId))
     const [partList, setPartList] = useState(data.partList);
 
     const [project, setProject] = useState({
@@ -35,13 +31,13 @@ function UpdateProjectModal(props) {
         dueDate: data.dueDate,
         partList: partLists,
         isPartListChanged: true
-    });
+    })
 
     const handleInputProject = (event) => {
         setProject({
             ...project,
             [event.target.name]: event.target.value
-        });
+        })
         if (event.target.name === 'projectName') {
             setProjectName(event.target.value)
           } else if (event.target.name === 'beginDate') {
@@ -51,34 +47,31 @@ function UpdateProjectModal(props) {
           }
     }
 
-    const navigate = useNavigate();
+    const navigate = useNavigate()
     const handleSubmit = event => {
         event.preventDefault()
         api.put('/projects', project)
           .then(response => {
-            console.log('프젝 업뎃 성공', response.data.data);
-
-            setProjectId(response.data.data.projectId);
-            setProjectName(response.data.data.projectName);
-            setBeginDate(response.data.data.beginDate);
-            setDueDate(response.data.data.dueDate);
+            setProjectId(response.data.data.projectId)
+            setProjectName(response.data.data.projectName)
+            setBeginDate(response.data.data.beginDate)
+            setDueDate(response.data.data.dueDate)
             setPartList(response.data.data.partList)
 
             setIsUpdate(false)
             onValueProject(response.data.data)
-            navigate(process.env.PUBLIC_URL + '/home');
+            navigate(process.env.PUBLIC_URL + '/home')
           })
           .catch(error => {
-            console.log(project);
-            console.error(error);
-          });
-    };
+            console.log(project)
+            console.error(error)
+          })
+    }
 
-    const teamMenuRef = useRef(null);
-    const [isTeam, setTeam] = useState(false);
-    const [isAddTeam, setAddTeam] = useState(false);
-    const [isDeleteTeam, setDeleteTeam] = useState(false);
-
+    const teamMenuRef = useRef(null)
+    const [isTeam, setTeam] = useState(false)
+    const [isAddTeam, setAddTeam] = useState(false)
+    const [isDeleteTeam, setDeleteTeam] = useState(false)
     const [imageUrl, setImageUrl] = useState(dot);
 
     function handleClick() {
@@ -97,24 +90,24 @@ function UpdateProjectModal(props) {
 
     useEffect(() => {
         const handleOutsideClose = (e) => {
-          if(isTeam && (!teamMenuRef.current || !teamMenuRef.current.contains(e.target))) setTeam(isTeam => !isTeam);
-        };
-        document.addEventListener('click', handleOutsideClose);
-        
-        return () => document.removeEventListener('click', handleOutsideClose);
-    }, [isTeam]);
+          if(isTeam && (!teamMenuRef.current || !teamMenuRef.current.contains(e.target))) setTeam(isTeam => !isTeam)
+        }
+        document.addEventListener('click', handleOutsideClose)
+      
+        return () => document.removeEventListener('click', handleOutsideClose)
+    }, [isTeam])
 
     const handleChange = (inputName, newValue) => {
       if (inputName === 'partList') {
         const temp = [...partList]
         const userId = parseInt(newValue.userId)
-        const userIdExists = temp.some(item => item.userId === userId);
+        const userIdExists = temp.some(item => item.userId === userId)
 
-        const newArray = [...partList, newValue];
+        const newArray = [...partList, newValue]
 
         if (userIdExists === false) {
           setPartList(newArray)
-          const newPartList = [...project.partList, userId];
+          const newPartList = [...project.partList, userId]
           setProject(prevProject => ({
             ...prevProject,
             partList: newPartList
@@ -125,14 +118,13 @@ function UpdateProjectModal(props) {
     
     const handleDeleteChange = (inputName, newValue) => {
       if (inputName === 'partList') {
-        setPartList(newValue); 
+        setPartList(newValue)
 
         const newPartList = newValue.map(item => parseInt(item.userId)).filter(id => !isNaN(id))
-        console.log(newPartList)
         setProject(prevProject => ({
           ...prevProject,
           partList: newPartList
-        }));
+        }))
       }
   }
 
@@ -218,7 +210,7 @@ function UpdateProjectModal(props) {
         </div>
         </Modal>
     
-      );
+      )
     }
   
-    export default UpdateProjectModal;
+    export default UpdateProjectModal

@@ -12,9 +12,6 @@
     background-color: #FDFDFA;
     z-index: 999;
     top: 0;
-
-    /* overflow: auto;
-    resize: horizontal; */
 }
     
 .hide-menu{
@@ -58,7 +55,6 @@
 }
 
 .sideHome:hover {
-    /* filter: invert(40%); */
     cursor: pointer;
 }
 
@@ -154,7 +150,6 @@
 
 .side-arrowDot-box {
     position: relative;
-    /* left: 180px; */
     display: flex;
 }
 
@@ -245,13 +240,19 @@
 .side-setting-box {
     position: absolute;
     bottom: 10px;
-    left: 250px;
+    left: 245px;
 }
 
 .side-arrowUpDown-box {
     position: absolute;
-    bottom: 12px;
-    left: 210px;
+    bottom: 14px;
+    left: 205px;
+}
+
+.arrowUpDown-txt-box {
+    position: absolute;
+    bottom: 14px;
+    left: 195px;
 }
 
 .side-bottomBox {
@@ -261,7 +262,7 @@
 .side-group-box {
     margin-left: 10px;
     margin-top: 25px;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     height: 58vh;
 }
 
@@ -318,14 +319,11 @@
     display: none;
 }
 
-/* .group-drag-box, .group-ndrag-box {
-    height: 20px;
-    padding: 10px 0px 10px 10px;
-} */
-
 .arrowUpDown-txt {
     font-size: 13px;
     margin-left: -13px;
+    opacity: 0.5;
+    font-weight: 500;
 }
 
 .arrowUpDown-img:hover, .arrowUpDown-txt:hover {

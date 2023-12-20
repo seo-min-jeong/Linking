@@ -4,13 +4,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   height: auto;
   padding: 20px;
-  /* left: 100px; */
-  /* position: fixed; */
 }
-
-/* .custom-cal {
-  position: fixed;
-} */
 
 .custom-calendar-body {
   background-color: #ffffff;
@@ -45,8 +39,6 @@
 
   min-height: 300px;
   min-width: 620px;
-  /* margin-top: 35px; */
-  /* margin-left: 25px; */
 }
 
 .fc .fc-daygrid-day-number {
@@ -85,7 +77,6 @@
 .fc-event-main {
   background-color: white;
   padding-left: 2px;
-  /* border: black solid 1px; */
 }
 
 .fc-direction-ltr .fc-daygrid-block-event:not(.fc-event-end) {
@@ -120,7 +111,6 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-/*아래코드가 달력 뒤로 보내는 코드에용 ㅠㅠ 이게뭐라고 ㅠㅠ*/
 .fc .fc-scroller-liquid-absolute {
   z-index: 0;
 }
@@ -130,7 +120,6 @@
 }
 
 .fc-icon-chevrons-right:before {
-  /* content: "\032D"; */
   content: "\e901";
 }
 

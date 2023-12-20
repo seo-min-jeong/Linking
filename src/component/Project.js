@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import './Project.css';
+import React from "react"
+import { useNavigate } from "react-router-dom"
+import './Project.css'
 
 import close from "../icon/close.png"
 import pencil from "../icon/pencil.png"
@@ -67,7 +67,7 @@ function Project() {
 
         </div>
 
-    );
+    )
 }
 
-export default Project;
+export default Project

@@ -8,7 +8,6 @@
     background-color: white;
     right: 350px;
     border-radius: 20px;
-    /* overflow-y: scroll; */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     margin-top: 10px;
     padding: 10px;
@@ -23,7 +22,8 @@
 }
 
 .chat-load-box {
-    font-size: 12px;
+    font-size: 13px;
+    font-weight: 500;
 }
 
 .badge-box {
@@ -45,9 +45,6 @@
 
 .chat-img-box {
     display: flex;
-    /* margin-right: 30px;
-    transition: 1s;
-    position: relative; */
 }
 
 .chat-header-bar {

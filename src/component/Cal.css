@@ -11,7 +11,6 @@
     display: block;
     margin-top: 30px;
     margin: auto;
-    /* width: 1315px; */
     height: 85vh;
 }
 
@@ -144,12 +143,10 @@
 }
 
 .todaySmall-txt1 {
-    margin-top: 50px;
     color: #5a5a5a;
     margin-left: 15px;
-    /* margin-right: 100px; */
     font-weight: 500;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .todaySmall-lower-txt {
@@ -181,7 +178,7 @@
     font-weight: 500;
 }
 
-.todaySmal-red-txt2 {
+.todaySmall-red-txt2 {
     margin-top: 50px;
     color: rgba(253, 71, 71, 0.895);
     margin-left: 15px;
@@ -270,7 +267,6 @@
 .work-toggle-box {
     width: 100px;
     height: auto;
-    /* position: absolute; */
     border: solid 2px white;
     background-color: white;
     z-index: 555;
@@ -332,13 +328,10 @@
 
 .todaySmall-txt4-box {
     width: 100px;
-    /* margin: auto; */
 }
 
 .todaySmall-img-box {
-    /* margin-right: 10px; */
     margin-left: 0px;
-    /* height: 70px; */
 }
 
 .work-plusIcon {
@@ -372,7 +365,6 @@
 .workNoti-toggle-box {
     width: 90px;
     height: auto;
-    /* position: absolute; */
     border: solid 2px white;
     background-color: white;
     z-index: 555;
@@ -436,10 +428,6 @@
     margin-top: 9px;
     font-size: 18px;
     font-weight: 500;
-}
-
-.todaySmall-txt1:hover{
-    cursor: pointer;
 }
 
 .calendarBox2 {

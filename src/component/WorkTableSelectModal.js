@@ -1,45 +1,41 @@
-import React, { useState, useRef, useEffect } from "react";
-import Modal from 'react-modal';
-import './WorkModal.css';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { ko } from "date-fns/esm/locale";
-import 'react-time-picker/dist/TimePicker.css';
-import api from '../utils/api';
-import { useCookies } from 'react-cookie'
+import React, { useState } from "react"
+import Modal from 'react-modal'
+import './WorkModal.css'
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
+import { ko } from "date-fns/esm/locale"
+import 'react-time-picker/dist/TimePicker.css'
+import api from '../utils/api'
 
 import deleteIcon from "../icon/trash.png"
 
 //일 상위할일 조회
 function WorkTableSelectModal(props) {
-    const { isOpen, onClose, data, projectId, emitterId, onValueAll, partList } = props;
-    const [isAddTeam, setAddTeam] = useState(false);
-    // const [cookies] = useCookies(['session'])
+    const { isOpen, onClose, data, projectId, emitterId, onValueAll, partList } = props
+    const [isAddTeam, setAddTeam] = useState(false)
 
     const [content, setContent] = useState(data.content)
-    const [startDate, setStartDate] = useState(new Date(data.startDate));
-    const [dueDate, setDueDate] = useState(new Date(data.dueDate));
-    const [hour, setHour] = useState(data.dueDate.substring(11,13));
-    const [minute, setMinute] = useState(data.dueDate.substring(14,16));
-    const [ampm, setAmpm] = useState(data.dueDate.substring(17,19));
+    const [startDate, setStartDate] = useState(new Date(data.startDate))
+    const [dueDate, setDueDate] = useState(new Date(data.dueDate))
+    const [hour, setHour] = useState(data.dueDate.substring(11,13))
+    const [minute, setMinute] = useState(data.dueDate.substring(14,16))
+    const [ampm, setAmpm] = useState(data.dueDate.substring(17,19))
     const [assignList, setAssignList] = useState([])
-    // const [partList, setPartList] = useState(data.assignList)
 
     let now = new Date()
     let year = now.getFullYear()
     let month = now.getMonth() + 1
 
-    const hours = [];
-    const minutes = [];
-    const ampms = ["AM", "PM"];
-    const [time, setTime] = useState()
+    const hours = []
+    const minutes = []
+    const ampms = ["AM", "PM"]
 
     for (let i = 1; i <= 24; i++) {
-        hours.push(i < 10 ? "0" + i : i.toString());
+        hours.push(i < 10 ? "0" + i : i.toString())
     }
 
     for (let i = 0; i <= 59; i++) {
-        minutes.push(i < 10 ? "0" + i : i.toString());
+        minutes.push(i < 10 ? "0" + i : i.toString())
     }
 
     const handleHourChange = (e) => {
@@ -75,29 +71,28 @@ function WorkTableSelectModal(props) {
     }
 
     const handleBtnClick = () => {
-        let startYear = startDate.getFullYear();
-        let startMonth = (startDate.getMonth() + 1).toString().padStart(2, '0');
-        let startDay = startDate.getDate().toString().padStart(2, '0');
-        let valueStartDate = startYear;
-        valueStartDate += '-';
-        valueStartDate += startMonth;
-        valueStartDate += '-';
-        valueStartDate += startDay;
+        let startYear = startDate.getFullYear()
+        let startMonth = (startDate.getMonth() + 1).toString().padStart(2, '0')
+        let startDay = startDate.getDate().toString().padStart(2, '0')
+        let valueStartDate = startYear
+        valueStartDate += '-'
+        valueStartDate += startMonth
+        valueStartDate += '-'
+        valueStartDate += startDay
 
-        let endYear = dueDate.getFullYear();
-        let endMonth = (dueDate.getMonth() + 1).toString().padStart(2, '0');
-        let endDay = dueDate.getDate().toString().padStart(2, '0');
-        let valueEndDate = endYear;
-        valueEndDate += '-';
-        valueEndDate += endMonth;
-        valueEndDate += '-';
-        valueEndDate += endDay;
+        let endYear = dueDate.getFullYear()
+        let endMonth = (dueDate.getMonth() + 1).toString().padStart(2, '0')
+        let endDay = dueDate.getDate().toString().padStart(2, '0')
+        let valueEndDate = endYear
+        valueEndDate += '-'
+        valueEndDate += endMonth
+        valueEndDate += '-'
+        valueEndDate += endDay
 
         const work = {
             emitterId: emitterId,
             todoId: data.todoId,
             projectId: projectId,
-            // childTodoList: data.childTodoList,
             isParent: data.isParent,
             startDate: valueStartDate + ' 10:10 PM',
             dueDate: valueEndDate + ' ' + hour + ':' + minute + ' ' + ampm,
@@ -115,30 +110,27 @@ function WorkTableSelectModal(props) {
                 })
         })
         .catch(error => {
-            console.error(error);
+            console.error(error)
         })
     }
 
     const onClickClose = () => {
-        onClose(isOpen => !isOpen);
+        onClose(isOpen => !isOpen)
     }
 
-    const [selectedPeoples, setSelectedPeoples] = useState([]);
-    const [chargeText, setChargeText] = useState('담당자 입력');
+    const [selectedPeoples, setSelectedPeoples] = useState([])
+    const [chargeText, setChargeText] = useState('담당자 입력')
 
     const handleCheckboxChange = (e) => {
         const value = e.target.value
-        const [lastName, firstName, userId] = value.split('_')
         if (selectedPeoples.includes(value)) {
-            setSelectedPeoples(selectedPeoples.filter((p) => p !== value));
-            console.log(userId)
+            setSelectedPeoples(selectedPeoples.filter((p) => p !== value))
           } else {
-            setSelectedPeoples([...selectedPeoples, value]);
-            console.log(userId)
+            setSelectedPeoples([...selectedPeoples, value])
           }
     }
 
-    const handleTextboxChange = (e) => {
+    const handleTextboxChange = () => {
         if(selectedPeoples.length >= 2) {
             const [lastName, firstName] = selectedPeoples[0].split('_')
             setChargeText(lastName + firstName + " 외 " + (selectedPeoples.length-1) + "명")
@@ -154,13 +146,13 @@ function WorkTableSelectModal(props) {
             }
         }
 
-        setAddTeam(false);
+        setAddTeam(false)
     }
 
     const setAssignListForSelectedPeoples = (selectedPeoples) => {
         selectedPeoples.forEach((person) => {
-          const [lastName, firstName, userId] = person.split('_');
-          setAssignList((prevList) => [...prevList, parseInt(userId)]);
+          const [userId] = person.split('_')
+          setAssignList((prevList) => [...prevList, parseInt(userId)])
         })
     }
 
@@ -169,7 +161,7 @@ function WorkTableSelectModal(props) {
             todoId: data.todoId,
             emitterId: emitterId
         }
-        console.log(work)
+
         api.post('/todos', work)
         .then(() => {
             api.get('/todos/list/monthly/project/' + projectId + '/' + year + '/' + month)
@@ -179,7 +171,7 @@ function WorkTableSelectModal(props) {
                 })
         })
         .catch(error => {
-            console.error(error);
+            console.error(error)
         })
     }
 
@@ -301,7 +293,7 @@ function WorkTableSelectModal(props) {
                 </div>
             </div>
         </Modal>
-      );
+      )
     }
   
-    export default WorkTableSelectModal;
+    export default WorkTableSelectModal

@@ -1,42 +1,35 @@
-import React, { useState, useRef, useEffect } from "react";
-import Modal from 'react-modal';
-import './ProjectModal.css';
-import api from "../utils/api"
-
-import mag from "./icon/mag.png"
+import React, { useState } from "react"
+import Modal from 'react-modal'
+import './ProjectModal.css'
 
 function DeleteTeam(props) {
     const storedUser = localStorage.getItem('user');
     const users = JSON.parse(storedUser);
 
-    const { isDeleteTeam, onClose, setDeleteTeam, partList, onValueChange } = props
+    const { isDeleteTeam, onClose, partList, onValueChange } = props
 
     const handleBtnClick = () => {
         onClose(isDeleteTeam => !isDeleteTeam)
-        const selectedUserIdsSet = new Set(selectedUser);
+        const selectedUserIdsSet = new Set(selectedUser)
         const unselectedPartList = partList.filter(user => !selectedUserIdsSet.has(user.userId))
-        console.log(unselectedPartList)
-        onValueChange('partList', unselectedPartList);
+        onValueChange('partList', unselectedPartList)
       }
 
       const handleOkClick = () => {
         onClose(isDeleteTeam => !isDeleteTeam)
     }
 
-      const [selectedUser, setSelectedUserIds] = useState([]);
+      const [selectedUser, setSelectedUserIds] = useState([])
 
         const handleCheckboxChange = (e) => {
-            const email = e.target.value;
-            const firstName = e.target.getAttribute('data-first-name');
-            const lastName = e.target.getAttribute('data-last-name');
-            const userId = parseInt(e.target.getAttribute('data-user-id'));
+            const userId = parseInt(e.target.getAttribute('data-user-id'))
 
             if (e.target.checked) {
-                setSelectedUserIds((prevSelectedUserIds) => [...prevSelectedUserIds, userId]);
+                setSelectedUserIds((prevSelectedUserIds) => [...prevSelectedUserIds, userId])
             } else {
-                setSelectedUserIds((prevSelectedUserIds) => prevSelectedUserIds.filter((id) => id !== userId));
+                setSelectedUserIds((prevSelectedUserIds) => prevSelectedUserIds.filter((id) => id !== userId))
             }
-        };
+        }
 
     return(
         <Modal isOpen={isDeleteTeam} onRequestClose={onClose} className="team-modal">
@@ -86,7 +79,7 @@ function DeleteTeam(props) {
             </div>
         </Modal>
     
-      );
+      )
     }
   
-    export default DeleteTeam;
+    export default DeleteTeam

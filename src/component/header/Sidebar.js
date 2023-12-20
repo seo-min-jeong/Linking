@@ -1,18 +1,15 @@
 import React, { useEffect, useRef, useState } from "react"
-import { NativeEventSource, EventSourcePolyfill } from 'event-source-polyfill';
+import { NativeEventSource, EventSourcePolyfill } from 'event-source-polyfill'
 import './Sidebar.css'
 import { useNavigate } from "react-router-dom"
 import api from '../../utils/api'
-import { Resizable } from 'react-resizable-element';
-import { useCookies } from 'react-cookie';
 
 import AddGroup from "./AddGroup"
 import AddDoc from "./AddDoc"
 import GroupDeletePopup from "./GroupDeletePopup"
 import GroupUpdatePopup from "./GroupUpdatePopup"
-import Document from "../Document";
-import SettingModal from "./SettingModal";
-import PageUpdatePopup from "./PageUpdatePopup";
+import SettingModal from "./SettingModal"
+import PageUpdatePopup from "./PageUpdatePopup"
 
 import ham from "../../icon/ham.png"
 import close from "../../icon/close.png"
@@ -20,13 +17,9 @@ import sideHome from "../../icon/home.png"
 import arrowBelow from "../../icon/arrowBelow.png"
 import arrowUp from "../../icon/arrowUp.png"
 import dot from "../../icon/dot.png"
-import file from "../../icon/file.png"
-import doc from "../../icon/doc.png"
-import trash from "../../icon/trash.png"
 import arrowUpDown from "../../icon/arrowUpDown.png"
 import folder from "../../icon/folder.png"
 import plus from "../../icon/plus2.png"
-import pencil from "../../icon/pencil.png"
 import deleteIcon from "../../icon/deleteIcon.png"
 import setting from "../../icon/setting.png"
 import updatePageIcon from "../../icon/updateAnno.png"
@@ -34,19 +27,17 @@ import updateIcon from "../../icon/updateIcon.png"
 import addDoc from "../../icon/addDoc.png"
 
 function Sidebar(props) {
-    const { data, projectId, isOpen, setMenu, beginDate, dueDate, partList } = props;
+    const { data, projectId, isOpen, setMenu, beginDate, dueDate, partList } = props
     const user = JSON.parse(localStorage.getItem('user'))
-    const [cookies] = useCookies(['session'])
     const [groupArr, setGroupArr] = useState([])
     const [isEndPage, setEndPage] = useState()
 
     let now = new Date()
     let year = now.getFullYear()
     let month = now.getMonth() + 1
-    let day = now.getDate()
 
     const EventSource = EventSourcePolyfill
-    const [eventSource, setEventSource] = useState(null);
+    const [eventSource, setEventSource] = useState(null)
     
     const toggleMenu = () => {
         if(isOpen == false) {
@@ -57,14 +48,13 @@ function Sidebar(props) {
                 }
             })
                     .then(response => {
-                      console.log(response)
                       setGroupArr(response.data.data)
                     })
                     .catch(error => {
                       console.error(error)
                     })
                 
-                    const newEventSource = new EventSource('http://43.201.231.51:8080/groups/subscribe?projectId=' + projectId,
+                    const newEventSource = new EventSource('https://mylinking.shop/groups/subscribe?projectId=' + projectId,
                     { 
                       headers: {
                         'userId': user.userId,
@@ -83,14 +73,12 @@ function Sidebar(props) {
                   }
         
                   newEventSource.addEventListener('connect', (e) => {
-                    const { data: receivedConnectData } = e;
-                    console.log('sidebar connect event data: ',receivedConnectData);  // "connected!"
+                    const { data: receivedConnectData } = e
                 });
         
                 //그룹생성
                   newEventSource.addEventListener('postGroup', (event) => {
-                    const newData = JSON.parse(event.data);
-                    console.log(newData)
+                    const newData = JSON.parse(event.data)
         
                     setGroupArr(prevGroupArr => [
                         ...prevGroupArr,
@@ -105,27 +93,25 @@ function Sidebar(props) {
         
                 //그룹수정
                 newEventSource.addEventListener('putGroupName', (event) => {
-                    const newData = JSON.parse(event.data);
-                    console.log(newData)
+                    const newData = JSON.parse(event.data)
         
                     setGroupArr(prevState => {
                         return prevState.map(group => {
                             if (group.groupId === newData.groupId) {
-                              return { ...group, name: newData.name };
+                              return { ...group, name: newData.name }
                             }
-                            return group;
+                            return group
                           })
                         })
                 })
         
                 //그룹삭제
                 newEventSource.addEventListener('deleteGroup', (event) => {
-                    const newData = JSON.parse(event.data);
-                    console.log(newData)
+                    const newData = JSON.parse(event.data)
                     
                     setGroupArr(prevState => {
-                        const filteredArr = prevState.filter(group => group.groupId !== newData.groupId);
-                        return filteredArr;
+                        const filteredArr = prevState.filter(group => group.groupId !== newData.groupId)
+                        return filteredArr
                       })
                     
                       setActiveGroupIndex(prevIndex => {
@@ -140,24 +126,24 @@ function Sidebar(props) {
                 //페이지 추가
                 newEventSource.addEventListener('postPage', (event) => {
                     const newData = JSON.parse(event.data);
-                    const { pageId, groupId, title, template, annoNotCnt } = newData
+                    const groupId = newData
         
                     setGroupArr(prevGroupArr => {
-                        return prevGroupArr.map((group, index) => {
+                        return prevGroupArr.map((group) => {
                             if (group.groupId === groupId) {
                               return {
                                 ...group,
                                 pageResList: [...group.pageResList, newData]
                               }
                             }
-                            return group;
+                            return group
                           })
                       })
                 })
 
                 //페이지 수정
                 newEventSource.addEventListener('putPageTitle', (event) => {
-                    const newData = JSON.parse(event.data);
+                    const newData = JSON.parse(event.data)
                     const { pageId, groupId, title } = newData
         
                     setGroupArr(prevGroupArr => {
@@ -165,16 +151,16 @@ function Sidebar(props) {
                           if (group.groupId === groupId) {
                             const newPageResList = group.pageResList.map((page) => {
                               if (page.pageId === pageId) {
-                                return { ...page, title: title };
+                                return { ...page, title: title }
                               }
-                              return page;
+                              return page
                             });
                             return {
                               ...group,
                               pageResList: newPageResList,
                             };
                           }
-                          return group;
+                          return group
                         });
                     });
                 })
@@ -186,21 +172,21 @@ function Sidebar(props) {
                     setGroupArr(prevGroupArr => {
                         const updatedGroupArr = prevGroupArr.map(group => {
                           if (group.groupId === newData.groupId) {
-                            const updatedPageResList = group.pageResList.filter(page => page.pageId !== newData.pageId);
+                            const updatedPageResList = group.pageResList.filter(page => page.pageId !== newData.pageId)
                             return {
                               ...group,
                               pageResList: updatedPageResList
                             };
                           } 
-                          return group;
+                          return group
                         });
-                        return updatedGroupArr;
+                        return updatedGroupArr
                       });
                 })
 
                 //주석 수 증가
                 newEventSource.addEventListener('postAnnotation', (event) => {
-                    const newData = JSON.parse(event.data);
+                    const newData = JSON.parse(event.data)
                     const { pageId, groupId } = newData
         
                     setGroupArr(prevGroupArr => {
@@ -208,23 +194,23 @@ function Sidebar(props) {
                           if (group.groupId === groupId) {
                             const newPageResList = group.pageResList.map((page) => {
                               if (page.pageId === pageId) {
-                                return { ...page, annoNotCnt: page.annoNotCnt+1 };
+                                return { ...page, annoNotCnt: page.annoNotCnt+1 }
                               }
-                              return page;
+                              return page
                             });
                             return {
                               ...group,
                               pageResList: newPageResList,
                             };
                           }
-                          return group;
+                          return group
                         });
                     });
                 })
 
                 //주석 수 감소
                 newEventSource.addEventListener('deleteAnnotation', (event) => {
-                    const newData = JSON.parse(event.data);
+                    const newData = JSON.parse(event.data)
                     const { pageId, groupId } = newData
         
                     setGroupArr(prevGroupArr => {
@@ -232,18 +218,18 @@ function Sidebar(props) {
                           if (group.groupId === groupId) {
                             const newPageResList = group.pageResList.map((page) => {
                               if (page.pageId === pageId) {
-                                return { ...page, annoNotCnt: page.annoNotCnt-1 };
+                                return { ...page, annoNotCnt: page.annoNotCnt-1 }
                               }
-                              return page;
-                            });
+                              return page
+                            })
                             return {
                               ...group,
                               pageResList: newPageResList,
-                            };
+                            }
                           }
-                          return group;
-                        });
-                    });
+                          return group
+                        })
+                    })
                 })
 
                 //eventSource 저장
@@ -257,25 +243,24 @@ function Sidebar(props) {
             setIsDeleteGroup(false)
             setIsUpdateGroup(false)
 
-            eventSource.close();
-            console.log('sidebar connection close')
-            setEventSource(null);
+            eventSource.close()
+            setEventSource(null)
         }
     }
 
     const [ grab, setGrab ] = React.useState(null)
 
-    const openDotRef = useRef(null);
-    const [isArrow, setIsArrow] = useState(false);
-    const [isDot, setIsDot] = useState(false);
-    const [isGroup, setIsGroup] = useState(false);
-    const [isDoc, setIsDoc] = useState(false);
-    const [isDeleteGroup, setIsDeleteGroup] = useState(false);
-    const [isUpdateGroup, setIsUpdateGroup] = useState(false);
+    const openDotRef = useRef(null)
+    const [isArrow, setIsArrow] = useState(false)
+    const [isDot, setIsDot] = useState(false)
+    const [isGroup, setIsGroup] = useState(false)
+    const [isDoc, setIsDoc] = useState(false)
+    const [isDeleteGroup, setIsDeleteGroup] = useState(false)
+    const [isUpdateGroup, setIsUpdateGroup] = useState(false)
 
-    const [isGroupDot, setIsGroupDot] = useState(new Array(groupArr.length).fill(false));
-    const [expandedGroups, setExpandedGroups] = useState(Array(groupArr.length).fill(false));
-    const [activeGroupIndex, setActiveGroupIndex] = useState(groupArr.length);
+    const [isGroupDot, setIsGroupDot] = useState(new Array(groupArr.length).fill(false))
+    const [expandedGroups, setExpandedGroups] = useState(Array(groupArr.length).fill(false))
+    const [activeGroupIndex, setActiveGroupIndex] = useState(groupArr.length)
 
     const navigate = useNavigate();
 
@@ -290,7 +275,6 @@ function Sidebar(props) {
                 }
             }) .then(() => {
                 setEndPage(null)
-                console.log("페이지 종료 api 넘겨줌")
             })
         }
         setIsGroup(false)
@@ -298,8 +282,7 @@ function Sidebar(props) {
         setIsDeleteGroup(false)
         setIsUpdateGroup(false)
         setMenu(false)
-        eventSource.close();
-        console.log('sidebar connection close')
+        eventSource.close()
         setEventSource(null)
 
         api.get('/todos/list/monthly/project/' + projectId + '/' + year + '/' + month)
@@ -329,11 +312,11 @@ function Sidebar(props) {
                     navigate(process.env.PUBLIC_URL + '/home', {state: totalTodo})
                 })
                 .catch(error => {
-                    console.error(error);
+                    console.error(error)
                 })
             })
             .catch(error => {
-                console.error(error);
+                console.error(error)
             })
     }
 
@@ -368,40 +351,38 @@ function Sidebar(props) {
         setIsDeleteGroup(false)
         setIsUpdateGroup(false)
         setMenu(false)
-        eventSource.close();
-        console.log('sidebar connection close')
+        eventSource.close()
         setEventSource(null)
     }
 
-    const arrowToggleMenu = () => {
-        setIsArrow(isArrow => !isArrow);
+    const onClickDot = () => {
+        setIsDot(isDot => !isDot)
     }
 
-    const onClickDot = () => {
-        setIsDot(isDot => !isDot);
-    }
     const onClickGroupDot = (index) => {
         setIsGroupDot(prevState => {
-            const newState = [...prevState]; 
-            newState[index] = !newState[index]; 
-            return newState;
+            const newState = [...prevState]
+            newState[index] = !newState[index]
+            return newState
         });
-        setActiveGroupIndex(index);
+        setActiveGroupIndex(index)
     }
+
     const onArrowClick = (groupIndex) => {
-        const newExpandedGroups = [...expandedGroups];
-        newExpandedGroups[groupIndex] = !newExpandedGroups[groupIndex];
-        setExpandedGroups(newExpandedGroups);
+        const newExpandedGroups = [...expandedGroups]
+        newExpandedGroups[groupIndex] = !newExpandedGroups[groupIndex]
+        setExpandedGroups(newExpandedGroups)
     }
 
     //추가, 수정, 삭제 버튼
     const onAddGroup = () => {
-        setIsDot(false);
+        setIsDot(false)
         setIsDoc(false)
         setIsDeleteGroup(false)
         setIsUpdateGroup(false)
-        setIsGroup(isGroup => !isGroup);
+        setIsGroup(isGroup => !isGroup)
     }
+
     const onAddDoc = () => {
         setIsGroupDot(false)
         setIsGroup(false)
@@ -409,6 +390,7 @@ function Sidebar(props) {
         setIsUpdateGroup(false)
         setIsDoc(isDoc => !isDoc)
     }
+
     const onDeleteGroup = () => {
         setIsGroupDot(false)
         setIsGroup(false)
@@ -416,6 +398,7 @@ function Sidebar(props) {
         setIsUpdateGroup(false)
         setIsDeleteGroup(isDeleteGroup => !isDeleteGroup)
     }
+
     const onUpdateGroup = () => {
         setIsGroupDot(false)
         setIsGroup(false)
@@ -424,7 +407,6 @@ function Sidebar(props) {
         setIsUpdateGroup(isUpdateGroup => !isUpdateGroup)
     }
     
-    ////
     //문서 이동
     const onClickDocument = (i, j) => {
         if(isEndPage != null) {
@@ -435,7 +417,6 @@ function Sidebar(props) {
                 }
             }) .then(() => {
                 setEndPage(null)
-                console.log("페이지 종료 api 넘겨줌")
             })
         }
 
@@ -446,7 +427,6 @@ function Sidebar(props) {
             }
         })
             .then(response => {
-                console.log(response.data.data.blockResList)
                 if(groupArr[i].pageResList[j].template == 'BLOCK') {
                     if(response.data.data.blockResList[0].blockId === -1) {
                         const doc = {blockResList: [], pageCheckResList: response.data.data.pageCheckResList, groupId: response.data.data.groupId, title: response.data.data.title, pageId: response.data.data.pageId}
@@ -463,7 +443,6 @@ function Sidebar(props) {
 
                 setMenu(false)
                 eventSource.close()
-                console.log('sidebar connection close')
                 setEventSource(null)
 
                 setEndPage(groupArr[i].pageResList[j].pageId)
@@ -473,16 +452,6 @@ function Sidebar(props) {
             })
     }
 
-    // useEffect(() => {
-    //     const handleOutsideClose = (e) => {
-    //       if(isDot && (!openDotRef.current || !openDotRef.current.contains(e.target))) setIsDot(isDot => !isDot);
-    //     };
-    //     document.addEventListener('click', handleOutsideClose);
-        
-    //     return () => document.removeEventListener('click', handleOutsideClose);
-    // }, [isDot]);
-
-    ///////////////////////////////////////////////////////////////////////
     //그룹추가
     const handleButtonClick = (inputName, newValue) => {
         if (inputName === 'newGroup') {
@@ -494,9 +463,9 @@ function Sidebar(props) {
               groupId: newValue.groupId,
               pageResList: newValue.pageResList
             }
-          ]);
+          ])
         }
-      };
+      }
       const handleDocButtonClick = (inputName, newValue) => {
         if (inputName === 'documents' && activeGroupIndex !== null) {
             setGroupArr(prevGroupArr => {
@@ -505,27 +474,23 @@ function Sidebar(props) {
                   return {
                     ...group,
                     pageResList: [...group.pageResList, newValue]
-                  };
+                  }
                 }
                 return group;
-              });
-            });
+              })
+            })
           }
-      };
-
-      useEffect(() => {
-        console.log(groupArr);
-      }, [groupArr]);
+      }
 
       //그룹수정
       const handleUpdateButtonClick = (inputName, newValue) => {
         if (inputName === 'name' && activeGroupIndex !== null) {
             setGroupArr(prevState => {
                 
-              const newArr = [...prevState];
-              newArr[activeGroupIndex] = { ...newArr[activeGroupIndex], name: newValue };
-              return newArr;
-            });
+              const newArr = [...prevState]
+              newArr[activeGroupIndex] = { ...newArr[activeGroupIndex], name: newValue }
+              return newArr
+            })
 
             const updateGroup = {
                 name: newValue,
@@ -557,34 +522,34 @@ function Sidebar(props) {
             })
         if (activeGroupIndex !== null) {
             setGroupArr(prevState => {
-              const newArr = [...prevState];
-              newArr.splice(activeGroupIndex, 1);
-              return newArr;
+              const newArr = [...prevState]
+              newArr.splice(activeGroupIndex, 1)
+              return newArr
             })
-            setActiveGroupIndex(prevIndex => prevIndex - 1);
+            setActiveGroupIndex(prevIndex => prevIndex - 1)
           }
-      };
+      }
 
     useEffect(() => {
-        document.addEventListener("click", handleClickOutside);
+        document.addEventListener("click", handleClickOutside)
         return () => {
-          document.removeEventListener("click", handleClickOutside);
+          document.removeEventListener("click", handleClickOutside)
         };
       }, []);
       
       const handleClickOutside = (event) => {
-        const clickedElement = event.target;
-        const groupDotBox = document.querySelectorAll(".side-groupDot-box");
+        const clickedElement = event.target
+        const groupDotBox = document.querySelectorAll(".side-groupDot-box")
       
-        let clickedInsideGroup = false;
+        let clickedInsideGroup = false
         groupDotBox.forEach((box) => {
           if (box.contains(clickedElement)) {
-            clickedInsideGroup = true;
+            clickedInsideGroup = true
           }
         });
       
         if (!clickedInsideGroup) {
-          setIsGroupDot([]);
+          setIsGroupDot([])
         }
       };
 
@@ -595,7 +560,7 @@ function Sidebar(props) {
         pageList: group.pageResList.map(page => ({
         pageId: page.pageId
         }))
-    }));
+    }))
     const onClickDropDragNow = () => {
         setIsDragGroup(isDragGroup => !isDragGroup)
     }
@@ -613,37 +578,37 @@ function Sidebar(props) {
     }
     
     const _onDragOver = e => {
-        e.preventDefault();
+        e.preventDefault()
     }
     const _onDragStart = e => {
-        setGrab(e.target);
-        e.target.classList.add("grabbing");
-        e.dataTransfer.effectAllowed = "move";
-        e.dataTransfer.setData("text/html", e.target);
+        setGrab(e.target)
+        e.target.classList.add("grabbing")
+        e.dataTransfer.effectAllowed = "move"
+        e.dataTransfer.setData("text/html", e.target)
     }
     const _onDragEnd = e => {
-        e.target.classList.remove("grabbing");
-        e.dataTransfer.dropEffect = "move";
+        e.target.classList.remove("grabbing")
+        e.dataTransfer.dropEffect = "move"
     }
     const _onDrop = e => {
-        let grabPosition = Number(grab.dataset.position);
-        let targetPosition = Number(e.target.dataset.position);
+        let grabPosition = Number(grab.dataset.position)
+        let targetPosition = Number(e.target.dataset.position)
 
-        let _list = [ ...groupArr ];
-        _list[grabPosition] = _list.splice(targetPosition, 1, _list[grabPosition])[0];
+        let _list = [ ...groupArr ]
+        _list[grabPosition] = _list.splice(targetPosition, 1, _list[grabPosition])[0]
 
-        setGroupArr(_list);
+        setGroupArr(_list)
     }
     const _onDrop2 = e => {
-        let grabPosition = Number(grab.dataset.position);
-        let targetPosition = Number(e.target.dataset.position);
+        let grabPosition = Number(grab.dataset.position)
+        let targetPosition = Number(e.target.dataset.position)
 
-        let _list = [ ...groupArr ];
-        let group = { ..._list[activeGroupIndex] };
-        group.pageResList[grabPosition] = group.pageResList.splice(targetPosition, 1, group.pageResList[grabPosition])[0];
-        _list[activeGroupIndex] = group;
+        let _list = [ ...groupArr ]
+        let group = { ..._list[activeGroupIndex] }
+        group.pageResList[grabPosition] = group.pageResList.splice(targetPosition, 1, group.pageResList[grabPosition])[0]
+        _list[activeGroupIndex] = group
 
-        setGroupArr(_list);
+        setGroupArr(_list)
     }
 
     //환경설정 버튼
@@ -704,7 +669,7 @@ function Sidebar(props) {
                     groupId: groupArr[activePagegroupIndex].groupId,
                     pageId: groupArr[activePagegroupIndex].pageResList[activePageIndex].pageId
                 } 
-                console.log(updatePage)
+
                 api.put('/pages', updatePage, {
                     headers: {
                         'userId': user.userId,
@@ -735,7 +700,6 @@ function Sidebar(props) {
                             <div><span className="side-work-txt">작업</span></div>
                             <div className="side-smallTxt-box">
                                 <div className="side-work-smallBox"><span className="side-work-smallTxt" onClick={ onClickWork }>할 일</span></div>
-                                {/* <div className="side-work-smallBox"><span className="side-work-smallTxt">간트차트</span></div> */}
                             </div>
                         </div>
                         <div className="side-doc">
@@ -918,12 +882,12 @@ function Sidebar(props) {
                         <div className="side-bottomBox">
                             <div className="side-setting-box"><img className="setting-img" src={ setting } onClick={ onClickSetting }/></div>
                             {isSetting ? <SettingModal onClose={ setIsSetting} settingData={ settingData } /> : <></>}
-                            {isDragGroup ? <div className="side-arrowUpDown-box"><span className="side-arrowUpDown-txt" onClick={onClickGroupDrag}>Done</span></div>: <div className="side-arrowUpDown-box"><img className="arrowUpDown-img" src={ arrowUpDown } onClick={onClickDropDragNow} /></div>}
+                            {isDragGroup ? <div className="arrowUpDown-txt-box"><span className="side-arrowUpDown-txt" onClick={onClickGroupDrag}>Done</span></div>: <div className="side-arrowUpDown-box"><img className="arrowUpDown-img" src={ arrowUpDown } onClick={onClickDropDragNow} /></div>}
                         </div>
                     </div>
                 </div>
         </div>
-    );
+    )
 }
 
-export default Sidebar;
+export default Sidebar

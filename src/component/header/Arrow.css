@@ -18,10 +18,7 @@
 }
 
 .arrowMenu-bar {
-    /* margin-top: 15px; */
-    /* margin-left: 34px; */
     text-align: left;
-    /* padding: 20px; */
 }
 
 .arrow-plus-txt {
@@ -58,5 +55,3 @@
 .arrowBox:hover {
     cursor: pointer;
 }
-
-/**/

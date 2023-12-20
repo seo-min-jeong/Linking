@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react'
 import logo from "../../icon/mainLogo.png"
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import api from "../../utils/api"
 
-import './SignUp.css';
+import './SignUp.css'
 
 function SignUp() {
     const [userId, setUserId] = useState(null)
@@ -12,7 +12,6 @@ function SignUp() {
     const [password, setPassword] = useState(null)
     const [firstName, setFirstName] = useState(null)
     const [lastName, setLastName] = useState(null)
-    const [exist, setExist] = useState(false)
 
     const [member, setMember] = useState({
         firstName: '',
@@ -20,16 +19,15 @@ function SignUp() {
         email: '',
         password: ''
     })
+
     const [verify, setVerify] = useState({
       email: -1
-    });
+    })
     
     const handleSubmit = event => {
         event.preventDefault()
         api.post('/users/sign-up', member)
           .then(response => {
-            console.log(response.data)
-
             setUserId(response.data.userId)
             setEmail(response.data.email)
             setFirstName(response.data.firstName)
@@ -39,19 +37,19 @@ function SignUp() {
           })
           .catch(error => {
             console.error(error);
-          });
-    };
+          })
+    }
 
     const handleChange = event => {
         setMember({
             ...member,
             [event.target.name]: event.target.value
-        });
+        })
 
         setVerify({
           ...verify,
           [event.target.name]: event.target.value
-        });
+        })
 
         if (event.target.name === 'email') {
             setEmail(event.target.value)
@@ -62,29 +60,29 @@ function SignUp() {
           } else if (event.target.name === 'lastName') {
             setLastName(event.target.value)
           } 
-    };
+    }
 
     const [isMessage, setIsMessage] = useState(null)
     const handleEmailSubmit = (event) => {
-        event.preventDefault();
-      console.log(verify)
+        event.preventDefault()
+
         if(verify.email !== -1) {
           api.post('/users/verify/email', verify)
           .then((response) => {
-            console.log(response.data);
+            console.log(response.data)
             setIsMessage(response.data.message)
 
           })
           .catch((error) => {
-            console.log(error);
-          });
+            console.log(error)
+          })
         } else {
           setIsMessage('이메일을 입력해주세요.')
         }
         
-      };
+      }
 
-    const navigate = useNavigate();
+    const navigate = useNavigate()
  
     const onClickLogin = () => {
         navigate(process.env.PUBLIC_URL + '/')
@@ -170,7 +168,6 @@ function SignUp() {
                 </form>
                 <div className='duplicate-box'>
                     <button className='duplicate-txt' onClick={ handleEmailSubmit }>중복 확인</button>
-                    {/* {isMessage != null ? <span className='sign-up-message'>{isMessage}</span> : <></>} */}
                 </div>
             </div>
             <div className='existBox'>
@@ -180,7 +177,7 @@ function SignUp() {
 
         </div>
         </div>
-    );
+    )
 }
 
-export default SignUp;
+export default SignUp

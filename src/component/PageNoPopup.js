@@ -1,16 +1,15 @@
-import React, { useState, useRef, useEffect } from "react";
-import Modal from 'react-modal';
-import './PagePopup.css';
-import api from '../utils/api';
-import { useNavigate } from "react-router-dom";
+import React from "react"
+import Modal from 'react-modal'
+import './PagePopup.css'
+import { useNavigate } from "react-router-dom"
 
 function PageNoPopup(props) {
     const { isNoPage, setIsNoPage } = props
   
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     const onClickDelOk = () => {
-        setIsNoPage(null);
+        setIsNoPage(null)
         navigate(process.env.PUBLIC_URL + '/home')
     }
 
@@ -29,7 +28,7 @@ function PageNoPopup(props) {
           
         </Modal>
     
-      );
+      )
     }
   
-    export default PageNoPopup;
+    export default PageNoPopup

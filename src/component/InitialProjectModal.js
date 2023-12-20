@@ -1,25 +1,24 @@
-import React, { useState, useRef, useEffect } from "react";
-import Modal from 'react-modal';
+import React, { useState, useRef, useEffect } from "react"
+import Modal from 'react-modal'
 import api from "../utils/api"
 
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { ko } from "date-fns/esm/locale";
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
+import { ko } from "date-fns/esm/locale"
 
-import AddTeam from "./AddTeam";
-import DeletePartModal from "./DeletePartModal";
+import AddTeam from "./AddTeam"
+import DeletePartModal from "./DeletePartModal"
 
 import dot from "../icon/dot.png"
 import crown from "../icon/crown.png"
 
 function InitialProjectModal(props) {
-    const user = JSON.parse(localStorage.getItem('user'));
-    const { isOpen, onClose, setIsOpen, onValueProjects, isNewData, onValueProjectList } = props
+    const user = JSON.parse(localStorage.getItem('user'))
+    const { isOpen, onClose, setIsOpen, onValueProjectList } = props
 
-    const [projectId, setProjectId] = useState(0);
-    const [beginDate, setBeginDate] = useState(new Date());
-    const [dueDate, setDueDate] = useState(new Date());
-    const [projectName, setProjectName] = useState('');
+    const [beginDate, setBeginDate] = useState(new Date())
+    const [dueDate, setDueDate] = useState(new Date())
+    const [projectName, setProjectName] = useState('')
     const [partList, setPartList] = useState([{ lastName: user.lastName, firstName: user.firstName, email: user.email, userId: user.userId }])
 
     const [project, setProject] = useState({
@@ -27,7 +26,7 @@ function InitialProjectModal(props) {
         beginDate: '',
         dueDate: '',
         partList: [user.userId]
-      });
+      })
       
       //프로젝트 생성버튼
       const handleSubmit = event => {
@@ -49,20 +48,20 @@ function InitialProjectModal(props) {
         })
     }
 
-    const teamMenuRef = useRef(null);
-    const [isTeam, setTeam] = useState(false);
-    const [isAddTeam, setAddTeam] = useState(false);
+    const teamMenuRef = useRef(null)
+    const [isTeam, setTeam] = useState(false)
+    const [isAddTeam, setAddTeam] = useState(false)
 
     const teamToggleMenu = () => {
-        setTeam(isTeam => !isTeam);
+        setTeam(isTeam => !isTeam)
     }
 
     const addTeamMenu = () => {
-        setTeam(false);
-        setAddTeam(isAddTeam => !isAddTeam);
+        setTeam(false)
+        setAddTeam(isAddTeam => !isAddTeam)
     }
 
-    const [isDeleteTeam, setDeleteTeam] = useState(false);
+    const [isDeleteTeam, setDeleteTeam] = useState(false)
     const deleteTeam = () => {
       setDeleteTeam(isDeleteTeam => !isDeleteTeam)
       setTeam(false)
@@ -70,18 +69,18 @@ function InitialProjectModal(props) {
 
     useEffect(() => {
         const handleOutsideClose = (e) => {
-          if(isTeam && (!teamMenuRef.current || !teamMenuRef.current.contains(e.target))) setTeam(isTeam => !isTeam);
-        };
-        document.addEventListener('click', handleOutsideClose);
+          if(isTeam && (!teamMenuRef.current || !teamMenuRef.current.contains(e.target))) setTeam(isTeam => !isTeam)
+        }
+        document.addEventListener('click', handleOutsideClose)
         
-        return () => document.removeEventListener('click', handleOutsideClose);
-    }, [isTeam]);
+        return () => document.removeEventListener('click', handleOutsideClose)
+    }, [isTeam])
 
     const handleInputProject = (event) => {
         setProject({
             ...project,
             [event.target.name]: event.target.value
-        });
+        })
         if (event.target.name === 'projectName') {
             setProjectName(event.target.value)
           } else if (event.target.name === 'beginDate') {
@@ -95,13 +94,13 @@ function InitialProjectModal(props) {
       if (inputName === 'partList') {
         const temp = [...partList]
         const userId = parseInt(newValue.userId)
-        const userIdExists = temp.some(item => item.userId === userId);
+        const userIdExists = temp.some(item => item.userId === userId)
 
-        const newArray = [...partList, newValue];
+        const newArray = [...partList, newValue]
 
         if (userIdExists === false) {
           setPartList(newArray)
-          const newPartList = [...project.partList, userId];
+          const newPartList = [...project.partList, userId]
           setProject(prevProject => ({
             ...prevProject,
             partList: newPartList
@@ -112,20 +111,20 @@ function InitialProjectModal(props) {
 
     const handleDeleteChange = (inputName, newValue) => {
       if (inputName === 'partList') {
-        setPartList(newValue); 
+        setPartList(newValue)
 
         const newPartList = newValue.map(item => parseInt(item.userId)).filter(id => !isNaN(id))
 
         setProject(prevProject => ({
           ...prevProject,
           partList: newPartList
-        }));
+        }))
       }
-  };
+  }
 
     useEffect(() => {
         setPartList(partList)
-    }, [partList]);
+    }, [partList])
 
     return(
         <Modal isOpen={isOpen} onRequestClose={onClose} className="modal">

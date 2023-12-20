@@ -208,7 +208,6 @@
 }
 
 .work-team-close:hover {
-    /* filter: invert(40%); */
     cursor: pointer;
 }
 
@@ -225,19 +224,6 @@
     top: 4px;
     cursor: pointer; /* 마우스 올렸을때 손모양 처리 */
 }
-
-/* .circle:after{
-    content: '\2713'; 
-    font-size: 20px; 
-    color: #202020;
-    position: absolute; 
-    top: -10px; 
-    opacity: 0; 
-    transition: 0.1s; 
-    font-weight: 700;
-}
-
-#chk:checked + .circle:after{ opacity: 1; } */
 
 /* 체크박스는 display:none;을 주면 데이터 처리가 안됨 */
 #chk { 

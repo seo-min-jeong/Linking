@@ -1,7 +1,6 @@
 .logo {
     width: 185px;
     height: 110px;
-    /* margin-top: 70px; */
     margin-bottom: 30px;
     text-align: center;
 }
@@ -61,7 +60,6 @@
     margin : auto;
     justify-content: center;
     margin-top: 60px;
-    /* padding-top: 30px; */
 }
 
 .signUpTxt {

@@ -1,10 +1,9 @@
-import React, { useState, useRef, useEffect } from "react";
-import './Header.css';
-import './Arrow.css';
-import { useNavigate } from "react-router-dom";
+import React, { useState, useRef, useEffect } from "react"
+import './Header.css'
+import './Arrow.css'
+import { useNavigate } from "react-router-dom"
 import CreateProjectModal from "../CreateProjectModal"
-import api from '../../utils/api';
-import { useCookies } from 'react-cookie'
+import api from '../../utils/api'
 
 import arrowBelow from '../../icon/arrowBelow.png'
 import arrowUp from '../../icon/arrowUp.png'
@@ -12,9 +11,8 @@ import plus from '../../icon/plus.png'
 
 function Arrow(props) {
   const user = JSON.parse(localStorage.getItem('user'));
-    const { onValueChange, onValueDocument, projectList, setMenu, onValueProjectLists, setIsNo, isNo } = props;
+    const { onValueChange, onValueDocument, projectList, setMenu, onValueProjectLists, setIsNo, isNo } = props
     const [projects, setProjects] = useState([])
-    const [cookies] = useCookies(['session']);
 
     let now = new Date()
     let year = now.getFullYear()
@@ -23,7 +21,7 @@ function Arrow(props) {
 
     useEffect(() => {
       setProjects(projectList)
-  }, [projectList]);
+  }, [projectList])
 
     const handleSubmit = event => {
       if(isArrow == false) {
@@ -41,22 +39,22 @@ function Arrow(props) {
 
     }
 
-    const arrowMenuRef = useRef(null);
-    const [isArrow, setArrow] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
+    const arrowMenuRef = useRef(null)
+    const [isArrow, setArrow] = useState(false)
+    const [isOpen, setIsOpen] = useState(false)
 
     useEffect(() => {
         const handleOutsideClose = (e) => {
-          if(isArrow && (!arrowMenuRef.current || !arrowMenuRef.current.contains(e.target))) setArrow(isArrow => !isArrow);
-        };
-        document.addEventListener('click', handleOutsideClose);
+          if(isArrow && (!arrowMenuRef.current || !arrowMenuRef.current.contains(e.target))) setArrow(isArrow => !isArrow)
+        }
+        document.addEventListener('click', handleOutsideClose)
         
-        return () => document.removeEventListener('click', handleOutsideClose);
-    }, [isArrow]);
+        return () => document.removeEventListener('click', handleOutsideClose)
+    }, [isArrow])
 
     const onClickButton = () => {
-        setArrow(false);
-        setIsOpen(isOpen => !isOpen);
+        setArrow(false)
+        setIsOpen(isOpen => !isOpen)
     }
     
     const navigate = useNavigate()
@@ -83,18 +81,18 @@ function Arrow(props) {
                       navigate(process.env.PUBLIC_URL + '/home', {state: totalTodo})
                     })
                     .catch(error => {
-                      console.error(error);
+                      console.error(error)
                     })
                 })
                 .catch(error => {
-                    console.error(error);
+                    console.error(error)
                 })
             })
             .catch(error => {
-                console.error(error);
+                console.error(error)
             })
      
-      setArrow(false);
+      setArrow(false)
       onValueChange('projectName', part.projectName)
       onValueChange('projectId', part.projectId)
       onValueChange('beginDate', part.beginDate)
@@ -128,7 +126,7 @@ function Arrow(props) {
           {isOpen ? <CreateProjectModal isOpen={isOpen} setIsOpen={setIsOpen} onClose={onClickButton} /> : <></> }
 
         </div>
-    );
+    )
 }
 
-export default Arrow;
+export default Arrow

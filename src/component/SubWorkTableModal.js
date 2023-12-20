@@ -1,17 +1,15 @@
-import React, { useState, useRef, useEffect } from "react";
-import Modal from 'react-modal';
-import './WorkModal.css';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { ko } from "date-fns/esm/locale";
-import 'react-time-picker/dist/TimePicker.css';
+import React, { useState } from "react";
+import Modal from 'react-modal'
+import './WorkModal.css'
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
+import { ko } from "date-fns/esm/locale"
+import 'react-time-picker/dist/TimePicker.css'
 import api from '../utils/api'
-import { useCookies } from 'react-cookie'
 
 function SubWorkTableModal(props) {
-    const { isOpen, onClose, onValueChange, partList, emitterId, projectId, parentId, onValueTodo, setIsWorkOpen } = props;
+    const { isOpen, onClose, partList, emitterId, projectId, parentId, onValueTodo, setIsWorkOpen } = props
     const [isAddTeam, setAddTeam] = useState(false)
-    // const [cookies] = useCookies(['session'])
 
     const [content, setContent] = useState('')
     const [startDate, setStartDate] = useState(new Date())
@@ -30,11 +28,11 @@ function SubWorkTableModal(props) {
     let month = now.getMonth() + 1
 
     for (let i = 1; i <= 12; i++) {
-        hours.push(i < 10 ? "0" + i : i.toString());
+        hours.push(i < 10 ? "0" + i : i.toString())
     }
 
     for (let i = 0; i <= 59; i++) {
-        minutes.push(i < 10 ? "0" + i : i.toString());
+        minutes.push(i < 10 ? "0" + i : i.toString())
     }
 
     const handleHourChange = (e) => {
@@ -68,7 +66,7 @@ function SubWorkTableModal(props) {
     })
 
     const handleInputWork = (event) => {
-        const { name, value } = event.target;
+        const { name, value } = event.target
         setWork({
             ...work,
             [name]: value
@@ -83,22 +81,22 @@ function SubWorkTableModal(props) {
     }
 
     const handleBtnClick = () => {
-        let startYear = startDate.getFullYear();
-        let startMonth = (startDate.getMonth() + 1).toString().padStart(2, '0');
-        let startDay = startDate.getDate().toString().padStart(2, '0');
-        let valueStartDate = startYear;
-        valueStartDate += '-';
-        valueStartDate += startMonth;
-        valueStartDate += '-';
-        valueStartDate += startDay;
+        let startYear = startDate.getFullYear()
+        let startMonth = (startDate.getMonth() + 1).toString().padStart(2, '0')
+        let startDay = startDate.getDate().toString().padStart(2, '0')
+        let valueStartDate = startYear
+        valueStartDate += '-'
+        valueStartDate += startMonth
+        valueStartDate += '-'
+        valueStartDate += startDay
 
-        let endYear = dueDate.getFullYear();
-        let endMonth = (dueDate.getMonth() + 1).toString().padStart(2, '0');
-        let endDay = dueDate.getDate().toString().padStart(2, '0');
-        let valueEndDate = endYear;
-        valueEndDate += '-';
-        valueEndDate += endMonth;
-        valueEndDate += '-';
+        let endYear = dueDate.getFullYear()
+        let endMonth = (dueDate.getMonth() + 1).toString().padStart(2, '0')
+        let endDay = dueDate.getDate().toString().padStart(2, '0')
+        let valueEndDate = endYear
+        valueEndDate += '-'
+        valueEndDate += endMonth
+        valueEndDate += '-'
         valueEndDate += endDay
 
         const work = {
@@ -120,37 +118,33 @@ function SubWorkTableModal(props) {
                 })
         })
         .catch(error => {
-            console.error(error);
+            console.error(error)
         })
 
-        onClose(isOpen => !isOpen);
+        onClose(isOpen => !isOpen)
     }
 
     const onClickClose = () => {
-        onClose(isOpen => !isOpen);
+        onClose(isOpen => !isOpen)
         setIsWorkOpen(true)
     }
     
-    const [selectedPeoples, setSelectedPeoples] = useState([]);
-    const [chargeText, setChargeText] = useState('담당자 선택');
+    const [selectedPeoples, setSelectedPeoples] = useState([])
+    const [chargeText, setChargeText] = useState('담당자 선택')
 
     const handleCheckboxChange = (e) => {
         const value = e.target.value
-        const [lastName, firstName, userId] = value.split('_')
         if (selectedPeoples.includes(value)) {
-            setSelectedPeoples(selectedPeoples.filter((p) => p !== value));
-            console.log(userId)
+            setSelectedPeoples(selectedPeoples.filter((p) => p !== value))
           } else {
-            setSelectedPeoples([...selectedPeoples, value]);
-            console.log(userId)
+            setSelectedPeoples([...selectedPeoples, value])
           }
     }
 
-    const handleTextboxChange = (e) => {
+    const handleTextboxChange = () => {
         if(selectedPeoples.length >= 2) {
             const [lastName, firstName] = selectedPeoples[0].split('_')
             setChargeText(lastName + firstName + " 외 " + (selectedPeoples.length-1) + "명")
-
             setAssignListForSelectedPeoples(selectedPeoples)
         } else {
             if(selectedPeoples.length === 0) {
@@ -161,12 +155,12 @@ function SubWorkTableModal(props) {
                 setAssignList([parseInt(userId)])
             }
         }
-        setAddTeam(false);
+        setAddTeam(false)
     }
 
     const setAssignListForSelectedPeoples = (selectedPeoples) => {
         selectedPeoples.forEach((person) => {
-          const [lastName, firstName, userId] = person.split('_')
+          const [userId] = person.split('_')
           setAssignList((prevList) => [...prevList, parseInt(userId)])
         })
     }
@@ -287,7 +281,7 @@ function SubWorkTableModal(props) {
                 </div>
             </div>
         </Modal>
-      );
+      )
     }
   
-    export default SubWorkTableModal;
+    export default SubWorkTableModal

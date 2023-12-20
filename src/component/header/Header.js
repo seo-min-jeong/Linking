@@ -1,8 +1,6 @@
-import linking from "../../icon/linking.png"
-
-import '../../App.css';
-import React, {useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import '../../App.css'
+import React, {useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 import Sidebar from "./Sidebar"
 import Arrow from "./Arrow"
@@ -30,15 +28,6 @@ function Header(props) {
         setPartList(projectList[0].partList)
       }
     }, [projectList])
-
-    // if (isProject === true) {
-    //   setProjectName(newProjectData.projectName)
-    //   setProjectId(newProjectData.projectId)
-    //   setBeginDate(newProjectData.beginDate)
-    //   setDueDate(newProjectData.dueDate)
-    //   setPartList(newProjectData.partList)
-    //   setIsProject(false)
-    // }
 
     const [isRegister, setIsRegister] = useState(true)
     const handleChange = (inputName, newValue) => {
@@ -83,8 +72,6 @@ function Header(props) {
     }
   }
 
-  const [projects, setProjects] = useState([])
-
   const [isOpen, setMenu] = useState(false); 
 
   //myTodo 상태변경
@@ -101,7 +88,11 @@ function Header(props) {
     return (
       <div className="App">
         <div className="head" style={{ minWidth: '660px'}}>
-          {isLoggedIn && <Sidebar className="side-bar" data={projectName} projectId={projectId} isOpen={isOpen} setMenu={setMenu} beginDate={beginDate} dueDate={dueDate} partList={partList} /> }
+          {isLoggedIn && 
+          <>
+          <Sidebar className="side-bar" data={projectName} projectId={projectId} isOpen={isOpen} setMenu={setMenu} beginDate={beginDate} dueDate={dueDate} partList={partList} /> 
+          </>
+          }
           <div className={isLoggedIn ? "titleBox" : "title-hide-box"}>
             <span className="linking-txt">{ projectName }</span>
             {isLoggedIn && <Arrow onValueChange={handleChange} onValueDocument={handleDocuments} projectList={projectList} setMenu={setMenu} />}
@@ -112,7 +103,7 @@ function Header(props) {
           {isLoggedIn && <Dot projectId={projectId} onValueProject={handleDeleteProject} ownerId={ownerId}/>}
         </div>
       </div>
-    );
+    )
   }
   
-  export default Header;
+  export default Header

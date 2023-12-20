@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react"
 
 import lookOk from "./icon/look-ok.png"
 import lookNo from "./icon/look-no.png"
@@ -6,11 +6,11 @@ import arrow from "./icon/doc-arrow.png"
 
 function DocumentChk() {
 
-    const [isLook, setIsLook] = useState(false);
-    const [isNoti, setIsNoti] = useState(false);
+    const [isLook, setIsLook] = useState(false)
+    const [isNoti, setIsNoti] = useState(false)
 
     const onClickNoti = () => {
-        setIsNoti(isNoti => !isNoti);
+        setIsNoti(isNoti => !isNoti)
     }
 
     return(
@@ -53,7 +53,7 @@ function DocumentChk() {
                 </div>
             </div>
         </div>
-    );
+    )
 }
 
-export default DocumentChk;
+export default DocumentChk

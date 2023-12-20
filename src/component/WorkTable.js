@@ -1,6 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
-import api from '../utils/api';
-import { useCookies } from 'react-cookie'
+import React, { useState, useRef, useEffect } from "react"
+import api from '../utils/api'
 
 import SubWorkTableModal from "./SubWorkTableModal"
 import WorkTableSelectModal from "./WorkTableSelectModal"
@@ -23,7 +22,6 @@ import circleInprogress from "../icon/circleInprogress.png"
 function WorkTable( props ) {
     const { event, projectId, emitterId, partList, onValueWorkOne } = props
     const user = JSON.parse(localStorage.getItem('user'))
-    // const [cookies] = useCookies(['session'])
 
     const [tableList, setTableList] = useState(event)
     const [activeTodoIndex, setActiveTodoIndex] = useState(tableList.length)
@@ -34,31 +32,31 @@ function WorkTable( props ) {
         setActiveTodoIndex(tableList.length)
     }, [event, activeTodoIndex, projectId, emitterId, partList])
 
-    const workMenuRef = useRef(null);
-    const [isWork, setWork] = useState(false);
+    const workMenuRef = useRef(null)
+    const [isWork, setWork] = useState(false)
 
-    const [isNoti, setIsNoti] = useState(false);
-    const [isTodoDot, setIsTodoDot] = useState(new Array(tableList.length).fill(false));
-    const [isUpAssignDot, setIsUpAssignDot] = useState(tableList.map(todo => new Array(todo.assignList.length).fill(false)));
+    const [isNoti, setIsNoti] = useState(false)
+    const [isTodoDot, setIsTodoDot] = useState(new Array(tableList.length).fill(false))
+    const [isUpAssignDot, setIsUpAssignDot] = useState(tableList.map(todo => new Array(todo.assignList.length).fill(false)))
 
     const [isChildTodoDot, setIsChildTodoDot] = useState(tableList.map(todo => todo.childAllList ? new Array(todo.childAllList.length).fill(false) : [] ))
-    const [isChildAssignDot, setIsChildAssignDot] = useState([]);
+    const [isChildAssignDot, setIsChildAssignDot] = useState([])
 
     //상위할일 ...
     const onToggleMenu = (i, k) => {
         if(k === -1) {
             setIsTodoDot(prevState => {
-                const newState = [...prevState]; 
-                newState[i] = !newState[i]; 
-                return newState;
-            });
+                const newState = [...prevState]
+                newState[i] = !newState[i]
+                return newState
+            })
             setActiveTodoIndex(i)
         } else {
             setIsUpAssignDot(prevState => {
-                const newState = [...prevState];
-                newState[i] = prevState[i]; 
-                newState[i][k] = !newState[i][k]; 
-                return newState;
+                const newState = [...prevState]
+                newState[i] = prevState[i]
+                newState[i][k] = !newState[i][k]
+                return newState
               })
         }
         setIsNoti(false)
@@ -73,69 +71,68 @@ function WorkTable( props ) {
                 const newState = [...prevState]
                 newState[i] = prevState[i]
                 newState[i][j] = !newState[i][j]
-                return newState;
+                return newState
               })
               setIsSubNoti(false)
         } else {
             const myArray = new Array(tableList.length).fill(false)
-            // const t = tableList.map(todo => new Array(todo.childTodoList.length).fill(false))
             const test = tableList[i].childTodoList.map(todo => new Array(todo.assignList.length).fill(false))
             for(let k = 0; k < myArray.length; k++) {
                 if(i === k) {
-                    myArray[k] = test;
+                    myArray[k] = test
                 }
             }
 
-            setIsChildAssignDot(prevState => {
-                const newState = myArray;
+            setIsChildAssignDot(() => {
+                const newState = myArray
                 newState[i] = myArray[i]
                 newState[i][j] = myArray[i][j]
-                newState[i][j][l] = !newState[i][j][l];
-                return newState;
+                newState[i][j][l] = !newState[i][j][l]
+                return newState
             })
             setIsSubNoti(false)
         }
     }
 
-    const [isSubWork, setIsSubWork] = useState(false);
+    const [isSubWork, setIsSubWork] = useState(false)
 
     const onToggleNoti = () => {
-        setIsNoti(isNoti => !isNoti);
+        setIsNoti(isNoti => !isNoti)
     }
 
-    const [isSubNoti, setIsSubNoti] = useState(false);
+    const [isSubNoti, setIsSubNoti] = useState(false)
     const onToggleSubNoti = () => {
-        setIsSubNoti(isSubNoti => !isSubNoti);
+        setIsSubNoti(isSubNoti => !isSubNoti)
     }
 
     useEffect(() => {
         const handleOutsideClose = (e) => {
-          if(isWork && (!workMenuRef.current || !workMenuRef.current.contains(e.target))) setWork(isWork => !isWork);
-        };
+          if(isWork && (!workMenuRef.current || !workMenuRef.current.contains(e.target))) setWork(isWork => !isWork)
+        }
         document.addEventListener('click', handleOutsideClose);
         
         return () => document.removeEventListener('click', handleOutsideClose);
-    }, [isWork]);
+    }, [isWork])
 
     useEffect(() => {
         const handleOutsideClose = (e) => {
-          if(isSubWork && (!workMenuRef.current || !workMenuRef.current.contains(e.target))) setIsSubWork(isSubWork => !isSubWork);
-        };
-        document.addEventListener('click', handleOutsideClose);
+          if(isSubWork && (!workMenuRef.current || !workMenuRef.current.contains(e.target))) setIsSubWork(isSubWork => !isSubWork)
+        }
+        document.addEventListener('click', handleOutsideClose)
         
-        return () => document.removeEventListener('click', handleOutsideClose);
-    }, [isSubWork]);
+        return () => document.removeEventListener('click', handleOutsideClose)
+    }, [isSubWork])
 
     const [isOpen, setIsOpen] = useState(false);
     const onClickButton = (i, todoId) => {
-        setWork(false);
-        setIsOpen(isOpen => !isOpen);
+        setWork(false)
+        setIsOpen(isOpen => !isOpen)
         
         setIsTodoDot(prevState => {
-            const newState = [...prevState]; 
-            newState[i] = !newState[i]; 
-            return newState;
-        });
+            const newState = [...prevState]
+            newState[i] = !newState[i]
+            return newState
+        })
         setActiveTodoIndex(i)
         setParentId(todoId)
         setIsTodoDot(new Array(tableList.length).fill(false))
@@ -163,12 +160,12 @@ function WorkTable( props ) {
           }
     };
 
-    const [isWorkOpen, setIsWorkOpen] = useState(true);
-    const [clickedEvent, setClickedEvent] = useState(null);
+    const [isWorkOpen, setIsWorkOpen] = useState(true)
+    const [clickedEvent, setClickedEvent] = useState(null)
     const handleEventClick = (info) => {
-        setIsWorkOpen(false);
-        info.event.people = valuePeople;
-        setClickedEvent(info.event); 
+        setIsWorkOpen(false)
+        info.event.people = valuePeople
+        setClickedEvent(info.event)
     }
 
     const[isSelectModal, setIsSelectModal] = useState(false)
@@ -188,21 +185,21 @@ function WorkTable( props ) {
     const handleTodoClick = (todoIndex, assignIndex) => {
         let state = tableList[todoIndex].assignList[assignIndex]
         setTableList(prevTodoList => {
-          const updatedTodoList = [...prevTodoList];
+          const updatedTodoList = [...prevTodoList]
           state = updatedTodoList[todoIndex].assignList[assignIndex]
 
           let now = new Date()
           const date = new Date(updatedTodoList[todoIndex].dueDate)
 
           if (state.status === 'BEFORE_START') {
-            state.status = 'IN_PROGRESS';
+            state.status = 'IN_PROGRESS'
           } else if (state.status === 'IN_PROGRESS') {
-            state.status = 'COMPLETE';
+            state.status = 'COMPLETE'
           } else {
             if(date < now) {
                 state.status = 'INCOMPLETE'
             } else {
-                state.status = 'BEFORE_START';
+                state.status = 'BEFORE_START'
             }
           }
 
@@ -217,10 +214,10 @@ function WorkTable( props ) {
             console.log(response.data.data)
         })
         .catch(error => {
-            console.error(error);
+            console.error(error)
         })
 
-          return updatedTodoList;
+          return updatedTodoList
         })
     }
 
@@ -228,14 +225,14 @@ function WorkTable( props ) {
     const handleLateClick = (todoIndex, assignIndex) => {
         let state = tableList[todoIndex].assignList[assignIndex]
         setTableList(prevTodoList => {
-          const updatedTodoList = [...prevTodoList];
-          state = updatedTodoList[todoIndex].assignList[assignIndex];
+          const updatedTodoList = [...prevTodoList]
+          state = updatedTodoList[todoIndex].assignList[assignIndex]
           if (state.status === 'INCOMPLETE') {
-            state.status = 'INCOMPLETE_PROGRESS';
+            state.status = 'INCOMPLETE_PROGRESS'
           } else if (state.status === 'INCOMPLETE_PROGRESS') {
-            state.status = 'COMPLETE';
+            state.status = 'COMPLETE'
           } else {
-            state.status = 'INCOMPLETE';
+            state.status = 'INCOMPLETE'
           }
 
           const todoStatus = {
@@ -260,21 +257,21 @@ function WorkTable( props ) {
     const handleChildTodoClick = (todoIndex, todoChildIndex, assignIndex) => {
         let state = tableList[todoIndex].childTodoList[todoChildIndex].assignList[assignIndex]
         setTableList(prevTodoList => {
-          const updatedTodoList = [...prevTodoList];
-          state = updatedTodoList[todoIndex].childTodoList[todoChildIndex].assignList[assignIndex];
+          const updatedTodoList = [...prevTodoList]
+          state = updatedTodoList[todoIndex].childTodoList[todoChildIndex].assignList[assignIndex]
           
           let now = new Date()
           const date = new Date(updatedTodoList[todoIndex].childTodoList[todoChildIndex].dueDate)
 
           if (state.status === 'BEFORE_START') {
-            state.status = 'IN_PROGRESS';
+            state.status = 'IN_PROGRESS'
           } else if (state.status === 'IN_PROGRESS') {
-            state.status = 'COMPLETE';
+            state.status = 'COMPLETE'
           } else {
             if(date < now) {
                 state.status = 'INCOMPLETE'
             } else {
-                state.status = 'BEFORE_START';
+                state.status = 'BEFORE_START'
             }
           }
 
@@ -289,10 +286,10 @@ function WorkTable( props ) {
             console.log(response.data.data)
         })
         .catch(error => {
-            console.error(error);
+            console.error(error)
         })
 
-          return updatedTodoList;
+          return updatedTodoList
         })
     }
 
@@ -797,8 +794,8 @@ function WorkTable( props ) {
         </div>
         
 
-    );
+    )
 
 }
 
-export default WorkTable;
+export default WorkTable

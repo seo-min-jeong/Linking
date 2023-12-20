@@ -1,52 +1,50 @@
-import React, { useState, useRef, useEffect } from "react";
-import Modal from 'react-modal';
-import './Group.css';
+import React, { useState, useEffect } from "react"
+import Modal from 'react-modal'
+import './Group.css'
 import api from "../../utils/api"
-import { useCookies } from 'react-cookie';
 
 function AddDoc(props) {
-    const { onClose, onButtonClick, groupId, order } = props;
-    const user = JSON.parse(localStorage.getItem('user'));
-    const [cookies] = useCookies(['session'])
-    const [title, setTitle] = useState('');
+    const { onClose, onButtonClick, groupId, order } = props
+    const user = JSON.parse(localStorage.getItem('user'))
+    const [title, setTitle] = useState('')
 
     const onClickClose = () => {
-        onClose(false);
+        onClose(false)
     }
 
     const [inputCount, setInputCount] = useState(0)
 
     const handleChange = event => {
-        setInputCount(event.target.value.length);
+        setInputCount(event.target.value.length)
         setPage({
             ...page,
             [event.target.name]: event.target.value
-        });
+        })
         if (event.target.name === 'title') {
             setTitle(event.target.value)
           } 
-    };
+    }
 
-    const [selectedBox, setSelectedBox] = useState("BLANK");
+    const [selectedBox, setSelectedBox] = useState("BLANK")
 
     const handleBoxClick = (event) => {
-        const { id } = event.currentTarget;
-        setSelectedBox(id);
-    };
+        const { id } = event.currentTarget
+        setSelectedBox(id)
+    }
 
     const [page, setPage] = useState({
         groupId: groupId,
         title: '',
         order: order,
         template: selectedBox
-    });
+    })
 
     useEffect(() => {
         setPage(prevPage => ({
           ...prevPage,
           template: selectedBox
-        }));
-      }, [selectedBox]);
+        }))
+      }, [selectedBox])
 
     const [newPage, setNewPage] = useState({
         pageId: 0,
@@ -56,6 +54,7 @@ function AddDoc(props) {
         pageCheckResList: [],
         annotNotiCnt: 0
     })
+
     const handleClick = event => {
         event.preventDefault()
         api.post('/pages', page, {
@@ -64,23 +63,21 @@ function AddDoc(props) {
             }
         })
           .then(response => {
-            console.log(response.data);
             const updatedNewPage = {
                 pageId: response.data.data.pageId,
                 groupId: response.data.data.groupId,
                 title: response.data.data.title,
                 template: response.data.data.template,
                 annotNotiCnt: response.data.data.annotNotiCnt
-            };
-            setNewPage(updatedNewPage);
-            onButtonClick('documents', updatedNewPage);
-            onClose(false);
+            }
+            setNewPage(updatedNewPage)
+            onButtonClick('documents', updatedNewPage)
+            onClose(false)
           })
           .catch(error => {
-            console.log(page)
-            console.error(error);
-          });
-      };
+            console.error(error)
+          })
+      }
 
     return(
         <Modal
@@ -144,7 +141,7 @@ function AddDoc(props) {
                 <div className="groupBtn-box"><button className="groupBtn" onClick={handleClick}>저장</button></div>
             </div>
         </Modal>
-    );
+    )
 }
 
-export default AddDoc;
+export default AddDoc

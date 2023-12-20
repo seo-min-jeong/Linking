@@ -1,22 +1,20 @@
-import React, { useState, useRef, useEffect } from "react";
-import Modal from 'react-modal';
-import './WorkModal.css';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { ko } from "date-fns/esm/locale";
-import 'react-time-picker/dist/TimePicker.css';
+import React, { useState } from "react"
+import Modal from 'react-modal'
+import './WorkModal.css'
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
+import { ko } from "date-fns/esm/locale"
+import 'react-time-picker/dist/TimePicker.css'
 import api from '../utils/api'
-import { useCookies } from 'react-cookie'
 
 function CreateWork(props) {
-    const { isOpen, onClose, partList, emitterId, projectId, onValueTodo, setIsWorkOpen } = props;
+    const { isOpen, onClose, partList, emitterId, projectId, onValueTodo, setIsWorkOpen } = props
     const [isAddTeam, setAddTeam] = useState(false)
-    // const [cookies] = useCookies(['session'])
 
     const [content, setContent] = useState('')
     const [startDate, setStartDate] = useState(new Date())
     const [dueDate, setDueDate] = useState(new Date())
-    const [hour, setHour] = useState("10")
+    const [hour, setHour] = useState("12")
     const [minute, setMinute] = useState("00")
     const [ampm, setAmpm] = useState("AM")
 
@@ -29,12 +27,12 @@ function CreateWork(props) {
     let year = now.getFullYear()
     let month = now.getMonth() + 1
 
-    for (let i = 1; i <= 24; i++) {
-        hours.push(i < 10 ? "0" + i : i.toString());
+    for (let i = 1; i <= 12; i++) {
+        hours.push(i < 10 ? "0" + i : i.toString())
     }
 
     for (let i = 0; i <= 59; i++) {
-        minutes.push(i < 10 ? "0" + i : i.toString());
+        minutes.push(i < 10 ? "0" + i : i.toString())
     }
 
     const handleHourChange = (e) => {
@@ -53,7 +51,7 @@ function CreateWork(props) {
     }
 
     const onClickChkButton = () => {
-        setAddTeam(false);
+        setAddTeam(false)
     }
 
     const [work, setWork] = useState({
@@ -83,23 +81,23 @@ function CreateWork(props) {
     }
 
     const handleBtnClick = () => {
-        let startYear = startDate.getFullYear();
-        let startMonth = (startDate.getMonth() + 1).toString().padStart(2, '0');
-        let startDay = startDate.getDate().toString().padStart(2, '0');
-        let valueStartDate = startYear;
-        valueStartDate += '-';
-        valueStartDate += startMonth;
-        valueStartDate += '-';
-        valueStartDate += startDay;
+        let startYear = startDate.getFullYear()
+        let startMonth = (startDate.getMonth() + 1).toString().padStart(2, '0')
+        let startDay = startDate.getDate().toString().padStart(2, '0')
+        let valueStartDate = startYear
+        valueStartDate += '-'
+        valueStartDate += startMonth
+        valueStartDate += '-'
+        valueStartDate += startDay
 
-        let endYear = dueDate.getFullYear();
-        let endMonth = (dueDate.getMonth() + 1).toString().padStart(2, '0');
-        let endDay = dueDate.getDate().toString().padStart(2, '0');
-        let valueEndDate = endYear;
-        valueEndDate += '-';
-        valueEndDate += endMonth;
-        valueEndDate += '-';
-        valueEndDate += endDay;
+        let endYear = dueDate.getFullYear()
+        let endMonth = (dueDate.getMonth() + 1).toString().padStart(2, '0')
+        let endDay = dueDate.getDate().toString().padStart(2, '0')
+        let valueEndDate = endYear
+        valueEndDate += '-'
+        valueEndDate += endMonth
+        valueEndDate += '-'
+        valueEndDate += endDay
 
         const work = {
             emitterId: emitterId,
@@ -109,7 +107,7 @@ function CreateWork(props) {
             startDate: valueStartDate + ' 12:00 PM',
             dueDate: valueEndDate + ' ' + hour + ':' + minute + ' ' + ampm,
             content: content,
-            assignList: assignList,
+            assignList: assignList
         }
 
         api.post('/todos/new', work)
@@ -117,40 +115,37 @@ function CreateWork(props) {
             api.get('/todos/list/monthly/project/' + projectId + '/' + year + '/' + month)
                 .then(response => {
                     onValueTodo(response.data.data)
-                    console.log(response.data.data)
                 })
                 .catch(error => {
                     console.error(error)
                 })
         })
         .catch(error => {
-            console.error(error);
+            console.error(error)
         })
 
         onClose(isOpen => !isOpen)
       }
 
       const onClickClose = () => {
-        onClose(isOpen => !isOpen);
+        onClose(isOpen => !isOpen)
         setIsWorkOpen(true)
       }
 
-    const [selectedPeoples, setSelectedPeoples] = useState([]);
-    const [chargeText, setChargeText] = useState('담당자 선택');
+    const [selectedPeoples, setSelectedPeoples] = useState([])
+    const [chargeText, setChargeText] = useState('담당자 선택')
 
     const handleCheckboxChange = (e) => {
         const value = e.target.value
-        const [lastName, firstName, userId] = value.split('_')
+        const [userId] = value.split('_')
         if (selectedPeoples.includes(value)) {
-            setSelectedPeoples(selectedPeoples.filter((p) => p !== value));
-            console.log(userId)
+            setSelectedPeoples(selectedPeoples.filter((p) => p !== value))
           } else {
-            setSelectedPeoples([...selectedPeoples, value]);
-            console.log(userId)
+            setSelectedPeoples([...selectedPeoples, value])
           }
     }
 
-    const handleTextboxChange = (e) => {
+    const handleTextboxChange = () => {
         if(selectedPeoples.length >= 2) {
             const [lastName, firstName] = selectedPeoples[0].split('_')
             setChargeText(lastName + firstName + " 외 " + (selectedPeoples.length-1) + "명")
@@ -171,10 +166,10 @@ function CreateWork(props) {
 
     const setAssignListForSelectedPeoples = (selectedPeoples) => {
         selectedPeoples.forEach((person) => {
-          const [lastName, firstName, userId] = person.split('_');
-          setAssignList((prevList) => [...prevList, parseInt(userId)]);
-        });
-    };
+          const [userId] = person.split('_')
+          setAssignList((prevList) => [...prevList, parseInt(userId)])
+        })
+    }
 
     return(
         <Modal isOpen={isOpen} onRequestClose={onClose} className="work-modal">
@@ -276,9 +271,7 @@ function CreateWork(props) {
                                     value={`${people.lastName}_${people.firstName}_${people.userId}`}
                                     checked={selectedPeoples.includes(`${people.lastName}_${people.firstName}_${people.userId}`)}
                                     onChange={handleCheckboxChange}
-                                    // id="chk"
                                     />
-                                    {/* <i class="circle"></i> */}
                                     {people.lastName}{people.firstName}
                                 </label>
                                 </div>
@@ -292,7 +285,7 @@ function CreateWork(props) {
                 </div>
             </div>
         </Modal>
-      );
+      )
     }
   
-    export default CreateWork;
+    export default CreateWork

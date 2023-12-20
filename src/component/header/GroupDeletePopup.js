@@ -1,19 +1,18 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import Modal from 'react-modal';
 import './Group.css';
 
 
 function GroupDeletePopup(props) {
-    const { onClose, onButtonClick, index } = props;
-    const [inputValue, setInputValue] = useState('');
+    const { onClose, onButtonClick, index } = props
 
     function handleClick() {
-        onClose(false);
+        onClose(false)
         onButtonClick(index)
     }
 
     const onClickClose = () => {
-        onClose(false);
+        onClose(false)
     }
 
     return(
@@ -30,7 +29,7 @@ function GroupDeletePopup(props) {
                 </div>
             </div>
         </Modal>
-    );
+    )
 }
 
-export default GroupDeletePopup;
+export default GroupDeletePopup

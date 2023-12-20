@@ -1,24 +1,24 @@
-import React, { useState } from "react";
-import Modal from 'react-modal';
-import './PagePopup.css';
+import React, { useState } from "react"
+import Modal from 'react-modal'
+import './PagePopup.css'
 
 function PageUpdatePopup(props) {
-    const { onClose, onButtonClick, name } = props;
-    const [title, setTitle] = useState('');
+    const { onClose, onButtonClick, name } = props
+    const [title, setTitle] = useState('')
 
     const handleClick = event => {
         onButtonClick('title', title)
-        onClose(false);
+        onClose(false)
     }
 
     const onClickClose = () => {
-        onClose(false);
+        onClose(false)
     }
 
     const [inputCount, setInputCount] = useState(0)
 
     const handleChange = event => {
-        setInputCount(event.target.value.length);
+        setInputCount(event.target.value.length)
         if (event.target.name === 'title') {
             setTitle(event.target.value)
           } 
