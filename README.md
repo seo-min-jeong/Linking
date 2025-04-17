@@ -48,11 +48,3 @@
  
 </div>
 </br>
-
-<div>
- <h2>🖥️ UI Preview</h2>
- <p><strong>📌 Main </strong></p>
- <br/>
- <h2></h2>
-
-</div>
