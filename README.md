@@ -11,37 +11,40 @@
  </p>
 
 <h2>🖥️ Stacks</h2>
- <li><strong>Environment :</strong> 
-  <img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/>
-  <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=openjdk&logoColor=white"/>
-</li>
 
+<li><strong>Environment :</strong> 
+  <img src="https://img.shields.io/badge/macOS-000000?style=for-the-badge&logo=apple&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white"/>
+</li>
+<li><strong>Language :</strong>  
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/>
+</li>
 <li><strong>Library :</strong> 
   <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"/>
-  <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white"/>
 </li>
+
+
 </div>
 <br/>
 
 ### 🧑‍💻 담당 역할 (프론트엔드 담당)
-- 💻 **React 기반 프론트엔드 전체 구현**
-- ⚙️ **Axios**로 서버 통신 처리
-- 🔀 사용자 / 관리자 페이지를 분리한 **라우팅 구조 설계**
-- 📊 **SSE**를 활용한 실시간 동시 편집 기능
-- 🖇 **WebSocket**을 활용한 채팅 기능
+- **React 기반 프론트엔드 전체 구현**
+- **Axios**로 서버 통신
+- 프로젝트 생성 및 할 일 등록/삭제/수정 UI 구현  
+- **SSE(Server-Sent Events)** 기반 실시간 협업 기능 구현  
+  (게시글·할 일 실시간 반영, 문서 동시 편집 기능 포함)
+- **WebSocket**을 활용한 실시간 채팅 기능 구현
 
 </br>
 <div>
  <h2>🖥️ Key Features</h2>
   
-### 👤 사용자 기능
-- 문서관리 (목차 템플릿 제공, 문서 열람 여부 확인, 실시간 동시 편집)
-- 할 일 관리
-- 홈 위젯 관리 (할 일 조회, 팀원별 할 일 완료 비율 확인 가능)
-- 알림 관리 (문서, 할 일 및 기타 요청)
-- 채팅 관리
+### 👤 사용자 주요 기능
+- 문서 관리 (목차 템플릿 제공, 문서 열람 여부 확인, 실시간 동시 편집)
+- 할 일 관리 (할 일 생성 / 수정 / 삭제 및 상태 변경)
+- 홈 위젯 관리 (오늘 할 일 및 캘린더 조회, 팀원별 할 일 완료 비율 시각화)
+- 알림 관리 (문서, 할 일 및 기타 요청 알림 송수신)
+- 채팅 관리 (팀원 간 실시간 소통 기능)
  
 </div>
 </br>
